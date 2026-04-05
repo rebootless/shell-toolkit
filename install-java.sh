@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "Updating system packages..."
-sudo apt update && sudo apt upgrade -y
+sudo apt update
 
 echo "Installing required dependencies..."
 sudo apt install -y curl tar ca-certificates
