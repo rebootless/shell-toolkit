@@ -78,7 +78,7 @@ read -rp "[?] Configure Grafana reverse proxy at /grafana? [y/N]: " GRAFANA_CHOI
 case "${GRAFANA_CHOICE,,}" in
     y|yes)
         echo "[*] Installing Docker..."
-        apt-get install -y docker docker-compose
+        apt-get install -y docker-compose
 
         echo "[*] Preparing Grafana proxy configuration..."
         GRAFANA_BLOCK="
