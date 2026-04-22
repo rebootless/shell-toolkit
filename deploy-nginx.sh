@@ -232,6 +232,8 @@ server {
     location = /favicon.ico { access_log off; log_not_found off; }
     location = /robots.txt { access_log off; log_not_found off; }
 
+    $GRAFANA_BLOCK
+
     $PHP_BLOCK
 
     location ~ /\. {
