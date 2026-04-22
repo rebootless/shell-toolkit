@@ -249,7 +249,7 @@ echo "[*] Enabling site..."
 if nginx -t 2>&1 | tee "$LOG_FILE"; then
     systemctl reload nginx
 
-    echo "---------------Setup Complete!---------------"
+    echo "------------------Setup Complete!----------------"
     echo "Server Info:"
     echo "  Domain/IP:        $DOMAIN"
     echo "  Local IP:         $DEFAULT_IP"
