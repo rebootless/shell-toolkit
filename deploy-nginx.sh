@@ -9,10 +9,10 @@ set -euo pipefail
 
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
-# Auto-elevate to root
+# Root check
 if [[ $EUID -ne 0 ]]; then
-    echo "[!] Not running as root. Attempting to elevate..."
-    exec sudo "$0" "$@"
+    echo "[!] Please log in as root and run this script."
+    exit 1
 fi
 
 echo "-------------Installing dependencies-------------"
