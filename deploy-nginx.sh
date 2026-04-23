@@ -39,7 +39,7 @@ read -rp "[?] Install PHP & PHP-FPM? [y/N]: " PHP_CHOICE
 case "${PHP_CHOICE,,}" in
     y|yes)
         INSTALL_PHP="y"
-        echo "[+] Installing PHP & PHP-FPM..."
+        echo "[*] Installing PHP & PHP-FPM..."
         # FIX: Replaced 'php' with 'php-cli' to avoid installing Apache2
         apt-get install -y php-cli php-fpm php-common php-mbstring php-xml php-curl
 
@@ -70,13 +70,48 @@ if [[ -n "${PHP_VERSION}" ]]; then
     }"
 fi
 
+echo "-----------------Grafana setup-------------------"
+
+GRAFANA_BLOCK=""
+read -rp "[?] Configure Grafana reverse proxy at /grafana? [y/N]: " GRAFANA_CHOICE
+
+case "${GRAFANA_CHOICE,,}" in
+    y|yes)
+        echo "[*] Installing Docker..."
+        apt-get install -y docker docker-compose
+
+        echo "[*] Preparing Grafana proxy configuration..."
+        GRAFANA_BLOCK="
+    location = /grafana {
+        return 301 /grafana/;
+    }
+
+    location /grafana/ {
+        proxy_http_version 1.1;
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto \$scheme;
+        proxy_set_header Upgrade \$http_upgrade;
+        proxy_set_header Connection \"upgrade\";
+        proxy_pass http://127.0.0.1:3000;
+    }"
+        ;;
+    n|no|"")
+        echo "[i] Grafana proxy skipped"
+        ;;
+    *)
+        echo "[!] Invalid input -> skipping Grafana proxy setup"
+        ;;
+esac
+
 echo "-----------------Firewall setup------------------"
 
 read -rp "[?] Install Firewalld? [y/N]: " FIREWALL_CHOICE
 
 case "${FIREWALL_CHOICE,,}" in
     y|yes)
-        echo "[+] Installing and configuring firewalld..."
+        echo "[*] Installing and configuring firewalld..."
 
         if apt-get install -y firewalld; then
             systemctl enable --now firewalld
