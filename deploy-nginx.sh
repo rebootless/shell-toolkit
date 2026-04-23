@@ -80,6 +80,7 @@ case "${GRAFANA_CHOICE,,}" in
         echo "[*] Installing Docker..."
         # docker.io provides the daemon (dockerd)
         apt-get install -y docker.io docker-compose
+        systemctl enable --now docker
 
         echo "[*] Preparing Grafana proxy configuration..."
         GRAFANA_BLOCK="
@@ -156,6 +157,7 @@ CONF_PATH="/etc/nginx/sites-available/$DOMAIN"
 
 mkdir -p "$WWW_PATH"
 chown -R www-data:www-data "$WWW_PATH"
+chmod -R 755 "$WWW_PATH"
 
 echo "---------------Site content setup----------------"
 
