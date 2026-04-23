@@ -79,8 +79,7 @@ case "${GRAFANA_CHOICE,,}" in
     y|yes)
         echo "[*] Installing Docker..."
         # docker.io provides the daemon (dockerd)
-        # docker-compose-v2 provides the 'docker compose' command
-        apt-get install -y docker.io docker-compose-v2
+        apt-get install -y docker.io
 
         echo "[*] Preparing Grafana proxy configuration..."
         GRAFANA_BLOCK="
