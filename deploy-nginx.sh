@@ -98,6 +98,7 @@ case "${GRAFANA_CHOICE,,}" in
         proxy_set_header Connection \"upgrade\";
         proxy_pass http://127.0.0.1:3000;
     }"
+    echo "[+] Done."
         ;;
     n|no|"")
         echo "[i] Grafana proxy skipped"
