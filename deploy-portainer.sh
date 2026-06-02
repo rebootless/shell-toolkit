@@ -20,6 +20,40 @@ if [[ $EUID -ne 0 ]]; then
     exit 1
 fi
 
+if [[ -d "$DEPLOY_DIR" ]]; then
+    echo ""
+    echo -e "${RED}╔═══════════════════════════════════════════════════╗${NC}"
+    echo -e "${RED}║        [!]  E X I S T I N G   D A T A  [!]        ║${NC}"
+    echo -e "${RED}╠═══════════════════════════════════════════════════╣${NC}"
+    echo -e "${RED}║                                                   ║${NC}"
+    echo -e "${RED}║  Directory $DEPLOY_DIR already exists.            ║${NC}"
+    echo -e "${RED}║  Proceeding will PERMANENTLY DELETE all data:     ║${NC}"
+    echo -e "${RED}║    containers, volumes, configs, Portainer DB.    ║${NC}"
+    echo -e "${RED}║  THIS ACTION IS IRREVERSIBLE.                     ║${NC}"
+    echo -e "${RED}║                                                   ║${NC}"
+    echo -e "${RED}╚═══════════════════════════════════════════════════╝${NC}"
+    echo ""
+    read -rp "[?] Wipe existing Portainer stack and all data? [y/N]: " WIPE_CHOICE
+    if [[ "${WIPE_CHOICE,,}" =~ ^y ]]; then
+        read -rp "[?] Are you sure? This cannot be undone. Type 'yes' to confirm: " WIPE_CONFIRM
+        if [[ "$WIPE_CONFIRM" == "yes" ]]; then
+            echo "[*] Stopping and removing containers..."
+            if [[ -f "$DEPLOY_DIR/compose.yaml" ]]; then
+                docker compose -f "$DEPLOY_DIR/compose.yaml" down -v 2>/dev/null || true
+            fi
+            echo "[*] Deleting $DEPLOY_DIR..."
+            rm -rf "$DEPLOY_DIR"
+            echo "[+] Wiped."
+        else
+            echo "[i] Confirmation not received — aborting."
+            exit 0
+        fi
+    else
+        echo "[i] Wipe skipped — continuing with existing data."
+    fi
+    echo ""
+fi
+
 echo "-------------Installing dependencies-------------"
 echo "[*] Updating system packages..."
 apt-get update -q
