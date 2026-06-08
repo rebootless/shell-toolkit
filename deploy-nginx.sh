@@ -21,6 +21,8 @@ echo "[*] Updating system packages..."
 apt-get update
 
 echo "[*] Installing required dependencies..."
+# avahi-daemon: enables mDNS so the server is reachable
+# as <hostname>.local on the local network (Android, Linux clients)
 apt-get install -y nginx ca-certificates avahi-daemon
 
 echo "[*] Starting services..."
