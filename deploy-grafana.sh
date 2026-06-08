@@ -232,7 +232,7 @@ if [[ "$GRAFANA_READY" == false ]]; then
     echo "    curl -fsSL https://grafana.com/api/dashboards/19937/revisions/latest/download | \\"
     echo "      curl -sf -X POST -H 'Content-Type: application/json' \\"
     echo "        -u '${GRAFANA_USER}:<password>' \\"
-    echo "        -d '{\"dashboard\":'\$(cat)'},\"overwrite\":true,\"inputs\":[{\"name\":\"DS_PROMETHEUS\",\"type\":\"datasource\",\"pluginId\":\"prometheus\",\"value\":\"Prometheus\"}]}' \\"
+    echo "        -d '{\"dashboard\":'\$(cat)',\"overwrite\":true,\"inputs\":[{\"name\":\"DS_PROMETHEUS\",\"type\":\"datasource\",\"pluginId\":\"prometheus\",\"value\":\"Prometheus\"}]}' \\"
     echo "        http://localhost:3000/api/dashboards/import"
 else
     echo "------------Importing dashboard 19937------------"
