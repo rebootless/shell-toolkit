@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Nginx deployment for Debian/Ubuntu systems.
-# Installs nginx, optional PHP-FPM, creates a site root and vhost,
+# Installs nginx, optional PHP-FPM, avahi-daemon, grafana, portainer, creates a site root and vhost,
 # and can configure firewalld for web access.
 # Recommended for Debian 12/13 and Ubuntu 22.04/24.04 LTS.
 
@@ -21,15 +21,35 @@ echo "[*] Updating system packages..."
 apt-get update
 
 echo "[*] Installing required dependencies..."
-# avahi-daemon: enables mDNS so the server is reachable
-# as <hostname>.local on the local network (Android, Linux clients)
-apt-get install -y nginx ca-certificates avahi-daemon
+apt-get install -y nginx ca-certificates
 
 echo "[*] Starting services..."
-systemctl enable --now avahi-daemon
 systemctl enable --now nginx
 
 LOG_FILE="/var/log/nginx/init_check.log"
+
+echo "----------------avahi-daemon setup---------------"
+
+INSTALL_AVAHI="n"
+read -rp "[?] Install avahi-daemon (mDNS / .local hostname)? [y/N]: " AVAHI_CHOICE
+
+case "${AVAHI_CHOICE,,}" in
+    y|yes)
+        INSTALL_AVAHI="y"
+        echo "[*] Installing avahi-daemon..."
+        # avahi-daemon: enables mDNS so the server is reachable
+        # as <hostname>.local on the local network (Android, Linux clients)
+        apt-get install -y avahi-daemon
+        systemctl enable --now avahi-daemon
+        echo "[+] avahi-daemon is running."
+        ;;
+    n|no|"")
+        echo "[i] avahi-daemon installation skipped"
+        ;;
+    *)
+        echo "[!] Invalid input -> skipping avahi-daemon"
+        ;;
+esac
 
 echo "--------------------PHP setup--------------------"
 
@@ -42,7 +62,7 @@ case "${PHP_CHOICE,,}" in
     y|yes)
         INSTALL_PHP="y"
         echo "[*] Installing PHP & PHP-FPM..."
-        # FIX: Replaced 'php' with 'php-cli' to avoid installing Apache2
+        # Replaced 'php' with 'php-cli' to avoid installing Apache2
         apt-get install -y php-cli php-fpm php-common php-mbstring php-xml php-curl
 
         if command -v php >/dev/null 2>&1; then
@@ -107,6 +127,40 @@ case "${GRAFANA_CHOICE,,}" in
         ;;
     *)
         echo "[!] Invalid input -> skipping Grafana proxy setup"
+        ;;
+esac
+
+echo "-----------------Portainer setup-----------------"
+
+PORTAINER_BLOCK=""
+read -rp "[?] Configure Portainer reverse proxy at /portainer? [y/N]: " PORTAINER_CHOICE
+
+case "${PORTAINER_CHOICE,,}" in
+    y|yes)
+        echo "[*] Preparing Portainer proxy configuration..."
+        PORTAINER_BLOCK="
+    location = /portainer {
+        return 301 /portainer/;
+    }
+
+    location /portainer/ {
+        proxy_http_version 1.1;
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto \$scheme;
+        proxy_set_header Upgrade \$http_upgrade;
+        proxy_set_header Connection \"upgrade\";
+        # Trailing slash strips /portainer/ prefix before forwarding to Portainer
+        proxy_pass http://127.0.0.1:9000/;
+    }"
+        echo "[+] Done."
+        ;;
+    n|no|"")
+        echo "[i] Portainer proxy skipped"
+        ;;
+    *)
+        echo "[!] Invalid input -> skipping Portainer proxy setup"
         ;;
 esac
 
@@ -240,6 +294,8 @@ server {
 
     $GRAFANA_BLOCK
 
+    $PORTAINER_BLOCK
+
     $PHP_BLOCK
 
     location ~ /\. {
@@ -262,8 +318,8 @@ if nginx -t 2>&1 | tee "$LOG_FILE"; then
     echo "  Domain/IP:        $DOMAIN"
     echo "  Local IP:         $DEFAULT_IP"
 
-    if systemctl is-active --quiet avahi-daemon; then
-        echo "  mDNS/Local:       http://$(hostname).local (if supported by client)"
+    if [[ "$INSTALL_AVAHI" == "y" ]]; then
+    echo "  mDNS/Local:       http://$(hostname).local (if supported by client)"
     fi
     echo ""
 
