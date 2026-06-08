@@ -2,7 +2,7 @@
 
 # Portainer CE deployment for Debian/Ubuntu systems.
 # Installs Docker, generates all configs inline, and deploys
-# Portainer CE with a bcrypt-hashed admin password via Docker secrets.
+# Portainer CE with admin password via Docker secrets.
 # Recommended for Debian 12/13 and Ubuntu 22.04/24.04 LTS.
 
 set -euo pipefail
@@ -24,9 +24,8 @@ echo "-------------Installing dependencies-------------"
 echo "[*] Updating system packages..."
 apt-get update -q
 
-# apache2-utils provides htpasswd for bcrypt password hashing
 echo "[*] Installing Docker & dependencies..."
-apt-get install -y docker.io docker-compose curl apache2-utils
+apt-get install -y docker.io docker-compose curl
 
 echo "[*] Enabling Docker service..."
 systemctl enable --now docker
@@ -46,11 +45,6 @@ if [[ -z "$PORTAINER_PASSWORD" ]]; then
     DEFAULT_PASSWORD=true
 fi
 
-# Hash the password with bcrypt so it's never stored in plaintext
-echo "[*] Hashing admin password (bcrypt)..."
-PORTAINER_PASSWORD_HASH=$(htpasswd -nbB admin "$PORTAINER_PASSWORD" | cut -d: -f2)
-echo "[+] Password hashed."
-
 echo "----------------------Domain---------------------"
 read -rp "[?] Domain for Portainer URL (e.g. example.com) [leave blank for localhost]: " PORTAINER_DOMAIN
 PORTAINER_DOMAIN="${PORTAINER_DOMAIN:-}"
@@ -67,21 +61,20 @@ mkdir -p "$DEPLOY_DIR"/{data,secrets}
 echo "[+] Directories created."
 
 echo "[*] Writing secrets..."
-# Store only the bcrypt hash — never the plaintext password
-printf '%s' "$PORTAINER_PASSWORD_HASH" > "$DEPLOY_DIR/secrets/portainer_admin_password.txt"
+printf '%s' "$PORTAINER_PASSWORD" > "$DEPLOY_DIR/secrets/portainer_admin_password.txt"
 chmod 600 "$DEPLOY_DIR/secrets/portainer_admin_password.txt"
 echo "[+] Secrets saved."
 
 echo "----------------Generating configs---------------"
 
 # Note: single-quoted heredoc — no shell expansion inside
-cat > "$DEPLOY_DIR/compose.yaml" <<'EOF'
+cat > "$DEPLOY_DIR/compose.yaml" <<'COMPOSE'
 services:
   portainer:
     image: portainer/portainer-ce:latest
     restart: unless-stopped
     command:
-      # Load bcrypt-hashed admin password from Docker secret (set on first run only)
+      # Load admin password from Docker secret (applied on first run only)
       - --admin-password-file=/run/secrets/portainer_admin_password
     secrets:
       - portainer_admin_password
@@ -104,7 +97,7 @@ services:
 secrets:
   portainer_admin_password:
     file: ./secrets/portainer_admin_password.txt
-EOF
+COMPOSE
 
 echo "[+] Configs written."
 
