@@ -16,7 +16,7 @@ if command -v ufw >/dev/null 2>&1; then
     echo "y" | ufw reset
 
     echo "[*] Removing UFW..."
-    apt-get purge -y ufw
+    apt-get remove -y ufw
     apt-get autoremove -y
 fi
 
