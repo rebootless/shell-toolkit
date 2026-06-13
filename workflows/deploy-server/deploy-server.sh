@@ -14,7 +14,7 @@ export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 export DEBIAN_FRONTEND=noninteractive
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-SERVER_DIR="$(cd "$SCRIPT_DIR/../server" && pwd)"
+SERVER_DIR="$(cd "$SCRIPT_DIR/../../server" && pwd)"
 ENV_FILE="$SCRIPT_DIR/.env"
 
 # Root check
