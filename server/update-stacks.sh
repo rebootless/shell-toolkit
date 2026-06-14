@@ -18,10 +18,10 @@ UPDATED=()
 UNCHANGED=()
 SKIPPED=()
 
-echo "---------------Current Containers---------------"
+echo "----------------Current Containers---------------"
 docker ps --format 'table {{.Names}}\t{{.Image}}\t{{.Status}}'
 
-echo "----------------Updating Stacks-----------------"
+echo "-----------------Updating Stacks-----------------"
 
 for dir in "$BASE_DIR"/*/; do
     stack="$(basename "$dir")"
@@ -68,7 +68,7 @@ for dir in "$BASE_DIR"/*/; do
     fi
 done
 
-echo "---------------------Summary--------------------"
+echo "---------------------Summary---------------------"
 echo "[+] Updated:   ${UPDATED[*]:-none}"
 echo "[i] Unchanged: ${UNCHANGED[*]:-none}"
 echo "[i] Skipped:   ${SKIPPED[*]:-none}"
