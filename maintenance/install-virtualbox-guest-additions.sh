@@ -91,7 +91,6 @@ HEADERS_PKG="$(detect_headers_pkg)" || {
 log "Installing kernel headers: ${HEADERS_PKG}"
 apt-get install -y "$HEADERS_PKG"
 
-INSTALLER=""
 if INSTALLER="$(find_vbox_ga_installer)"; then
     log "Found Guest Additions installer: ${INSTALLER}"
 else
@@ -102,15 +101,30 @@ else
 fi
 
 log "Running Guest Additions installer..."
-sh "$INSTALLER" || {
-    echo "[!] Guest Additions installation failed."
-    exit 1
-}
+
+INSTALL_EXIT=0
+sh "$INSTALLER" || INSTALL_EXIT=$?
+
+if (( INSTALL_EXIT != 0 )); then
+    echo "[!] Guest Additions installer returned exit code ${INSTALL_EXIT}."
+    echo "[!] Verifying whether the kernel modules were installed..."
+fi
 
 log "Attempting to load modules..."
 modprobe vboxguest 2>/dev/null || true
 modprobe vboxsf 2>/dev/null || true
 modprobe vboxvideo 2>/dev/null || true
 
-echo "[+] VirtualBox Guest Additions installation completed successfully."
-echo "[i] Reboot the guest system to finish activation."
+if lsmod | grep -q '^vboxguest'; then
+    echo "[+] VirtualBox Guest Additions installation completed successfully."
+
+    if (( INSTALL_EXIT != 0 )); then
+        echo "[i] The installer returned a non-zero exit code, but the kernel modules are loaded."
+    fi
+
+    echo "[i] Reboot the guest system to finish activation."
+else
+    echo "[!] vboxguest module is not loaded."
+    echo "[!] Guest Additions installation appears to have failed."
+    exit 1
+fi
