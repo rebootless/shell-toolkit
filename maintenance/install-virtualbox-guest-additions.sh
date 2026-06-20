@@ -123,6 +123,20 @@ if lsmod | grep -q '^vboxguest'; then
     fi
 
     echo "[i] Reboot the guest system to finish activation."
+
+    echo
+    echo "[i] Loaded VirtualBox modules:"
+    if ! lsmod | grep vbox; then
+        echo "[i] No VirtualBox modules are currently loaded."
+    fi
+
+    echo
+    echo "[i] vboxadd service status:"
+    if systemctl list-unit-files | grep -q '^vboxadd'; then
+        systemctl status vboxadd --no-pager || true
+    else
+        echo "[i] vboxadd service is not present."
+    fi
 else
     echo "[!] vboxguest module is not loaded."
     echo "[!] Guest Additions installation appears to have failed."
