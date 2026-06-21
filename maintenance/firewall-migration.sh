@@ -23,16 +23,32 @@ fi
 echo "[*] Updating package lists..."
 apt-get update
 
-echo "[*] Installing firewalld..."
-apt-get install -y firewalld
+echo "[*] Installing firewalld and OpenSSH Server..."
+apt-get install -y firewalld openssh-server
 
 echo "[*] Enabling and starting firewalld..."
 systemctl enable --now firewalld
 
-echo "[*] Allowing SSH..."
-firewall-cmd --permanent --add-service=ssh
+echo "[*] Enabling and starting SSH..."
+systemctl enable --now ssh
+
+echo "[*] Allowing SSH through firewalld..."
+firewall-cmd --permanent --zone=public --add-service=ssh
 
 echo "[*] Reloading firewall rules..."
 firewall-cmd --reload
 
-echo "[+] Migration from UFW to firewalld completed."
+echo "[*] Verifying SSH service..."
+if ! systemctl is-active --quiet ssh; then
+    echo "[!] SSH service failed to start."
+    exit 1
+fi
+
+echo "[*] Verifying that SSH is listening on port 22..."
+if ! ss -tulpn | grep -q ':22'; then
+    echo "[!] SSH is not listening on port 22."
+    exit 1
+fi
+
+echo "[+] Migration from UFW to firewalld completed successfully."
+echo "[+] SSH is running and port 22 is allowed through the firewall."
