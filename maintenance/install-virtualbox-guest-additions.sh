@@ -56,6 +56,27 @@ detect_headers_pkg() {
     return 1
 }
 
+find_vbox_ga_installer() {
+    local candidates=(
+        "/media/cdrom/VBoxLinuxAdditions.run"
+        "/media/cdrom0/VBoxLinuxAdditions.run"
+        "/run/media/${SUDO_USER:-root}/VBox_GAs_"*/VBoxLinuxAdditions.run
+        "/mnt/VBoxLinuxAdditions.run"
+    )
+
+    local path
+    for path in "${candidates[@]}"; do
+        for path in $path; do
+            if [[ -f "$path" ]]; then
+                echo "$path"
+                return 0
+            fi
+        done
+    done
+
+    return 1
+}
+
 log "Updating package lists..."
 apt-get update
 
@@ -70,42 +91,26 @@ HEADERS_PKG="$(detect_headers_pkg)" || {
 log "Installing kernel headers: ${HEADERS_PKG}"
 apt-get install -y "$HEADERS_PKG"
 
-GUEST_PKGS=()
-
-if pkg_exists virtualbox-guest-dkms; then
-    GUEST_PKGS+=("virtualbox-guest-dkms")
-fi
-
-if pkg_exists virtualbox-guest-utils; then
-    GUEST_PKGS+=("virtualbox-guest-utils")
-fi
-
-if pkg_exists virtualbox-guest-x11; then
-    GUEST_PKGS+=("virtualbox-guest-x11")
-fi
-
-if pkg_exists virtualbox-guest-additions-iso; then
-    GUEST_PKGS+=("virtualbox-guest-additions-iso")
-fi
-
-if [[ ${#GUEST_PKGS[@]} -eq 0 ]]; then
-    echo "[!] No VirtualBox guest packages were found in the configured repositories."
-    echo "[!] You can still use the Guest Additions ISO from the VirtualBox menu if needed."
+INSTALLER=""
+if INSTALLER="$(find_vbox_ga_installer)"; then
+    log "Found Guest Additions installer: ${INSTALLER}"
 else
-    log "Installing VirtualBox guest packages..."
-    apt-get install -y "${GUEST_PKGS[@]}"
+    echo "[!] Guest Additions ISO is not mounted."
+    echo "[!] In VirtualBox, use: Devices -> Insert Guest Additions CD image..."
+    echo "[!] Then re-run this script."
+    exit 1
 fi
 
-log "Loading guest modules..."
+log "Running Guest Additions installer..."
+sh "$INSTALLER" || {
+    echo "[!] Guest Additions installation failed."
+    exit 1
+}
+
+log "Attempting to load modules..."
 modprobe vboxguest 2>/dev/null || true
 modprobe vboxsf 2>/dev/null || true
 modprobe vboxvideo 2>/dev/null || true
-
-log "Verifying installation..."
-if ! lsmod | grep -q '^vboxguest'; then
-    echo "[!] vboxguest module is not loaded."
-    exit 1
-fi
 
 echo "[+] VirtualBox Guest Additions installation completed successfully."
 echo "[i] Reboot the guest system to finish activation."
