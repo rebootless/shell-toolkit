@@ -6,11 +6,9 @@
 # Recommended for Debian 12/13 and Ubuntu 22.04/24.04 LTS.
 
 set -euo pipefail
-
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
 GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
 NC='\033[0m'
 
 if [[ $EUID -ne 0 ]]; then
@@ -162,5 +160,5 @@ echo -e "${GREEN}Cleanup summary:${NC}"
 echo "  Space freed:      ~${SPACE_FREED_HUMAN}"
 echo "  Free space now:   $(df -h / | awk 'NR==2 {print $4}')"
 echo ""
-echo -e "${YELLOW}[i]${NC} journald and rotated logs older than ${LOG_AGE_DAYS} days were removed."
-echo -e "${YELLOW}[i]${NC} Run again periodically or schedule via cron."
+echo -e "[NOTE] journald and rotated logs older than ${LOG_AGE_DAYS} days were removed."
+echo -e "       Run again periodically or schedule via cron."

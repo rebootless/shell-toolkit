@@ -69,6 +69,6 @@ for dir in "$BASE_DIR"/*/; do
 done
 
 echo "---------------------Summary---------------------"
-echo "[+] Updated:   ${UPDATED[*]:-none}"
-echo "[i] Unchanged: ${UNCHANGED[*]:-none}"
-echo "[i] Skipped:   ${SKIPPED[*]:-none}"
+echo "[SUCCESS] Updated:   ${UPDATED[*]:-none}"
+echo "          Unchanged: ${UNCHANGED[*]:-none}"
+echo "          Skipped:   ${SKIPPED[*]:-none}"

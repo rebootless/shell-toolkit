@@ -94,9 +94,9 @@ apt-get install -y "$HEADERS_PKG"
 if INSTALLER="$(find_vbox_ga_installer)"; then
     log "Found Guest Additions installer: ${INSTALLER}"
 else
-    echo "[!] Guest Additions ISO is not mounted."
-    echo "[!] In VirtualBox, use: Devices -> Insert Guest Additions CD image..."
-    echo "[!] Then re-run this script."
+    echo "[INFO] Guest Additions ISO is not mounted."
+    echo "       In VirtualBox, use: Devices -> Insert Guest Additions CD image..."
+    echo "       Then re-run this script."
     exit 1
 fi
 
@@ -106,8 +106,8 @@ INSTALL_EXIT=0
 sh "$INSTALLER" || INSTALL_EXIT=$?
 
 if (( INSTALL_EXIT != 0 )); then
-    echo "[!] Guest Additions installer returned exit code ${INSTALL_EXIT}."
-    echo "[!] Verifying whether the kernel modules were installed..."
+    echo "[INFO] Guest Additions installer returned exit code ${INSTALL_EXIT}."
+    echo "       Verifying whether the kernel modules were installed..."
 fi
 
 log "Attempting to load modules..."
@@ -122,6 +122,7 @@ if lsmod | grep -q '^vboxguest'; then
         echo "[i] The installer returned a non-zero exit code, but the kernel modules are loaded."
     fi
 
+    echo
     echo "[i] Reboot the guest system to finish activation."
 
     echo
@@ -138,7 +139,7 @@ if lsmod | grep -q '^vboxguest'; then
         echo "[i] vboxadd service is not present."
     fi
 else
-    echo "[!] vboxguest module is not loaded."
-    echo "[!] Guest Additions installation appears to have failed."
+    echo "[FAIL] vboxguest module is not loaded."
+    echo "       Guest Additions installation appears to have failed."
     exit 1
 fi
