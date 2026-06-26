@@ -6,19 +6,18 @@
 # Recommended for Debian 12/13 and Ubuntu 22.04/24.04 LTS.
 
 set -euo pipefail
-
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
+if [[ $EUID -ne 0 ]]; then
+    echo "[!] Please log in as root and run this script."
+    exit 1
+fi
 
 RED='\033[0;31m'
 YELLOW='\033[1;33m'
 NC='\033[0m'
 
 DEPLOY_DIR="/opt/portainer-stack"
-
-if [[ $EUID -ne 0 ]]; then
-    echo "[!] Please log in as root and run this script."
-    exit 1
-fi
 
 if [[ -d "$DEPLOY_DIR" ]]; then
     echo ""
@@ -160,8 +159,8 @@ done
 echo ""
 
 if [[ "$PORTAINER_READY" == false ]]; then
-    echo "[!] Portainer did not become healthy in time."
-    echo "[i] Check status with: docker compose -f $DEPLOY_DIR/compose.yaml ps"
+    echo "[WARN] Portainer did not become healthy in time."
+    echo "       Check status with: docker compose -f $DEPLOY_DIR/compose.yaml ps"
 fi
 
 echo ""
@@ -185,6 +184,7 @@ if [[ "$DEFAULT_PASSWORD" == true ]]; then
     echo ""
 fi
 
+echo "[SUCCESS]"
 echo "Stack info:"
 echo "  Deploy dir:     $DEPLOY_DIR"
 echo "  Admin user:     admin"

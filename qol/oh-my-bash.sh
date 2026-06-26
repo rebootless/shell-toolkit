@@ -41,8 +41,8 @@ echo "-------------------Oh My Bash--------------------"
 
 MODE=""
 if [[ -d "$OSH" ]]; then
-    echo "[i] oh-my-bash already installed at $OSH."
-    echo "[i] Skipping installation, only refreshing the theme."
+    echo "[INFO] oh-my-bash already installed at $OSH."
+    echo "    Skipping installation, only refreshing the theme."
     # Detect how it's wired into ~/.bashrc so we know what to refresh
     if grep -qF "$MARK_START" "$BASHRC" 2>/dev/null; then
         MODE="manual"
@@ -50,7 +50,7 @@ if [[ -d "$OSH" ]]; then
         MODE="official"
     fi
 else
-    echo "[i] Choose how to integrate oh-my-bash:"
+    echo "[INFO] Choose how to integrate oh-my-bash:"
     echo "    1) Official installer - REPLACES ~/.bashrc with its template"
     echo "       (backup as ~/.bashrc.omb-*, plus our own backup)."
     echo "    2) Manual integration - git clone + small block prepended to"
@@ -70,9 +70,9 @@ case "$MODE" in
     official)
         if [[ ! -d "$OSH" ]]; then
             echo ""
-            echo "[i] The official installer will REPLACE ~/.bashrc with its own template."
-            echo "[i] Any existing config (bash-qol blocks, aliases, etc.) will be lost."
-            echo "[i] The installer saves its own backup as ~/.bashrc.omb-TIMESTAMP."
+            echo "[INFO] The official installer will REPLACE ~/.bashrc with its own template."
+            echo "    Any existing config (bash-qol blocks, aliases, etc.) will be lost."
+            echo "    The installer saves its own backup as ~/.bashrc.omb-TIMESTAMP."
             echo ""
             read -rp "[?] Proceed with the official installer? [y/N]: " CONFIRM
             case "${CONFIRM,,}" in
@@ -127,7 +127,7 @@ while true; do
     img_file=$(find "$theme_dir" -maxdepth 1 -type f \( -name "*.png" -o -name "*.jpg" -o -name "*.jpeg" \) | head -n 1)
 
     clear
-    echo "[i] Tab = next theme, Enter = confirm selection"
+    echo "[Tab] = next theme, [Enter] = confirm selection"
     echo "-------------------------------------------------"
     echo "[$((idx+1))/${#THEMES[@]}] Theme: $theme"
     echo ""
@@ -136,7 +136,7 @@ while true; do
     if [[ -n "$img_file" && -f "$img_file" ]]; then
         chafa --size=65x16 "$img_file"
     else
-        echo "  [ No preview image available for this theme ]"
+        echo "[No preview image available for this theme]"
     fi
     echo ""
 
@@ -193,14 +193,14 @@ echo ""
 echo "================================================="
 echo "               Setup Complete!                   "
 echo "================================================="
-echo "[i] oh-my-bash : $OSH"
-echo "[i] Mode       : $MODE"
-echo "[i] Theme      : $OMB_THEME"
+echo "[SUCCESS] oh-my-bash : $OSH"
+echo "          Mode       : $MODE"
+echo "          Theme      : $OMB_THEME"
 if [[ "$MODE" == "official" ]]; then
-    echo "[i] ~/.bashrc was REPLACED by the installer."
-    echo "    Re-run bash-qol.sh to restore its managed block if needed."
+    echo "          ~/.bashrc was REPLACED by the installer."
+    echo "          Re-run bash-qol.sh to restore its managed block if needed."
 else
-    echo "[i] ~/.bashrc was only prepended; the bash-qol block is untouched."
+    echo "          ~/.bashrc was only prepended; the bash-qol block is untouched."
 fi
 echo ""
-echo "[i] Apply changes now with: source ~/.bashrc"
+echo "          Apply changes now with: source ~/.bashrc"

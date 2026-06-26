@@ -6,19 +6,18 @@
 # Recommended for Debian 12/13 and Ubuntu 22.04/24.04 LTS.
 
 set -euo pipefail
-
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
+if [[ $EUID -ne 0 ]]; then
+    echo "[!] Please log in as root and run this script."
+    exit 1
+fi
 
 RED='\033[0;31m'
 YELLOW='\033[1;33m'
 NC='\033[0m'
 
 DEPLOY_DIR="/opt/grafana-stack"
-
-if [[ $EUID -ne 0 ]]; then
-    echo "[!] Please log in as root and run this script."
-    exit 1
-fi
 
 if [[ -d "$DEPLOY_DIR" ]]; then
     echo ""
@@ -262,13 +261,13 @@ done
 echo ""
 
 if [[ "$GRAFANA_READY" == false ]]; then
-    echo "[!] Grafana did not become healthy in time."
-    echo "[i] Dashboard import skipped — run this when Grafana is up:"
-    echo "    curl -fsSL https://grafana.com/api/dashboards/19937/revisions/latest/download | \\"
-    echo "      curl -sf -X POST -H 'Content-Type: application/json' \\"
-    echo "        -u '${GRAFANA_USER}:<password>' \\"
-    echo "        -d '{\"dashboard\":'\$(cat)',\"overwrite\":true,\"inputs\":[{\"name\":\"DS_PROMETHEUS\",\"type\":\"datasource\",\"pluginId\":\"prometheus\",\"value\":\"Prometheus\"}]}' \\"
-    echo "        http://localhost:3000/api/dashboards/import"
+    echo "[WARN] Grafana did not become healthy in time."
+    echo "       Dashboard import skipped — run this when Grafana is up:"
+    echo "       curl -fsSL https://grafana.com/api/dashboards/19937/revisions/latest/download | \\"
+    echo "         curl -sf -X POST -H 'Content-Type: application/json' \\"
+    echo "           -u '${GRAFANA_USER}:<password>' \\"
+    echo "           -d '{\"dashboard\":'\$(cat)',\"overwrite\":true,\"inputs\":[{\"name\":\"DS_PROMETHEUS\",\"type\":\"datasource\",\"pluginId\":\"prometheus\",\"value\":\"Prometheus\"}]}' \\"
+    echo "           http://localhost:3000/api/dashboards/import"
 else
     echo "------------Importing dashboard 19937------------"
     echo "[*] Downloading Node Exporter Full dashboard from grafana.com..."
@@ -314,6 +313,7 @@ if [[ "$DEFAULT_PASSWORD" == true ]]; then
     echo ""
 fi
 
+echo "[SUCCESS]"
 echo "Stack info:"
 echo "  Deploy dir:     $DEPLOY_DIR"
 echo "  Admin user:     $GRAFANA_USER"

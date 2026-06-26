@@ -86,6 +86,5 @@ rm -rf "$DEMO_DIR"
 
 echo -e "${C_CYAN}Tour completed! Happy coding!${C_RESET}"
 
-echo "TIP:"
-echo "To display emojis correctly, you need to install a Nerd Font"
-echo "(https://www.nerdfonts.com/), for example: JetBrainsMono"
+echo "[TIP] To display emojis correctly, you need to install a Nerd Font"
+echo "      (https://www.nerdfonts.com/), for example: JetBrainsMono"

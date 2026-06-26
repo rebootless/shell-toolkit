@@ -25,8 +25,8 @@ fi
 
 # .env check
 if [[ ! -f "$ENV_FILE" ]]; then
-    echo "[!] Config not found: $ENV_FILE"
-    echo "[i] cp $SCRIPT_DIR/.env.example $ENV_FILE && nano $ENV_FILE"
+    echo "[INFO] Config not found: $ENV_FILE"
+    echo "    cp $SCRIPT_DIR/.env.example $ENV_FILE && nano $ENV_FILE"
     exit 1
 fi
 
@@ -63,8 +63,8 @@ fi
 
 if [[ "${CREATE_DEPLOY_USER,,}" =~ ^y ]]; then
     if [[ -z "$DEPLOY_USER" ]]; then
-        echo "[!] CREATE_DEPLOY_USER=y but DEPLOY_USER is empty."
-        echo "[i] Set a username or set CREATE_DEPLOY_USER=n."
+        echo "[INFO] CREATE_DEPLOY_USER=y but DEPLOY_USER is empty."
+        echo "       Set a username or set CREATE_DEPLOY_USER=n."
         exit 1
     fi
     # chpasswd format is 'user:pass' — a colon in the password breaks parsing
@@ -194,7 +194,7 @@ trap - ERR
 
 echo ""
 echo "================================================="
-echo "[+] Deployment complete."
+echo "[SUCCESS] Deployment complete."
 echo ""
 echo "  Nginx:      http://$DISPLAY_HOST"
 echo "  Grafana:    http://$DISPLAY_HOST/grafana"

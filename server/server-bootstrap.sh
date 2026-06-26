@@ -6,11 +6,8 @@
 # Recommended for Debian 12/13 and Ubuntu 22.04/24.04 LTS.
 
 set -euo pipefail
-
-# System PATH
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
-# Root check
 if [[ $EUID -ne 0 ]]; then
     echo "[!] Please log in as root and run this script."
     exit 1
@@ -256,4 +253,4 @@ lsblk
 echo ""
 
 echo "--------------------------------------------------"
-echo "[✓] System setup completed"
+echo "[+] System setup completed"

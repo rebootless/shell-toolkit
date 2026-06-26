@@ -1,4 +1,5 @@
 #!/bin/bash
+
 set -euo pipefail
 export PATH="/usr/bin:/bin:/usr/local/bin:$PATH"
 

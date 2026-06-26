@@ -15,18 +15,17 @@
 # - Cron & Tree (directory structures)
 
 set -euo pipefail
-
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
+if [[ $EUID -ne 0 ]]; then
+    echo "[!] Please log in as root and run this script."
+    exit 1
+fi
 
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m'
-
-if [[ $EUID -ne 0 ]]; then
-    echo -e "${RED}[!] Please log in as root and run this script.${NC}"
-    exit 1
-fi
 
 echo "-------------Installing dependencies-------------"
 echo "[*] Updating system packages..."

@@ -90,8 +90,8 @@ ensure_installed() {
     cp "$self_path" "$INSTALL_PATH"
     chmod +x "$INSTALL_PATH"
     ln -sf "$INSTALL_PATH" "$ASK_PATH"
-    echo "[+] Installed to $INSTALL_PATH"
-    echo "[+] Created command alias $ASK_PATH -> $INSTALL_PATH"
+    echo "[INFO] Installed to $INSTALL_PATH"
+    echo "       Created command alias $ASK_PATH -> $INSTALL_PATH"
 
     # Idempotent PATH block: skip if markers already present
     if grep -qF "$MARK_START" "$BASHRC" 2>/dev/null; then
@@ -105,8 +105,8 @@ ensure_installed() {
         echo "export PATH=\"\$PATH:$INSTALL_DIR\""
         echo "$MARK_END"
     } >> "$BASHRC"
-    echo "[i] Added $INSTALL_DIR to PATH in $BASHRC"
-    echo "[i] Run 'source $BASHRC' or open a new terminal to use the 'ask' command"
+    echo "[INFO] Added $INSTALL_DIR to PATH in $BASHRC"
+    echo "       Run 'source $BASHRC' or open a new terminal to use the 'ask' command"
 }
 
 run_setup() {
@@ -114,8 +114,8 @@ run_setup() {
     chmod 700 "$CONFIG_DIR"
 
     echo "--------------Gemini (Google) setup--------------"
-    echo "[i] Free tier available, no billing required."
-    echo "[i] Get an API key here: $GEMINI_KEY_URL"
+    echo "[INFO] Free tier available, no billing required."
+    echo "       Get an API key here: $GEMINI_KEY_URL"
     read -rsp "[>] Enter Gemini API key: " key
     echo
 
@@ -170,8 +170,8 @@ run_uninstall() {
                 sed -i "/${MARK_START}/,/${MARK_END}/d" "$BASHRC"
                 echo "[+] Removed PATH block from $BASHRC"
             fi
-            echo "[+] Removed $INSTALL_PATH, $ASK_PATH and $CONFIG_DIR"
-            echo "[i] You may also remove the PATH entry added to your shell rc file"
+            echo "[INFO] Removed $INSTALL_PATH, $ASK_PATH and $CONFIG_DIR"
+            echo "       You may also remove the PATH entry added to your shell rc file"
             ;;
         *)
             echo "[i] Cancelled"
@@ -737,8 +737,8 @@ main() {
     esac
 
     if [[ $# -eq 0 ]]; then
-        echo "[!] Usage: ask [--model NAME] <text>" >&2
-        echo "[i] Run 'ask --help' for details." >&2
+        echo "[TIP] Usage: ask [--model NAME] <text>" >&2
+        echo "      Run 'ask --help' for details." >&2
         exit 1
     fi
 
@@ -808,8 +808,8 @@ main() {
     local err_msg
     err_msg=$(jq -r '.error.message // empty' <<< "$resp" 2>/dev/null || true)
     if [[ -n "$err_msg" ]]; then
-        echo "[!] Gemini error: $err_msg" >&2
-        echo "[i] Run 'ask --reset' if your key may be invalid, or check the model name with --model." >&2
+        echo "[INFO] Gemini error: $err_msg" >&2
+        echo "       Run 'ask --reset' if your key may be invalid, or check the model name with --model." >&2
         exit 1
     fi
 

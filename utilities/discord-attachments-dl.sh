@@ -29,6 +29,7 @@
 # - Safe to re-run (existing files are skipped)
 
 set -euo pipefail
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
 echo "[*] Updating system packages..."
 sudo apt-get update
@@ -136,7 +137,7 @@ for dir in "${ALL_DIRS[@]}"; do
 
     rm -f "$dir/links.tmp"
 done
-echo "[✓] Done"
+echo "[+] Done."
 
 echo "Total processed:  $TOTAL_FOUND"
 echo "Downloaded:       $TOTAL_SUCCESS"
