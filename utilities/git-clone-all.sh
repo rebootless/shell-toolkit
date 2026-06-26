@@ -3,7 +3,7 @@
 set -euo pipefail
 export PATH="/usr/bin:/bin:/usr/local/bin:$PATH"
 
-# Usage: ./clone-all.sh <github-username-or-profile-url> [target-dir]
+# Usage: ./git-clone-all.sh <github-username-or-profile-url> [target-dir]
 
 if [[ $# -lt 1 ]]; then
     echo "[!] Usage: $0 <github-username-or-url> [target-dir]"
