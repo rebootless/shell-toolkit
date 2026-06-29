@@ -102,7 +102,7 @@ show_spinner() {
     (
         while true; do
             for frame in "${frames[@]}"; do
-                printf "\r [%s] Fetching GitHub API data..." "$frame"
+                printf "\r[%s] Fetching GitHub API data..." "$frame"
                 sleep $delay
             done
         done
