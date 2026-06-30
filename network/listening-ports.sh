@@ -26,7 +26,7 @@ if [[ $EUID -ne 0 ]]; then
     echo -e "${YELLOW}Warning: Running as non-root. Process information will be limited.${NC}\n"
 fi
 
-printf "\n${YELLOW}=== LISTENING PORTS (TCP/UDP) ===${NC}\n"
+printf "\n${YELLOW}LISTENING PORTS (TCP/UDP):${NC}\n"
 
 printf "%-8s %-25s %-8s %s\n" "Proto" "Local Address" "Port" "Process"
 echo "----------------------------------------------------------------------"

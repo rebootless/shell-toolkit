@@ -41,7 +41,7 @@ fi
 pub_ipv4=$(curl -s --max-time 4 -4 https://api.ipify.org 2>/dev/null || echo "Unavailable")
 pub_ipv6=$(curl -s --max-time 4 -6 https://api6.ipify.org 2>/dev/null || echo "Unavailable")
 
-printf "\n${YELLOW}=== NETWORK DIAGNOSTIC SUMMARY ===${NC}\n"
+printf "\n${YELLOW}NETWORK DIAGNOSTIC SUMMARY:${NC}\n"
 
 printf "%-15s : " "Gateway"
 [[ "$gw_status" == "OK" ]] && printf "%b\n" "${GREEN}OK${NC}" || printf "%b\n" "${RED}FAIL${NC}"

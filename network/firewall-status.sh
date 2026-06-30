@@ -18,7 +18,7 @@ if [[ $EUID -ne 0 ]]; then
     echo -e "${YELLOW}Warning: Non-root mode. Firewall checks may fail or return incomplete info.${NC}\n"
 fi
 
-printf "\n${YELLOW}=== FIREWALL STATUS ===${NC}\n"
+printf "\n${YELLOW}FIREWALL STATUS:${NC}\n"
 
 found_any=0
 

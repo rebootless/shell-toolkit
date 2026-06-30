@@ -26,7 +26,7 @@ if [[ $EUID -ne 0 ]]; then
     echo -e "${YELLOW}Warning: Running as non-root. Process information will be limited.${NC}\n"
 fi
 
-printf "\n${YELLOW}=== ESTABLISHED CONNECTIONS ===${NC}\n"
+printf "\n${YELLOW}ESTABLISHED CONNECTIONS:${NC}\n"
 
 printf "%-6s %-25s %-25s %s\n" "Proto" "Local Endpoint" "Remote Endpoint" "Process"
 echo "--------------------------------------------------------------------------------"

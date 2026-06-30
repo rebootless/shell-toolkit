@@ -13,7 +13,7 @@ fi
 
 trap 'echo -e "\n${RED}Script interrupted${NC}"; exit 130' INT TERM
 
-printf "\n${YELLOW}=== INTERFACE STATISTICS ===${NC}\n"
+printf "\n${YELLOW}INTERFACE STATISTICS:${NC}\n"
 
 for iface_path in /sys/class/net/*; do
     [[ -d "$iface_path" ]] || continue

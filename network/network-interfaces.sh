@@ -22,7 +22,7 @@ if [[ ${#missing[@]} -gt 0 ]]; then
     exit 1
 fi
 
-printf "\n${YELLOW}=== NETWORK INTERFACES ===${NC}\n"
+printf "\n${YELLOW}NETWORK INTERFACES:${NC}\n"
 
 for iface_path in /sys/class/net/*; do
     [[ -d "$iface_path" ]] || continue

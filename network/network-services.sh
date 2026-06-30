@@ -14,7 +14,7 @@ fi
 
 trap 'echo -e "\n${RED}Script interrupted${NC}"; exit 130' INT TERM
 
-printf "\n${YELLOW}=== NETWORK DAEMONS & SERVICES ===${NC}\n"
+printf "\n${YELLOW}NETWORK DAEMONS & SERVICES:${NC}\n"
 
 if command -v systemctl >/dev/null 2>&1; then
     for srv in NetworkManager systemd-networkd systemd-resolved dhcpcd networking wpa_supplicant iwd; do

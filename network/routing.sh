@@ -15,13 +15,13 @@ trap 'echo -e "\n${RED}Script interrupted${NC}"; exit 130' INT TERM
 
 command -v ip >/dev/null 2>&1 || { echo -e "${RED}Missing command: ip${NC}"; exit 1; }
 
-printf "\n${YELLOW}=== IPv4 ROUTING TABLE ===${NC}\n"
+printf "\n${YELLOW}IPv4 ROUTING TABLE:${NC}\n"
 ip -4 route show 2>/dev/null || echo "No IPv4 routes found."
 
-printf "\n${YELLOW}=== IPv6 ROUTING TABLE ===${NC}\n"
+printf "\n${YELLOW}IPv6 ROUTING TABLE:${NC}\n"
 ip -6 route show 2>/dev/null || echo "No IPv6 routes found."
 
-printf "\n${YELLOW}=== DEFAULT GATEWAY ===${NC}\n"
+printf "\n${YELLOW}DEFAULT GATEWAY:${NC}\n"
 
 def_gw4=$(ip -4 route show default 2>/dev/null | awk '{print $3}' | head -n1 || true)
 def_iface4=$(ip -4 route show default 2>/dev/null | awk '{print $5}' | head -n1 || true)

@@ -15,7 +15,7 @@ trap 'echo -e "\n${RED}Script interrupted${NC}"; exit 130' INT TERM
 
 command -v sysctl >/dev/null 2>&1 || { echo -e "${RED}Missing command: sysctl${NC}"; exit 1; }
 
-printf "\n${YELLOW}=== NETWORK KERNEL PARAMETERS (sysctl) ===${NC}\n"
+printf "\n${YELLOW}NETWORK KERNEL PARAMETERS (sysctl):${NC}\n"
 
 cc=$(sysctl -n net.ipv4.tcp_congestion_control 2>/dev/null || echo "Unknown")
 echo "TCP Congestion Control : $cc"
