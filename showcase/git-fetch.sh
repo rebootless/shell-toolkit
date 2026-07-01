@@ -33,7 +33,7 @@ C_STATS_SOCIAL="184;108;255"
 C_STATS_LANGS="0;184;94"
 C_STATS_ACTIVITY="255;170;0"
 
-GITHUB_USER="VargKernel"
+GITHUB_USER="rebootless"
 COL=20
 
 print_label() {
