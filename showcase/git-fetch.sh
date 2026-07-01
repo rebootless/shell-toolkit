@@ -38,6 +38,13 @@ C_STATS_ACTIVITY="255;170;0"
 GITHUB_USER="rebootless"
 COL=20
 
+github_get() {
+    curl -fsSL \
+        -H "User-Agent: git-fetch.sh" \
+        -H "Accept: application/vnd.github+json" \
+        "$1"
+}
+
 print_label() {
     local label="$1"
     local pad=$(( COL - ${#label} - 1 ))
@@ -131,34 +138,54 @@ info "Focus"  "Self-hosted · Automation · Observability"
 
 show_spinner
 
-GITHUB_API="$(curl -fsSL "https://api.github.com/users/$GITHUB_USER")"
-GITHUB_REPOS="$(curl -fsSL "https://api.github.com/users/$GITHUB_USER/repos?per_page=100&type=owner&sort=updated")"
+GITHUB_API="$(github_get "https://api.github.com/users/$GITHUB_USER")"
+GITHUB_REPOS="$(github_get "https://api.github.com/users/$GITHUB_USER/repos?per_page=100&type=owner&sort=updated")"
 
-get_repos() { printf '%s\n' "$GITHUB_API" | grep '"public_repos"' | sed 's/[^0-9]//g'; }
-get_followers() { printf '%s\n' "$GITHUB_API" | grep '"followers"' | head -n1 | sed 's/[^0-9]//g'; }
-get_following() { printf '%s\n' "$GITHUB_API" | grep '"following"' | head -n1 | sed 's/[^0-9]//g'; }
-get_stars() { printf '%s\n' "$GITHUB_REPOS" | grep '"stargazers_count"' | sed 's/[^0-9]//g' | awk '{s+=$1} END{print s+0}'; }
-get_forks() { printf '%s\n' "$GITHUB_REPOS" | grep '"forks_count"' | sed 's/[^0-9]//g' | awk '{s+=$1} END{print s+0}'; }
-get_last_push() { printf '%s\n' "$GITHUB_REPOS" | grep '"pushed_at"' | head -n1 | sed 's/.*"pushed_at": "//; s/T.*//; s/".*//'; }
+get_repos() {
+    jq -r '.public_repos' <<< "$GITHUB_API"
+}
+
+get_followers() {
+    jq -r '.followers' <<< "$GITHUB_API"
+}
+
+get_following() {
+    jq -r '.following' <<< "$GITHUB_API"
+}
+
+get_stars() {
+    jq '[.[].stargazers_count] | add // 0' <<< "$GITHUB_REPOS"
+}
+
+get_forks() {
+    jq '[.[].forks_count] | add // 0' <<< "$GITHUB_REPOS"
+}
+
+get_last_push() {
+    jq -r '.[0].pushed_at[:10]' <<< "$GITHUB_REPOS"
+}
 
 get_top_languages() {
     declare -A langs
     local total=0
 
     while read -r url; do
-        [ -z "$url" ] && continue
-        while read -r line; do
-            lang=$(echo "$line" | cut -d\" -f2)
-            bytes=$(echo "$line" | grep -o '[0-9]\+')
-            [ -z "$lang" ] && continue
-            [ -z "$bytes" ] && continue
-            langs["$lang"]=$((langs["$lang"] + bytes))
-            total=$((total + bytes))
-        done < <(curl -fsSL "$url" | grep -E '"[^"]+": [0-9]+')
-    done < <(echo "$GITHUB_REPOS" | grep '"languages_url"' | sed 's/.*"languages_url": "//; s/".*//')
+        while IFS=$'\t' read -r lang bytes; do
+            langs["$lang"]=$(( ${langs["$lang"]:-0} + bytes ))
+            total=$(( total + bytes ))
+        done < <(
+            github_get "$url" |
+            jq -r 'to_entries[] | "\(.key)\t\(.value)"'
+        )
+    done < <(
+        jq -r '.[].languages_url' <<< "$GITHUB_REPOS"
+    )
+
+    (( total == 0 )) && return
 
     for lang in "${!langs[@]}"; do
-        percent=$(awk -v b="${langs[$lang]}" -v t="$total" 'BEGIN { printf "%.2f", (b/t)*100 }')
+        percent=$(awk -v b="${langs[$lang]}" -v t="$total" \
+            'BEGIN { printf "%.2f", b * 100 / t }')
 
         icon=""
         case "$lang" in
@@ -178,7 +205,7 @@ get_top_languages() {
             Lua)                 icon="" ;;
         esac
 
-        echo "${lang}|${icon}|${percent}"
+        printf "%s|%s|%s\n" "$lang" "$icon" "$percent"
     done | sort -t'|' -k3 -nr | head -n 5
 }
 
