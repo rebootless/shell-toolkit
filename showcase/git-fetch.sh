@@ -11,22 +11,24 @@ WHITE="\e[38;2;255;255;255m"
 L_CURVE="\ue0b6"
 R_CURVE="\ue0b4"
 
-C_DEBIAN="215;7;81"
-C_UBUNTU="233;84;32"
-C_QEMU="119;39;180"
-C_VBOX="23;114;237"
-C_DOCKER="36;150;237"
-C_PORTAINER="0;194;168"
-C_PROM="230;82;44"
-C_GRAFANA="244;104;0"
-C_BASH="48;209;88"
-C_PYTHON="55;118;171"
-C_CPP="0;89;156"
-C_GITHUB="36;41;46"
-C_NGINX="0;150;57"
-C_KATE="61;174;233"
-C_KDEV="127;90;240"
-C_GIT="240;80;51"
+C_DEBIAN="168;29;51"      # #A81D33
+C_UBUNTU="233;84;32"      # #E95420
+C_QEMU="127;90;240"       # #7F5AF0
+C_VBOX="24;58;97"         # #183A61
+C_DOCKER="36;150;237"     # #2496ED
+C_PORTAINER="19;190;249"  # #13BEF9
+C_PROM="230;82;44"        # #E6522C
+C_GRAFANA="244;104;0"     # #F46800
+C_BASH="78;170;37"        # #4EAA25
+C_PYTHON="55;118;171"     # #3776AB
+C_CPP="0;89;156"          # #00599C
+C_GITHUB="36;41;47"       # #24292F
+C_NGINX="0;150;57"        # #009639
+C_KATE="61;174;233"       # #3DAEE9
+C_KDEV="127;90;240"       # #7F5AF0
+C_GIT="240;80;50"         # #F05032
+C_ANSIBLE="238;0;0"       # #EE0000
+C_OPENTOFU="255;218;24"   # #FFDA18
 
 C_STATS_GITHUB="88;166;255"
 C_STATS_SOCIAL="184;108;255"
@@ -74,13 +76,15 @@ row() {
 
 palette() {
     local row1=(
-        "$C_DEBIAN" "$C_UBUNTU" "$C_QEMU" "$C_VBOX"
-        "$C_DOCKER" "$C_PORTAINER" "$C_PROM" "$C_GIT"
+    "$C_DEBIAN" "$C_UBUNTU" "$C_QEMU" "$C_VBOX"
+    "$C_DOCKER" "$C_PORTAINER" "$C_PROM" "$C_GRAFANA"
+    "$C_ANSIBLE"
     )
 
     local row2=(
-        "$C_GRAFANA" "$C_BASH" "$C_PYTHON" "$C_CPP"
-        "$C_GITHUB" "$C_NGINX" "$C_KATE" "$C_KDEV"
+    "$C_OPENTOFU" "$C_BASH" "$C_PYTHON" "$C_CPP"
+    "$C_GITHUB" "$C_GIT" "$C_NGINX" "$C_KATE"
+    "$C_KDEV"
     )
 
     local c
@@ -199,6 +203,10 @@ row "Containers" \
 row "Observability" \
     "$C_PROM"      " Prometheus" \
     "$C_GRAFANA"   " Grafana"
+
+row "Infrastructure" \
+    "$C_ANSIBLE"   "󱂚 Ansible" \
+    "$C_OPENTOFU"  "󱁢 OpenTofu"
 
 row "Languages" \
     "$C_BASH"      " Bash" \

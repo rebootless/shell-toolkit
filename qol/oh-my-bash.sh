@@ -42,7 +42,7 @@ echo "-------------------Oh My Bash--------------------"
 MODE=""
 if [[ -d "$OSH" ]]; then
     echo "[INFO] oh-my-bash already installed at $OSH."
-    echo "    Skipping installation, only refreshing the theme."
+    echo "       Skipping installation, only refreshing the theme."
     # Detect how it's wired into ~/.bashrc so we know what to refresh
     if grep -qF "$MARK_START" "$BASHRC" 2>/dev/null; then
         MODE="manual"
@@ -71,8 +71,8 @@ case "$MODE" in
         if [[ ! -d "$OSH" ]]; then
             echo ""
             echo "[INFO] The official installer will REPLACE ~/.bashrc with its own template."
-            echo "    Any existing config (bash-qol blocks, aliases, etc.) will be lost."
-            echo "    The installer saves its own backup as ~/.bashrc.omb-TIMESTAMP."
+            echo "       Any existing config (bash-qol blocks, aliases, etc.) will be lost."
+            echo "       The installer saves its own backup as ~/.bashrc.omb-TIMESTAMP."
             echo ""
             read -rp "[?] Proceed with the official installer? [y/N]: " CONFIRM
             case "${CONFIRM,,}" in
