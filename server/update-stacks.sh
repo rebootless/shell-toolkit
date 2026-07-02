@@ -1,10 +1,5 @@
 #!/bin/bash
 
-# update-stacks.sh
-# Iterates over all docker compose stacks in /opt/*, runs
-# `docker compose pull && docker compose up -d` for each, and
-# reports which stacks had image updates.
-
 set -euo pipefail
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 

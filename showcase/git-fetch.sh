@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# This script requires Nerd Fonts to be installed
-
 RESET="\e[0m"
 BOLD="\e[1m"
 DIM="\e[38;2;110;110;110m"

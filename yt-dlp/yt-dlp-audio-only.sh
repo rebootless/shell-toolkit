@@ -1,9 +1,5 @@
 #!/bin/bash
 
-# yt-dlp-audio-only.sh
-# Downloads audio only and converts it to MP3 (best quality).
-# Usage: ./yt-dlp-audio-only.sh <URL> [extra yt-dlp options]
-
 set -euo pipefail
 
 echo "[*] Installing required dependencies..."

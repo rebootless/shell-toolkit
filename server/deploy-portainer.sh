@@ -1,10 +1,5 @@
 #!/bin/bash
 
-# Portainer CE deployment for Debian/Ubuntu systems.
-# Installs Docker, generates all configs inline, and deploys
-# Portainer CE with admin password via Docker secrets.
-# Recommended for Debian 12/13 and Ubuntu 22.04/24.04 LTS.
-
 set -euo pipefail
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 

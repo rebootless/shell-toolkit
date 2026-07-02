@@ -1,10 +1,5 @@
 #!/bin/bash
 
-# Grafana + Prometheus stack deployment for Debian/Ubuntu systems.
-# Installs Docker, generates all configs inline, and imports
-# the Node Exporter Full dashboard (ID 19937) via the Grafana API.
-# Recommended for Debian 12/13 and Ubuntu 22.04/24.04 LTS.
-
 set -euo pipefail
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 

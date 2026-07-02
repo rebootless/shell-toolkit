@@ -1,13 +1,5 @@
 #!/bin/bash
 
-# Installs an NVIDIA GPU driver, either from the distro repo (nvidia-driver-XXX)
-# or from a legacy/manual .run installer.
-# Workflow: blacklists nouveau, stops the display manager and switches to
-# multi-user.target (X/Wayland must be fully down before driver install/build),
-# installs the driver, then restores graphical.target and reboots if needed.
-# Requirements: root, Debian/Ubuntu-based system (apt), or a downloaded .run
-# installer for the manual mode.
-
 set -euo pipefail
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 

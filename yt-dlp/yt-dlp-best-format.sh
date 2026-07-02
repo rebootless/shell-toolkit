@@ -1,9 +1,5 @@
 #!/bin/bash
 
-# yt-dlp-best-format.sh
-# Downloads the best available quality as MP4 (video+audio merged).
-# Usage: ./yt-dlp-best-format.sh <URL> [extra yt-dlp options]
-
 set -euo pipefail
 
 echo "[*] Installing required dependencies..."
