@@ -10,8 +10,8 @@ fi
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-CLI_DIR="$(cd "$SCRIPT_DIR/../../install/cli" && pwd)"
-GUI_DIR="$(cd "$SCRIPT_DIR/../../install/gui" && pwd)"
+CLI_DIR="$(cd "$SCRIPT_DIR/../../apt/cli" && pwd)"
+GUI_DIR="$(cd "$SCRIPT_DIR/../../apt/gui" && pwd)"
 LSP_DIR="$(cd "$SCRIPT_DIR/../../lsp" && pwd)"
 
 run_scripts() {
