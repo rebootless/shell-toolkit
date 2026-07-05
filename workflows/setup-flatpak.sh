@@ -3,7 +3,7 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-FLATPAK_DIR="$(cd "$SCRIPT_DIR/../../flatpak" && pwd)"
+FLATPAK_DIR="$(cd "$SCRIPT_DIR/../standalone/flatpak" && pwd)"
 
 cd "$FLATPAK_DIR"
 
