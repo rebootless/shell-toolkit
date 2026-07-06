@@ -4,6 +4,8 @@ set -euo pipefail
 
 export DEBIAN_FRONTEND=noninteractive
 
+echo "==> Installing Discord via Flatpak"
+
 echo "[*] Installing Discord via Flatpak..."
 
 flatpak install -y flathub com.discordapp.Discord

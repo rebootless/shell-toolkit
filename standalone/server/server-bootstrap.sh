@@ -17,12 +17,11 @@ apt-get update
 echo "[*] Upgrading installed packages..."
 apt-get upgrade -y
 
-echo "-------------------Profile setup------------------"
+echo "==> Profile setup"
 echo " Select Installation Profile:"
 echo " 1) Base tools only"
 echo " 2) Base + Hardware tools"
 echo " 0) Cancel and exit."
-echo "--------------------------------------------------"
 
 read -rp "[>] Choice: " PROFILE_CHOICE
 
@@ -45,7 +44,7 @@ case "${PROFILE_CHOICE,,}" in
         ;;
 esac
 
-echo "---------------Sudo group management--------------"
+echo "==> Sudo group management"
 
 mapfile -t REGULAR_USERS < <(getent passwd | awk -F: '$3 >= 1000 && $3 < 65534 {print $1}')
 
@@ -105,7 +104,7 @@ else
     echo "[i] No valid user selected, skipping sudo assignment."
 fi
 
-echo "------------------Firewall setup------------------"
+echo "==> Firewall setup"
 
 read -rp "[?] Install Firewalld? [y/N]: " FIREWALL_CHOICE
 
@@ -134,7 +133,7 @@ case "${FIREWALL_CHOICE,,}" in
         ;;
 esac
 
-echo "------------------Fail2Ban setup------------------"
+echo "==> Fail2Ban setup"
 
 read -rp "[?] Install and configure Fail2Ban? [y/N]: " FAIL2BAN_CHOICE
 
@@ -178,9 +177,9 @@ EOF
         ;;
 esac
 
-echo "------------------SYSTEM SUMMARY------------------"
 echo ""
-
+echo "==> Summary"
+echo ""
 echo "Installed Profile:"
 echo "Base tools: $BASE_TOOLS"
 echo "Hardware tools: $HARDWARE_TOOLS"
@@ -247,5 +246,4 @@ echo "Disk Summary:"
 lsblk
 echo ""
 
-echo "--------------------------------------------------"
 echo "[+] System setup completed"

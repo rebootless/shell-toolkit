@@ -8,7 +8,7 @@ if [[ $EUID -ne 0 ]]; then
     exit 1
 fi
 
-echo "-------------Installing dependencies-------------"
+echo "==> Installing dependencies"
 
 echo "[*] Updating system packages..."
 apt-get update
@@ -21,7 +21,7 @@ systemctl enable --now nginx
 
 LOG_FILE="/var/log/nginx/init_check.log"
 
-echo "----------------avahi-daemon setup---------------"
+echo "==> avahi-daemon setup"
 
 INSTALL_AVAHI="n"
 read -rp "[?] Install avahi-daemon (mDNS / .local hostname)? [y/N]: " AVAHI_CHOICE
@@ -44,7 +44,7 @@ case "${AVAHI_CHOICE,,}" in
         ;;
 esac
 
-echo "--------------------PHP setup--------------------"
+echo "==> PHP setup"
 
 INSTALL_PHP="n"
 PHP_VERSION=""
@@ -85,7 +85,7 @@ if [[ -n "${PHP_VERSION}" ]]; then
     }"
 fi
 
-echo "-----------------Grafana setup-------------------"
+echo "==> Grafana setup"
 
 GRAFANA_BLOCK=""
 read -rp "[?] Configure Grafana reverse proxy at /grafana? [y/N]: " GRAFANA_CHOICE
@@ -123,7 +123,7 @@ case "${GRAFANA_CHOICE,,}" in
         ;;
 esac
 
-echo "-----------------Portainer setup-----------------"
+echo "==> Portainer setup"
 
 PORTAINER_BLOCK=""
 read -rp "[?] Configure Portainer reverse proxy at /portainer? [y/N]: " PORTAINER_CHOICE
@@ -157,7 +157,7 @@ case "${PORTAINER_CHOICE,,}" in
         ;;
 esac
 
-echo "-----------------Firewall setup------------------"
+echo "==> Firewall setup"
 
 read -rp "[?] Install Firewalld? [y/N]: " FIREWALL_CHOICE
 
@@ -209,7 +209,7 @@ mkdir -p "$WWW_PATH"
 chown -R www-data:www-data "$WWW_PATH"
 chmod -R 755 "$WWW_PATH"
 
-echo "---------------Site content setup----------------"
+echo "==> Site content setup"
 
 SHOULD_WRITE_INDEX="y"
 BACKUP_TIME=$(date +%Y%m%d_%H%M%S)
@@ -249,7 +249,7 @@ EOF
     chown www-data:www-data "$WWW_PATH/index.html"
 fi
 
-echo "------------------Nginx config-------------------"
+echo "==> Nginx config"
 
 SHOULD_WRITE_CONF="y"
 
@@ -306,7 +306,7 @@ echo "[*] Enabling site..."
 if nginx -t 2>&1 | tee "$LOG_FILE"; then
     systemctl reload nginx
 
-    echo "------------------Setup Complete!----------------"
+    echo "==> Summary"
     echo "Server Info:"
     echo "  Domain/IP:        $DOMAIN"
     echo "  Local IP:         $DEFAULT_IP"

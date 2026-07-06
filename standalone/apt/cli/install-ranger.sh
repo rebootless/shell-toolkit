@@ -1,4 +1,5 @@
 #!/bin/bash
+
 set -euo pipefail
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 export DEBIAN_FRONTEND=noninteractive
@@ -8,10 +9,10 @@ if [[ $EUID -ne 0 ]]; then
     exit 1
 fi
 
-echo "----------------Installing ranger----------------"
+echo "==> Installing ranger"
 
 if command -v ranger >/dev/null 2>&1; then
-    echo "[i] ranger is already installed, skipping."
+    echo "[i] ranger is already installed, skipping..."
     exit 0
 fi
 

@@ -166,6 +166,8 @@ if [[ -n "$ORIGIN_URL" ]]; then
 fi
 
 echo ""
+echo "==> Summary"
+echo ""
 echo "[SUCCESS] Rewrite complete."
 echo ""
 echo "Repo:   $REPO"

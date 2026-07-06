@@ -2,6 +2,8 @@
 
 set -euo pipefail
 
+echo "==> Installing Bash LSP"
+
 MARK_START="# >>> bash-language-server >>>"
 MARK_END="# <<< bash-language-server <<<"
 

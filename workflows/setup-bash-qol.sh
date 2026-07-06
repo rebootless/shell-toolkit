@@ -12,7 +12,7 @@ BASHRC="$HOME/.bashrc"
 INPUTRC="$HOME/.inputrc"
 TS="$(date +%Y%m%d_%H%M%S)"
 
-echo "---------------Installing packages---------------"
+echo "==> Installing packages"
 
 for script in install-bash-completion.sh install-fzf.sh install-zoxide.sh install-ripgrep.sh install-bat.sh install-eza.sh; do
     if [[ ! -f "$CLI_DIR/$script" ]]; then
@@ -25,7 +25,7 @@ done
 
 echo "[+] Packages installed."
 
-echo "--------------Configuring ~/.bashrc--------------"
+echo "==> Configuring ~/.bashrc"
 
 if [[ -f "$BASHRC" ]]; then
     cp "$BASHRC" "${BASHRC}.bak.${TS}"
@@ -99,7 +99,7 @@ EOF
 
 echo "[+] ~/.bashrc updated."
 
-echo "--------------Configuring ~/.inputrc-------------"
+echo "==> Configuring ~/.inputrc"
 
 if [[ -f "$INPUTRC" ]]; then
     cp "$INPUTRC" "${INPUTRC}.bak.${TS}"
@@ -125,16 +125,16 @@ EOF
 
 echo "[+] ~/.inputrc written."
 
-echo "================================================="
-echo "                     SUMMARY                     "
-echo "================================================="
+echo ""
+echo "==> Summary"
 echo "[INFO] Installed: bash-completion, fzf, zoxide, ripgrep, bat, eza"
 echo "       Packages installed via standalone/apt/cli/install-*.sh"
 echo "       ~/.bashrc managed block: $MARK_START ... $MARK_END"
 echo "       ~/.inputrc: replaced (backup saved if it existed)"
 echo "       For oh-my-bash, run setup-oh-my-bash.sh separately (it edits ~/.bashrc)"
+
 echo ""
-echo "---------------------Aliases---------------------"
+echo "==> Aliases"
 printf "  %-10s %-20s %s\n" "ll"     "ls -lah"               "long list, all files, human sizes"
 printf "  %-10s %-20s %s\n" "la"     "ls -A"                 "all files except . and .."
 printf "  %-10s %-20s %s\n" "l"      "ls -CF"                "compact columns with type marks"
@@ -142,34 +142,38 @@ printf "  %-10s %-20s %s\n" "grep"   "grep --color=auto"     "highlight matches"
 printf "  %-10s %-20s %s\n" "update" "apt update && upgrade" "system update"
 printf "  %-10s %-20s %s\n" "ports"  "ss -tulpen"            "listening ports + processes"
 printf "  %-10s %-20s %s\n" "dfh"    "df -h"                 "disk usage, human-readable"
+
 echo ""
-echo "-------------------Keybindings-------------------"
+echo "==> Keybindings"
 printf "  %-12s %s\n" "Tab"     "cycle through completions (menu-complete)"
 printf "  %-12s %s\n" "Up/Down" "search history by text already on the line"
 printf "  %-12s %s\n" "Ctrl+R"  "fuzzy search through command history (fzf)"
 echo "  completion is case-insensitive, colored, shows all matches"
+
 echo ""
-echo "------------------Shell behavior-----------------"
+echo "==> Shell behavior"
 printf "  %-14s %s\n" "autocd"       "bare directory path -> cd into it"
 printf "  %-14s %s\n" "cdspell"      "autocorrects minor 'cd' typos"
 printf "  %-14s %s\n" "dirspell"     "autocorrects typos in path completion"
 printf "  %-14s %s\n" "globstar"     "'**' matches files recursively"
 printf "  %-14s %s\n" "checkwinsize" "terminal size updates after each command"
+
 echo ""
-echo "---------------------History---------------------"
+echo "==> History"
 echo "  100000 commands in memory / 200000 in ~/.bash_history"
 echo "  duplicates are not stored (ignoredups:erasedups)"
 echo "  ls, l, ll, pwd, clear, history are never stored"
 echo "  history is shared live between open terminal sessions"
+
 echo ""
-echo "--------------------New tools--------------------"
+echo "==> New tools"
 printf "  %-12s %s\n" "z <name>"   "zoxide: jump to a frequent directory"
 printf "  %-12s %s\n" "zi"         "zoxide: interactive directory picker"
 printf "  %-12s %s\n" "rg <text>"  "ripgrep: fast recursive text search"
 printf "  %-12s %s\n" "bat <file>" "syntax-highlighted 'cat'"
 printf "  %-12s %s\n" "eza"    "modern 'ls' (icons, git status, tree)"
 printf "  %-12s %s\n" "eza -T" "tree view of a directory"
-echo "================================================="
+
 echo ""
 echo "[i] Apply changes now with: source ~/.bashrc"
 echo ""

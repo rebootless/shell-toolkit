@@ -10,6 +10,8 @@ if [[ $EUID -ne 0 ]]; then
     exit 1
 fi
 
+echo "==> Installing ProtonVPN"
+
 PKG="protonvpn-stable-release_1.0.8_all.deb"
 URL="https://repo.protonvpn.com/debian/dists/stable/main/binary-all/${PKG}"
 SHA256="0b14e71586b22e498eb20926c48c7b434b751149b1f2af9902ef1cfe6b03e180"

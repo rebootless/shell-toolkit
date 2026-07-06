@@ -178,7 +178,6 @@ if [[ "$MODE" != "detect" && -z "$TARGET" ]]; then
     usage
 fi
 
-echo "-------------------------------------------------"
 echo "[i] Distribution: ${PRETTY_NAME:-$DISTRO_ID}"
 
 # Already-installed check — avoid pointless reinstalls/reboots.
@@ -191,7 +190,7 @@ fi
 
 # --detect resolves to a concrete package and then behaves like --package.
 if [[ "$MODE" == "detect" ]]; then
-    echo "-------------------Detecting GPU driver-------------------"
+    echo "==> Detecting GPU driver"
     if ! TARGET="$(detect_driver_package)"; then
         echo "[!] Auto-detection failed. Re-run with --package <name> or --run <file> instead."
         exit 1
@@ -209,7 +208,7 @@ if [[ "$MODE" == "package" ]]; then
     check_nonfree_component_enabled
 fi
 
-echo "-----------------Detecting environment-----------------"
+echo "==> Detecting environment"
 
 CURRENT_TARGET="$(systemctl get-default 2>/dev/null || echo unknown)"
 DM_SERVICE="$(basename "$(readlink -f /etc/systemd/system/display-manager.service 2>/dev/null)" .service 2>/dev/null || true)"
@@ -254,7 +253,7 @@ echo ""
 read -rp "[?] Continue? [y/N]: " PROCEED
 [[ "${PROCEED,,}" =~ ^y ]] || { echo "[i] Aborted."; exit 0; }
 
-echo "-------------------Blacklisting nouveau-------------------"
+echo "==> Blacklisting nouveau"
 
 NOUVEAU_CONF="/etc/modprobe.d/blacklist-nouveau.conf"
 if [[ ! -f "$NOUVEAU_CONF" ]]; then
@@ -271,7 +270,7 @@ echo "[*] Updating initramfs..."
 update-initramfs -u
 echo "[+] initramfs updated."
 
-echo "----------------Stopping graphical session----------------"
+echo "==> Stopping graphical session"
 
 echo "[*] Switching to multi-user.target..."
 systemctl isolate multi-user.target
@@ -297,13 +296,13 @@ if command -v fuser &>/dev/null; then
 fi
 
 if [[ "$MODE" == "package" ]]; then
-    echo "-------------------Installing via apt-------------------"
+    echo "==> Installing via apt"
     apt-get update
     echo "[*] Installing $TARGET ..."
     apt-get install -y "$TARGET"
     echo "[+] Package $TARGET installed."
 else
-    echo "----------------Installing via .run file----------------"
+    echo "==> Installing via .run file"
     chmod +x "$TARGET"
     echo "[*] Running $TARGET (silent, dkms, no X check, no UI)..."
     # --no-x-check: we already confirmed X is down manually above
@@ -317,7 +316,8 @@ echo "[*] Refreshing initramfs after driver install..."
 update-initramfs -u
 echo "[+] initramfs refreshed."
 
-echo "-------------------Setup Complete!-------------------"
+echo ""
+echo "==> Summary"
 echo ""
 echo "Driver installed via: $MODE ($TARGET)"
 echo "Nouveau blacklist:    $NOUVEAU_CONF"

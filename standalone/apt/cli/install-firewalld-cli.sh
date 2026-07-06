@@ -1,4 +1,5 @@
 #!/bin/bash
+
 set -euo pipefail
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 export DEBIAN_FRONTEND=noninteractive
@@ -8,7 +9,7 @@ if [[ $EUID -ne 0 ]]; then
     exit 1
 fi
 
-echo "-------------Installing Firewalld CLI-------------"
+echo "==> Installing Firewalld CLI"
 
 echo "[*] Updating package lists..."
 apt update -q

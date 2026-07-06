@@ -1,4 +1,5 @@
 #!/bin/bash
+
 set -euo pipefail
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 export DEBIAN_FRONTEND=noninteractive
@@ -8,10 +9,12 @@ if [[ $EUID -ne 0 ]]; then
     exit 1
 fi
 
-echo "[i] ghostwriter is a distraction-free Markdown editor with live preview,"
-echo "    focus and fullscreen modes, word count, document navigation,"
-echo "    and support for multiple Markdown processors,"
-echo "    including built-in cmark-gfm and optional Pandoc integration."
+echo "==> Installing ghostwriter"
+
+if command -v ghostwriter >/dev/null 2>&1; then
+    echo "[i] ghostwritert is already installed, skipping..."
+    exit 0
+fi
 
 echo "[*] Updating package lists..."
 apt update -q

@@ -185,8 +185,9 @@ printf '%s\n' \
 trap - ERR
 
 echo ""
-echo "================================================="
-echo "[SUCCESS] Deployment complete."
+echo "==> Summary"
+echo ""
+echo "  Deployment complete."
 echo ""
 echo "  Nginx:      http://$DISPLAY_HOST"
 echo "  Grafana:    http://$DISPLAY_HOST/grafana"
