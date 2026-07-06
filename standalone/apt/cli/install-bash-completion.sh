@@ -8,7 +8,7 @@ if [[ $EUID -ne 0 ]]; then
     exit 1
 fi
 
-echo "-------------Installing bash-completion-----------"
+echo "------------Installing bash-completion-----------"
 
 if dpkg -s bash-completion >/dev/null 2>&1; then
     echo "[i] bash-completion is already installed, skipping."

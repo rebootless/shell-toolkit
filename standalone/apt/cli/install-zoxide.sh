@@ -8,7 +8,7 @@ if [[ $EUID -ne 0 ]]; then
     exit 1
 fi
 
-echo "----------------Installing zoxide-----------------"
+echo "----------------Installing zoxide----------------"
 
 if command -v zoxide >/dev/null 2>&1; then
     echo "[i] zoxide is already installed, skipping."
