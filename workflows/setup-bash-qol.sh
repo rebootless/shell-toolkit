@@ -4,7 +4,7 @@ set -euo pipefail
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-CLI_DIR="$(cd "$SCRIPT_DIR/../standalone/apt/cli" && pwd)"
+CLI_DIR="$(cd "$SCRIPT_DIR/../standalone/install/apt/cli" && pwd)"
 
 MARK_START="# >>> bash-qol >>>"
 MARK_END="# <<< bash-qol <<<"

@@ -1,10 +1,15 @@
 #!/bin/bash
 
 set -euo pipefail
-
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 export DEBIAN_FRONTEND=noninteractive
 
 echo "==> Installing Discord via Flatpak"
+
+if ! command -v flatpak >/dev/null 2>&1; then
+    echo "[i] flatpak is not installed, skipping..."
+    exit 0
+fi
 
 echo "[*] Installing Discord via Flatpak..."
 

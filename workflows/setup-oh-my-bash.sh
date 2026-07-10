@@ -7,7 +7,7 @@ RED='\033[0;31m'
 NC='\033[0m'
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-CLI_DIR="$(cd "$SCRIPT_DIR/../standalone/apt/cli" && pwd)"
+CLI_DIR="$(cd "$SCRIPT_DIR/../standalone/install/apt/cli" && pwd)"
 
 BASHRC="$HOME/.bashrc"
 OSH="$HOME/.oh-my-bash"

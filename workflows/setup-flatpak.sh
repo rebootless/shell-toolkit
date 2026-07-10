@@ -4,8 +4,8 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-APT_CLI_DIR="$(cd "$SCRIPT_DIR/../standalone/apt/cli" && pwd)"
-FLATPAK_DIR="$(cd "$SCRIPT_DIR/../standalone/flatpak" && pwd)"
+APT_CLI_DIR="$(cd "$SCRIPT_DIR/../standalone/install/apt/cli" && pwd)"
+FLATPAK_DIR="$(cd "$SCRIPT_DIR/../standalone/install/flatpak" && pwd)"
 
 echo "[*] Running install-flatpak.sh"
 bash "$APT_CLI_DIR/install-flatpak.sh"
