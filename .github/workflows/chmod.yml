@@ -1,4 +1,4 @@
-name: chmod
+name: chmod-check
 
 on:
   push:
@@ -12,7 +12,7 @@ permissions:
   contents: write
 
 jobs:
-  chmod:
+  chmod-check:
     runs-on: ubuntu-latest
 
     steps:
