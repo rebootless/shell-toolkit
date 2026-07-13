@@ -11,12 +11,18 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: repository-writes
+  cancel-in-progress: false
+
 jobs:
   chmod-add:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set executable bit
         shell: bash
@@ -41,4 +47,6 @@ jobs:
           fi
 
           git commit -m "chore: restore executable bit [skip ci]"
-          git push
+
+          git pull --rebase origin main
+          git push origin HEAD:main
