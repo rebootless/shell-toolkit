@@ -152,8 +152,8 @@ services:
         - wget -qO- http://localhost:9090/-/ready | grep -q Ready
       interval: 10s
       timeout: 5s
-      retries: 12
-      start_period: 20s
+      retries: 30
+      start_period: 60s
     networks:
       - monitoring
 
@@ -250,7 +250,8 @@ done
 echo ""
 
 if [[ "$GRAFANA_READY" == false ]]; then
-    echo "[WARN] Grafana did not become healthy in time."
+    echo "[WARN] Grafana did not become healthy within 300 seconds."
+    echo "       The container may still be starting."
     echo "       Dashboard import skipped — run this when Grafana is up:"
     echo "       curl -fsSL https://grafana.com/api/dashboards/19937/revisions/latest/download | \\"
     echo "         curl -sf -X POST -H 'Content-Type: application/json' \\"
