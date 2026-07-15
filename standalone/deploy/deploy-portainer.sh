@@ -113,8 +113,8 @@ services:
         - wget -qO- http://localhost:9000/api/status | grep -q '"Version"'
       interval: 10s
       timeout: 5s
-      retries: 12
-      start_period: 20s
+      retries: 30
+      start_period: 60s
 
 secrets:
   portainer_admin_password:
@@ -134,9 +134,9 @@ docker compose up -d --remove-orphans
 echo "[+] Containers started."
 
 echo "==> Waiting for Portainer health"
-echo "[*] Polling Portainer API (up to 60s)..."
+echo "[*] Polling Portainer API (up to 300s)..."
 PORTAINER_READY=false
-for i in $(seq 1 30); do
+for i in $(seq 1 150); do
     if curl -sf http://localhost:9000/api/status 2>/dev/null | grep -q '"Version"'; then
         echo "[+] Portainer is healthy."
         PORTAINER_READY=true
@@ -148,7 +148,8 @@ done
 echo ""
 
 if [[ "$PORTAINER_READY" == false ]]; then
-    echo "[WARN] Portainer did not become healthy in time."
+    echo "[WARN] Portainer did not become healthy within 300 seconds."
+    echo "       The container may still be starting."
     echo "       Check status with: docker compose -f $DEPLOY_DIR/compose.yaml ps"
 fi
 
