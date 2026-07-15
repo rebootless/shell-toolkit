@@ -16,7 +16,7 @@ trap 'echo -e "\n${RED}Script interrupted${NC}"; exit 130' INT TERM
 
 command -v curl >/dev/null 2>&1 || { echo -e "${RED}Missing command: curl${NC}"; exit 1; }
 
-printf "\n${YELLOW}=== PUBLIC IP ADDRESSES ===${NC}\n"
+printf "\n${YELLOW}PUBLIC IP ADDRESSES:${NC}\n"
 
 pub_ipv4=$(curl -s --max-time 4 -4 https://api.ipify.org 2>/dev/null || true)
 if [[ -z "$pub_ipv4" ]]; then

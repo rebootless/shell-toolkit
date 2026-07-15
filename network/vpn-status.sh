@@ -14,7 +14,7 @@ fi
 
 trap 'echo -e "\n${RED}Script interrupted${NC}"; exit 130' INT TERM
 
-printf "\n${YELLOW}=== VPN & OVERLAY NETWORKS STATUS ===${NC}\n"
+printf "\n${YELLOW}VPN & OVERLAY NETWORKS STATUS:${NC}\n"
 
 # Check WireGuard
 echo "--> WireGuard:"

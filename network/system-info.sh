@@ -22,7 +22,7 @@ if [[ ${#missing[@]} -gt 0 ]]; then
     exit 1
 fi
 
-printf "\n${YELLOW}=== SYSTEM INFORMATION ===${NC}\n"
+printf "\n${YELLOW}SYSTEM INFORMATION:${NC}\n"
 
 echo "Hostname     : $(hostname)"
 

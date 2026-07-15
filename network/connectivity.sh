@@ -23,7 +23,7 @@ if [[ ${#missing[@]} -gt 0 ]]; then
     exit 1
 fi
 
-printf "\n${YELLOW}=== CONNECTIVITY CHECKS ===${NC}\n"
+printf "\n${YELLOW}CONNECTIVITY CHECKS:${NC}\n"
 
 gw_status="FAIL"
 dns_status="FAIL"

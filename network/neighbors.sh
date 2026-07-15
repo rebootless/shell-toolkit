@@ -15,10 +15,10 @@ trap 'echo -e "\n${RED}Script interrupted${NC}"; exit 130' INT TERM
 
 command -v ip >/dev/null 2>&1 || { echo -e "${RED}Missing command: ip${NC}"; exit 1; }
 
-printf "\n${YELLOW}=== ARP TABLE (IPv4 Neighbors) ===${NC}\n"
+printf "\n${YELLOW}ARP TABLE (IPv4 Neighbors):${NC}\n"
 ip -4 neighbor show 2>/dev/null || echo "No IPv4 neighbors found."
 
-printf "\n${YELLOW}=== IPv6 NEIGHBOR CACHE ===${NC}\n"
+printf "\n${YELLOW}IPv6 NEIGHBOR CACHE:${NC}\n"
 ip -6 neighbor show 2>/dev/null || echo "No IPv6 neighbors found."
 
 echo ""

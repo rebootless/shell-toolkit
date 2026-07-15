@@ -13,7 +13,7 @@ fi
 
 trap 'echo -e "\n${RED}Script interrupted${NC}"; exit 130' INT TERM
 
-printf "\n${YELLOW}=== HARDWARE BANDWIDTH SUMMARY ===${NC}\n"
+printf "\n${YELLOW}HARDWARE BANDWIDTH SUMMARY:${NC}\n"
 
 printf "%-15s %-10s %-10s %-10s %-10s\n" "Interface" "Speed" "Duplex" "Carrier" "MTU"
 echo "------------------------------------------------------------"

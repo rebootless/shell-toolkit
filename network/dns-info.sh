@@ -23,7 +23,7 @@ if [[ ${#missing[@]} -gt 0 ]]; then
     exit 1
 fi
 
-printf "\n${YELLOW}=== DNS CONFIGURATION ===${NC}\n"
+printf "\n${YELLOW}DNS CONFIGURATION:${NC}\n"
 
 resolved_used=0
 if command -v resolvectl >/dev/null 2>&1; then
@@ -41,7 +41,7 @@ if [[ $resolved_used -eq 0 || -L /etc/resolv.conf ]]; then
     fi
 fi
 
-printf "\n${YELLOW}=== ACTIVE DNS SERVERS (Parsed) ===${NC}\n"
+printf "\n${YELLOW}ACTIVE DNS SERVERS:${NC}\n"
 nameservers=""
 [[ -f /etc/resolv.conf ]] && nameservers=$(awk '/^nameserver/ {print $2}' /etc/resolv.conf 2>/dev/null)
 if [[ -n "$nameservers" ]]; then
@@ -50,7 +50,7 @@ else
     echo "None found."
 fi
 
-printf "\n${YELLOW}=== SEARCH DOMAINS ===${NC}\n"
+printf "\n${YELLOW}SEARCH DOMAINS:${NC}\n"
 search_domains=""
 [[ -f /etc/resolv.conf ]] && search_domains=$(awk '/^search/ {for(i=2;i<=NF;i++) print $i}' /etc/resolv.conf 2>/dev/null)
 if [[ -n "$search_domains" ]]; then

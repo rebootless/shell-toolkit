@@ -13,7 +13,7 @@ fi
 
 trap 'echo -e "\n${RED}Script interrupted${NC}"; exit 130' INT TERM
 
-printf "\n${YELLOW}=== Wi-Fi STATUS ===${NC}\n"
+printf "\n${YELLOW}Wi-Fi STATUS:${NC}\n"
 
 found=0
 for iface_path in /sys/class/net/*; do
