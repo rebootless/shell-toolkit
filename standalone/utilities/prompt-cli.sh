@@ -26,7 +26,7 @@ RESET=$'\033[0m'
 # Automatic dependency installation via apt-get
 check_and_install_deps() {
     if ! command -v python3 &>/dev/null || ! command -v jq &>/dev/null || ! command -v curl &>/dev/null; then
-        echo "-------------Installing dependencies-------------"
+        echo "==> Installing dependencies"
 
         local sudo_cmd=""
         if [[ $EUID -ne 0 ]]; then
@@ -45,7 +45,6 @@ check_and_install_deps() {
         echo "[*] Installing required dependencies (python3, jq, curl)..."
         $sudo_cmd apt-get install -y python3 jq curl
         echo "[+] Dependencies installed successfully."
-        echo "-------------------------------------------------"
     fi
 }
 
@@ -97,7 +96,7 @@ run_setup() {
     mkdir -p "$CONFIG_DIR"
     chmod 700 "$CONFIG_DIR"
 
-    echo "--------------Gemini (Google) setup--------------"
+    echo "==> Gemini (Google) setup"
     echo "[INFO] Free tier available, no billing required."
     echo "       Get an API key here: $GEMINI_KEY_URL"
     read -rsp "[>] Enter Gemini API key: " key
@@ -111,7 +110,6 @@ run_setup() {
     printf 'GEMINI_API_KEY=%s\n' "$key" > "$KEYS_FILE"
     chmod 600 "$KEYS_FILE"
     echo "[+] Setup complete. Key stored in $KEYS_FILE"
-    echo "-------------------------------------------------"
 }
 
 run_reset() {

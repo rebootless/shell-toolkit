@@ -14,7 +14,7 @@ TS="$(date +%Y%m%d_%H%M%S)"
 DEFAULT_V="25"
 DEFAULT_TYPE="jdk"
 
-echo "----------------------Setup----------------------"
+echo "==> Setup"
 echo "[*] Updating package index..."
 sudo apt-get update -q
 
@@ -22,7 +22,7 @@ echo "[*] Installing required packages: curl tar ca-certificates"
 sudo apt-get install -y curl tar ca-certificates
 echo "[+] Packages installed."
 
-echo "----------------Java Installation----------------"
+echo "==> Java Installation"
 sudo mkdir -p "$BASE_DIR"
 
 for item in "${VERSIONS[@]}"; do
@@ -64,7 +64,7 @@ for item in "${VERSIONS[@]}"; do
 done
 
 echo ""
-echo "---------------------.bashrc---------------------"
+echo "==> .bashrc"
 
 # Remove existing block if present (idempotent re-run)
 if grep -qF "$MARK_START" "$BASHRC" 2>/dev/null; then
@@ -98,13 +98,12 @@ echo "[*] Writing java-temurin block to ~/.bashrc..."
 echo "[+] ~/.bashrc updated."
 
 echo ""
-echo "================================================="
-echo "               Setup Complete!                   "
-echo "================================================="
+echo "==> Summary"
+echo ""
 echo "[INFO] Install dir : $BASE_DIR"
 echo "       Contents    :"
 ls -1 "$BASE_DIR" 2>/dev/null | sed 's/^/             /'
 echo "       Default     : $BASE_DIR/java-${DEFAULT_V}-${DEFAULT_TYPE}"
 echo "       ~/.bashrc   : $MARK_START block added"
 echo ""
-echo "       Apply changes now with: source ~/.bashrc"
+echo "       Apply changes now with: 'source ~/.bashrc'"
