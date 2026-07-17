@@ -10,8 +10,9 @@ fi
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-APT_DIR="$(cd "$SCRIPT_DIR/../../apt" && pwd)"
-NPM_DIR="$(cd "$SCRIPT_DIR/../../lsp" && pwd)"
+CLI_DIR="$(cd "$SCRIPT_DIR/../../install/cli" && pwd)"
+GUI_DIR="$(cd "$SCRIPT_DIR/../../install/gui" && pwd)"
+LSP_DIR="$(cd "$SCRIPT_DIR/../../lsp" && pwd)"
 
 run_scripts() {
     local dir="$1"
@@ -30,18 +31,21 @@ run_scripts() {
     done
 }
 
-echo "[*] Running /apt scripts..."
-run_scripts "$APT_DIR" \
+echo "[*] Running CLI installation scripts..."
+run_scripts "$CLI_DIR" \
     install-cpp.sh \
     install-python.sh \
     install-php.sh \
-    install-kdevelop.sh \
     install-npm.sh \
-    install-ghostwriter.sh \
     install-docker.sh
 
-echo "[*] Running /lsp scripts..."
-run_scripts "$NPM_DIR" \
+echo "[*] Running GUI installation scripts..."
+run_scripts "$GUI_DIR" \
+    install-kdevelop.sh \
+    install-ghostwriter.sh
+
+echo "[*] Running LSP installation scripts..."
+run_scripts "$LSP_DIR" \
     install-bash-language-server.sh \
     install-markdown-language-server.sh
 
