@@ -32,7 +32,7 @@ fi
 
 source "$ENV_FILE"
 
-# ── Validate: all required variables are declared ─────────────────────────────
+# Validate: all required variables are declared
 MISSING=0
 for var in \
     BOOTSTRAP_PROFILE BOOTSTRAP_FIREWALL BOOTSTRAP_FAIL2BAN \
@@ -52,8 +52,7 @@ if [[ $MISSING -eq 1 ]]; then
     exit 1
 fi
 
-# ── Validate: specific required values ───────────────────────────────────────
-
+# Validate: specific required values
 # BOOTSTRAP_PROFILE must be 1 or 2 — 0 exits the subscript cleanly (exit 0),
 # which set -e treats as success, silently skipping bootstrap entirely.
 if [[ ! "$BOOTSTRAP_PROFILE" =~ ^[12]$ ]]; then
@@ -74,7 +73,7 @@ if [[ "${CREATE_DEPLOY_USER,,}" =~ ^y ]]; then
     fi
 fi
 
-# ── Script presence check ─────────────────────────────────────────────────────
+# Script presence check
 for s in server-bootstrap.sh deploy-nginx.sh deploy-grafana.sh deploy-portainer.sh; do
     if [[ ! -f "$SERVER_DIR/$s" ]]; then
         echo "[!] Missing: $SERVER_DIR/$s"
@@ -83,7 +82,7 @@ for s in server-bootstrap.sh deploy-nginx.sh deploy-grafana.sh deploy-portainer.
     chmod +x "$SERVER_DIR/$s"
 done
 
-# ── Deployment plan ───────────────────────────────────────────────────────────
+# Deployment plan
 LOCAL_IP=$(ip -4 route get 1.1.1.1 2>/dev/null | awk '{print $7; exit}' || echo "unknown")
 DISPLAY_HOST="${NGINX_DOMAIN:-${LOCAL_IP} (auto)}"
 
@@ -113,7 +112,7 @@ echo ""
 read -rp "[?] Start? [y/N]: " PROCEED
 [[ "${PROCEED,,}" =~ ^y ]] || { echo "[i] Aborted."; exit 0; }
 
-# ── Step runner ───────────────────────────────────────────────────────────────
+# Step runner
 STEP=0
 trap 'echo "[!] Failed at step $STEP/4."; exit 1' ERR
 
