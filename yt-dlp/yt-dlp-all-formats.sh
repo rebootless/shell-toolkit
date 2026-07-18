@@ -1,10 +1,5 @@
 #!/bin/bash
 
-# yt-dlp-all-formats.sh
-# Downloads the highest quality up to and including each available
-# resolution tier (480p..8K), falling back to best overall as MP4.
-# Usage: ./yt-dlp-all-formats.sh <URL> [extra yt-dlp options]
-
 set -euo pipefail
 
 echo "[*] Installing required dependencies..."

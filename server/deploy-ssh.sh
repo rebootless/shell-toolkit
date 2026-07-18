@@ -1,10 +1,5 @@
 #!/bin/bash
 
-# OpenSSH deployment for Debian/Ubuntu systems.
-# Installs OpenSSH Server, enables the service,
-# and can configure firewalld for SSH access.
-# Recommended for Debian 12/13 and Ubuntu 22.04/24.04 LTS.
-
 set -euo pipefail
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 

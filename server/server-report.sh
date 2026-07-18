@@ -1,19 +1,5 @@
 #!/bin/bash
 
-# Gathers detailed server information (optimized for Debian/Ubuntu), saves
-# all data into .txt files in ~/server-report, packs them into a .tar.gz
-# archive, and prints a clean summary to the console.
-#
-# --- CORE UTILITIES (Usually pre-installed) ---
-# systemctl, journalctl, ip, ss, free, ps, df, lsblk, lscpu, dpkg-query
-#
-# --- 3RD-PARTY SOFTWARE (Auto-detected) ---
-# The script automatically checks for and logs data from:
-# - Docker (containers, networks, volumes, info)
-# - Nginx (version, config test)
-# - Firewalls (UFW, Firewalld, iptables)
-# - Cron & Tree (directory structures)
-
 set -euo pipefail
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 

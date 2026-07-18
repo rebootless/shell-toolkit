@@ -1,11 +1,5 @@
 #!/bin/bash
 
-# Configures a convenience-focused Bash environment for the current user
-# on Debian: history, completion, fzf, shopt options, aliases, and extra
-# CLI tools (zoxide, ripgrep, bat, eza).
-# Idempotent: re-running replaces the managed block in ~/.bashrc/~/.inputrc.
-# Requirements: sudo access for package installation.
-
 set -euo pipefail
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 

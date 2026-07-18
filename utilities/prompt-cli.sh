@@ -1,21 +1,5 @@
 #!/bin/bash
 
-# prompt-cli - send a prompt to the Google Gemini API and render the markdown
-# response directly in the terminal.
-
-# On first run: self-installs to ~/.local/bin, installs missing
-# dependencies (python3, jq, curl) via apt-get, and asks for a Gemini
-# API key (stored in ~/.config/prompt-cli/keys.env, chmod 600).
-
-# Usage: ask [--model NAME] <prompt text>
-#        ask --setup        (enter the API key, only if not set yet)
-#        ask --reset        (clear the stored API key and enter a new one)
-#        ask --uninstall    (remove the script and stored config)
-#        ask --help         (show usage)
-#
-# Note: the command name `prompt` is already used by oh-my-bash, so this tool
-# is exposed as `ask`.
-
 set -euo pipefail
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 

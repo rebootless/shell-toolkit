@@ -1,12 +1,5 @@
 #!/bin/bash
 
-# Full server deployment workflow for Debian/Ubuntu.
-# Sources .env from the same directory and runs four scripts in sequence:
-#   server-bootstrap.sh → deploy-nginx.sh → deploy-grafana.sh → deploy-portainer.sh
-# Answers are piped to each script via stdin using printf — safely handles
-# special characters in values. Fresh deployments only — re-running on an
-# existing setup breaks prompt ordering.
-
 set -euo pipefail
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 

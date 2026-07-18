@@ -1,10 +1,5 @@
 #!/bin/bash
 
-# Downloads and installs Eclipse Temurin JDK/JRE builds into /opt/java/temurin/.
-# Re-runnable: existing version dirs trigger an overwrite prompt; the
-# java-temurin block in ~/.bashrc is replaced on every run.
-# Requirements: sudo access, curl, tar, ca-certificates (installed automatically via apt).
-
 set -euo pipefail
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 

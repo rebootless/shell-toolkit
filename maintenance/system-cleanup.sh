@@ -1,10 +1,5 @@
 #!/bin/bash
 
-# System cleanup for Debian/Ubuntu systems.
-# Cleans APT caches, removes orphaned packages, rotates/truncates old logs.
-# Clears journald history, and removes temp files and old kernels.
-# Recommended for Debian 12/13 and Ubuntu 22.04/24.04 LTS.
-
 set -euo pipefail
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 

@@ -1,9 +1,5 @@
 #!/bin/bash
 
-# Clones all public repositories of a GitHub user into a local directory.
-# Only PUBLIC repositories are fetched (no auth, GitHub public API only).
-# Usage: ./git-clone-all.sh <github-username-or-profile-url> [target-dir]
-
 set -euo pipefail
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 

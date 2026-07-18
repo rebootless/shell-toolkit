@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# Colors for formatted output (using ANSI-C quoting)
 C_CYAN=$'\e[1;36m'
 C_GREEN=$'\e[1;32m'
 C_YELLOW=$'\e[1;33m'

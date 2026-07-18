@@ -1,10 +1,5 @@
 #!/bin/bash
 
-# Nginx deployment for Debian/Ubuntu systems.
-# Installs nginx, optional PHP-FPM, avahi-daemon, grafana, portainer, creates a site root and vhost,
-# and can configure firewalld for web access.
-# Recommended for Debian 12/13 and Ubuntu 22.04/24.04 LTS.
-
 set -euo pipefail
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 

@@ -1,9 +1,5 @@
 #!/bin/bash
 
-# Resets ~/.bashrc to the distribution default (/etc/skel/.bashrc).
-# Backs up the current ~/.bashrc with a timestamp before overwriting.
-# Idempotent / safe: only acts after explicit confirmation.
-
 set -euo pipefail
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
