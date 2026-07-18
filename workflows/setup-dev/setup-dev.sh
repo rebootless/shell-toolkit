@@ -41,12 +41,14 @@ run_scripts "$CLI_DIR" \
 
 echo "[*] Running GUI installation scripts..."
 run_scripts "$GUI_DIR" \
+    install-kate.sh \
     install-kdevelop.sh \
     install-ghostwriter.sh
 
 echo "[*] Running LSP installation scripts..."
 run_scripts "$LSP_DIR" \
     install-bash-language-server.sh \
-    install-markdown-language-server.sh
+    install-markdown-language-server.sh \
+    install-python-language-server.sh
 
 echo "[+] Done."
