@@ -19,13 +19,16 @@ Usage: $(basename "$0") [OPTIONS]
 
 Rewrite Git commit author/committer information across the full history.
 
+Show all unique author identities (name + email):
+git log --all --format='%an <%ae>' | sort -u
+
 Options:
   -r, --repo PATH          Repository path (default: current directory)
       --old-name NAME      Author/committer name to replace
       --new-name NAME      Replacement name
       --old-email EMAIL    Author/committer email to replace
       --new-email EMAIL    Replacement email
-  -h, --help                Show this help message
+  -h, --help               Show this help message
 
 Examples:
   $(basename "$0") --old-name "OLD" --new-name "NEW"
