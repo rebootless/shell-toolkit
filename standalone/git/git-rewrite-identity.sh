@@ -1,7 +1,6 @@
 #!/bin/bash
 
 set -euo pipefail
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
 RED='\033[0;31m'
 YELLOW='\033[1;33m'
@@ -78,7 +77,7 @@ if command -v git-filter-repo >/dev/null 2>&1; then
     echo "[i] git-filter-repo already installed, skipping..."
 else
     echo "[!] git-filter-repo not found."
-    echo "[!] Install it, e.g.: pip install git-filter-repo"
+    echo "[!] Install it, e.g.: 'pipx install git-filter-repo'"
     exit 1
 fi
 
