@@ -16,16 +16,10 @@ DEPLOY_DIR="/opt/portainer-stack"
 
 if [[ -d "$DEPLOY_DIR" ]]; then
     echo ""
-    echo -e "${RED}╔═══════════════════════════════════════════════════╗${NC}"
-    echo -e "${RED}║        [!]  E X I S T I N G   D A T A  [!]        ║${NC}"
-    echo -e "${RED}╠═══════════════════════════════════════════════════╣${NC}"
-    echo -e "${RED}║                                                   ║${NC}"
-    echo -e "${RED}║  Directory $DEPLOY_DIR already exists.            ║${NC}"
-    echo -e "${RED}║  Proceeding will PERMANENTLY DELETE all data:     ║${NC}"
-    echo -e "${RED}║    containers, volumes, configs, Portainer DB.    ║${NC}"
-    echo -e "${RED}║  THIS ACTION IS IRREVERSIBLE.                     ║${NC}"
-    echo -e "${RED}║                                                   ║${NC}"
-    echo -e "${RED}╚═══════════════════════════════════════════════════╝${NC}"
+    echo -e "${RED}Directory $DEPLOY_DIR already exists.${NC}"
+    echo -e "${RED}Proceeding will PERMANENTLY DELETE all data:${NC}"
+    echo -e "${RED}    containers, volumes, configs, Portainer DB.${NC}"
+    echo -e "${RED}THIS ACTION IS IRREVERSIBLE.${NC}"
     echo ""
     read -rp "[?] Wipe existing Portainer stack and all data? [y/N]: " WIPE_CHOICE
     if [[ "${WIPE_CHOICE,,}" =~ ^y ]]; then
@@ -166,16 +160,10 @@ echo "==> Summary"
 echo ""
 
 if [[ "$DEFAULT_PASSWORD" == true ]]; then
-    echo -e "${RED}╔═══════════════════════════════════════════════════╗${NC}"
-    echo -e "${RED}║     [!]  C R I T I C A L   W A R N I N G  [!]     ║${NC}"
-    echo -e "${RED}╠═══════════════════════════════════════════════════╣${NC}"
-    echo -e "${RED}║                                                   ║${NC}"
-    echo -e "${RED}║  You are using the DEFAULT password: 'admin'      ║${NC}"
-    echo -e "${RED}║  This is EXTREMELY INSECURE.                      ║${NC}"
-    echo -e "${RED}║  Change it immediately after first login:         ║${NC}"
-    echo -e "${RED}║    My Account → Change Password                   ║${NC}"
-    echo -e "${RED}║                                                   ║${NC}"
-    echo -e "${RED}╚═══════════════════════════════════════════════════╝${NC}"
+    echo -e "${RED}You are using the DEFAULT password: 'admin'${NC}"
+    echo -e "${RED}This is EXTREMELY INSECURE.${NC}"
+    echo -e "${RED}Change it immediately after first login:${NC}"
+    echo -e "${RED}    My Account -> Change Password${NC}"
 fi
 
 echo ""
