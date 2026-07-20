@@ -22,11 +22,7 @@ if [[ ${#missing[@]} -gt 0 ]]; then
     exit 1
 fi
 
-if [[ $EUID -ne 0 ]]; then
-    echo -e "${YELLOW}Warning: Running as non-root. `dmesg` and `sysctl` output will be limited or denied.${NC}\n"
-fi
-
-printf "\n${YELLOW}SYSTEM INFORMATION:${NC}\n\n"
+printf "\n${YELLOW}HOST INFORMATION:${NC}\n\n"
 
 echo -e "${YELLOW}Hostnamectl:${NC}"
 hostnamectl || true
@@ -39,12 +35,5 @@ uname -a
 
 echo -e "\n${YELLOW}Uptime:${NC}"
 uptime
-
-echo -e "\n${YELLOW}Sysctl (Partial/All):${NC}"
-sysctl -a 2>/dev/null | head -n 20
-echo "(... output truncated for readability ...)"
-
-echo -e "\n${YELLOW}Dmesg (Last 20 lines):${NC}"
-dmesg 2>/dev/null | tail -n 20 || echo "Permission denied or unavailable."
 
 echo ""
