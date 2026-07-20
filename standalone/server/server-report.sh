@@ -13,14 +13,14 @@ GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m'
 
-echo "-------------Installing dependencies-------------"
+echo "==> Installing dependencies"
 echo "[*] Updating system packages..."
 apt-get update -q
 
 echo "[*] Installing dependencies..."
 apt-get install -y pciutils usbutils dmidecode lshw tree
 
-echo "----------------Server information---------------"
+echo "==> Server information"
 
 REPORT_DIR="$HOME/server-report"
 
@@ -28,7 +28,7 @@ mkdir -p "$REPORT_DIR"
 
 echo "[+] Output directory: $REPORT_DIR"
 
-echo "----------------System information---------------"
+echo "==> System information"
 echo "[*] Collecting system info..."
 
 hostnamectl > "$REPORT_DIR/hostnamectl.txt"
@@ -40,7 +40,7 @@ dmesg > "$REPORT_DIR/dmesg.txt"
 
 echo "[+] System information collected."
 
-echo "----------------Hardware resources---------------"
+echo "==> Hardware resources"
 echo "[*] Collecting hardware info..."
 
 lscpu > "$REPORT_DIR/lscpu.txt"
@@ -60,7 +60,7 @@ fi
 
 echo "[+] Hardware information collected."
 
-echo "----------------Network information--------------"
+echo "==> Network information"
 echo "[*] Collecting network info..."
 
 ip -br a > "$REPORT_DIR/interfaces.txt"
@@ -75,7 +75,7 @@ fi
 
 echo "[+] Network information collected."
 
-echo "----------------Users and Processes--------------"
+echo "==> Users and Processes"
 echo "[*] Collecting users and process info..."
 
 ps aux > "$REPORT_DIR/processes.txt"
@@ -90,7 +90,7 @@ fi
 
 echo "[+] Users and processes collected."
 
-echo "----------------Packages and Logs----------------"
+echo "==> Packages and Logs"
 echo "[*] Collecting packages and logs..."
 
 dpkg-query -l > "$REPORT_DIR/installed-packages.txt" 2>/dev/null || true
@@ -98,7 +98,7 @@ journalctl -p 3 -xb > "$REPORT_DIR/journal-errors.txt" 2>/dev/null || true
 
 echo "[+] Packages and logs collected."
 
-echo "----------------Firewall information-------------"
+echo "==> Firewall information"
 
 if command -v ufw >/dev/null 2>&1; then
     ufw status verbose > "$REPORT_DIR/ufw-status.txt"
@@ -111,7 +111,7 @@ else
     echo "[i] Firewall (UFW/Firewalld) not installed or active."
 fi
 
-echo "----------------Service information--------------"
+echo "==> Service information"
 echo "[*] Collecting service info..."
 
 systemctl --type=service --state=running > "$REPORT_DIR/running-services.txt"
@@ -119,7 +119,7 @@ systemctl list-unit-files --state=enabled > "$REPORT_DIR/enabled-services.txt"
 
 echo "[+] Service information collected."
 
-echo "----------------Docker information---------------"
+echo "==> Docker information"
 
 if command -v docker >/dev/null 2>&1; then
     docker ps -a > "$REPORT_DIR/docker-containers.txt"
@@ -131,7 +131,7 @@ else
     echo "[i] Docker not installed."
 fi
 
-echo "----------------Nginx information----------------"
+echo "==> Nginx information"
 
 if command -v nginx >/dev/null 2>&1; then
     nginx -v > "$REPORT_DIR/nginx-version.txt" 2>&1
@@ -141,7 +141,7 @@ else
     echo "[i] Nginx not installed."
 fi
 
-echo "----------------Directory structure--------------"
+echo "==> Directory structure"
 
 if command -v tree >/dev/null 2>&1; then
     tree -L 2 /srv > "$REPORT_DIR/srv-tree.txt" 2>/dev/null || true
@@ -152,35 +152,37 @@ else
     echo "[i] Tree command not installed."
 fi
 
-echo "-----------------Archive creation----------------"
+echo "==> Archive creation"
 
 tar -czf server-report.tar.gz "$REPORT_DIR"
 
 echo "[+] Archive created: server-report.tar.gz"
 
-echo "-----------------Setup Complete!-----------------"
+echo ""
+echo "==> Summary"
+echo ""
 
 SYS_OS=$(grep -w "PRETTY_NAME" /etc/os-release | cut -d= -f2 | tr -d '"' || echo "Unknown")
 SYS_KERN=$(uname -r || echo "Unknown")
 SYS_HOST=$(hostname || echo "Unknown")
 SYS_UP=$(uptime -p || echo "Unknown")
 SYS_LOAD=$(cat /proc/loadavg | awk '{print $1, $2, $3}' || echo "Unknown")
-
+echo ""
 SYS_CPU=$(lscpu | grep "Model name" | sed -r 's/Model name:\s+//g' || echo "Unknown")
 SYS_CORES=$(nproc || echo "Unknown")
-
+echo ""
 SYS_MEM_T=$(free -m | awk '/^Mem:/ {print $2"MB"}' || echo "Unknown")
 SYS_MEM_U=$(free -m | awk '/^Mem:/ {print $3"MB"}' || echo "Unknown")
 SYS_SWAP_T=$(free -m | awk '/^Swap:/ {print $2"MB"}' || echo "0MB")
 SYS_SWAP_U=$(free -m | awk '/^Swap:/ {print $3"MB"}' || echo "0MB")
-
+echo ""
 SYS_DISK_T=$(df -h / | awk 'NR==2 {print $2}' || echo "Unknown")
 SYS_DISK_U=$(df -h / | awk 'NR==2 {print $3}' || echo "Unknown")
-
+echo ""
 SYS_IPS=$(ip -4 addr show | grep inet | grep -v 127.0.0.1 | awk '{print $2}' | paste -sd "," - || echo "None")
 SYS_PORTS=$(ss -tulpn | tail -n +2 | wc -l || echo "0")
 SYS_PKGS=$(dpkg-query -f '${binary:Package}\n' -W 2>/dev/null | wc -l || echo "Unknown")
-
+echo ""
 SYS_SVC=$(systemctl --type=service --state=running --no-pager | grep running | wc -l || echo "0")
 SYS_DOCKER_RUN=$(command -v docker >/dev/null 2>&1 && docker ps -q | wc -l || echo "N/A")
 

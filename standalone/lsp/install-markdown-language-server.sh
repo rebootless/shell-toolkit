@@ -5,9 +5,11 @@ export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 export DEBIAN_FRONTEND=noninteractive
 
 if [[ $EUID -ne 0 ]]; then
-    echo "[!] Please run as root."
+    echo "[!] Please log in as root and run this script."
     exit 1
 fi
+
+echo "==> Installing Markdown LSP"
 
 # --- detect real user home ---
 REAL_USER="${SUDO_USER:-root}"

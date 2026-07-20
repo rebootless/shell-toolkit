@@ -16,7 +16,7 @@ LOG_AGE_DAYS=7
 # Disk usage before cleanup (root filesystem)
 SPACE_BEFORE=$(df --output=avail / | tail -1 | tr -d ' ')
 
-echo "------------------APT cleanup---------------------"
+echo "==> APT cleanup"
 
 echo "[*] Removing orphaned packages (autoremove)..."
 apt-get autoremove -y
@@ -29,7 +29,7 @@ apt-get clean
 
 echo "[+] APT cleanup done."
 
-echo "----------------Old kernels cleanup----------------"
+echo "==> Old kernels cleanup"
 
 CURRENT_KERNEL=$(uname -r)
 echo "[i] Current kernel: $CURRENT_KERNEL"
@@ -59,7 +59,7 @@ else
     echo "[i] No old kernel packages found."
 fi
 
-echo "------------------Log cleanup----------------------"
+echo "==> Log cleanup"
 
 echo "[*] Vacuuming journald logs older than ${LOG_AGE_DAYS} days..."
 journalctl --vacuum-time=${LOG_AGE_DAYS}d >/dev/null
@@ -71,7 +71,7 @@ find /var/log -type f \( -name "*.gz" -o -name "*.[0-9]" -o -name "*.old" \) \
     -mtime +${LOG_AGE_DAYS} -print -delete
 echo "[+] Old rotated logs removed."
 
-echo "------------------Temp file cleanup-----------------"
+echo "==> Temp file cleanup"
 
 echo "[*] Removing files in /tmp older than ${LOG_AGE_DAYS} days..."
 find /tmp -mindepth 1 -mtime +${LOG_AGE_DAYS} -print -delete 2>/dev/null || true
@@ -81,7 +81,7 @@ find /var/tmp -mindepth 1 -mtime +${LOG_AGE_DAYS} -print -delete 2>/dev/null || 
 
 echo "[+] Temp files cleaned."
 
-echo "------------------Docker cleanup--------------------"
+echo "==> Docker cleanup"
 
 if command -v docker >/dev/null 2>&1; then
     echo "[i] Docker detected."
@@ -122,7 +122,7 @@ else
     echo "[i] Docker not installed — skipping."
 fi
 
-echo "----------------Thumbnail cache cleanup-------------"
+echo "==> Thumbnail cache cleanup"
 
 THUMB_CLEANED=0
 for home in /root /home/*; do
@@ -139,7 +139,7 @@ else
     echo "[i] No thumbnail caches found."
 fi
 
-echo "-----------------Cleanup Complete!------------------"
+echo "==> Cleanup summary"
 
 SPACE_AFTER=$(df --output=avail / | tail -1 | tr -d ' ')
 SPACE_FREED_KB=$((SPACE_AFTER - SPACE_BEFORE))
@@ -151,7 +151,6 @@ else
 fi
 
 echo ""
-echo -e "${GREEN}Cleanup summary:${NC}"
 echo "  Space freed:      ~${SPACE_FREED_HUMAN}"
 echo "  Free space now:   $(df -h / | awk 'NR==2 {print $4}')"
 echo ""

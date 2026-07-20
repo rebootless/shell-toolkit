@@ -1,4 +1,5 @@
 #!/bin/bash
+
 set -euo pipefail
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 export DEBIAN_FRONTEND=noninteractive
@@ -8,7 +9,7 @@ if [[ $EUID -ne 0 ]]; then
     exit 1
 fi
 
-echo "-----------------VeraCrypt GUI Setup------------------"
+echo "==> VeraCrypt GUI Setup"
 
 echo "[*] Updating package lists..."
 apt update -q
@@ -56,16 +57,17 @@ apt install -y "/tmp/${TARGET_PKG}"
 echo "[*] Cleaning up..."
 rm -f "/tmp/${TARGET_PKG}"
 
-echo
+echo ""
+echo "==> Summary"
+echo ""
 echo "[SUCCESS] VeraCrypt (gui) installed successfully."
-echo
+echo ""
 
 if [[ "$PKG_DEBIAN_VERSION" != "$DEBIAN_MAJOR" ]]; then
     echo "[WARN] No package for Debian ${DEBIAN_MAJOR} was available."
     echo "       Installed package built for Debian ${PKG_DEBIAN_VERSION}."
-    echo
+    echo ""
 fi
 
 echo "[INFO] VeraCrypt uses FUSE. If mounting volumes fails,"
-echo "       ensure that the fuse kernel module is loaded:"
-echo "       modprobe fuse"
+echo "       ensure that the fuse kernel module is loaded: 'modprobe fuse'"

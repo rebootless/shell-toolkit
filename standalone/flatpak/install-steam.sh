@@ -4,6 +4,8 @@ set -euo pipefail
 
 export DEBIAN_FRONTEND=noninteractive
 
+echo "==> Installing Steam via Flatpak"
+
 echo "[*] Installing Steam via Flatpak..."
 
 flatpak install -y flathub com.valvesoftware.Steam

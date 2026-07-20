@@ -1,4 +1,5 @@
 #!/bin/bash
+
 set -euo pipefail
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 export DEBIAN_FRONTEND=noninteractive
@@ -8,10 +9,10 @@ if [[ $EUID -ne 0 ]]; then
     exit 1
 fi
 
-echo "------------Installing bash-completion-----------"
+echo "==> Installing bash-completion"
 
 if dpkg -s bash-completion >/dev/null 2>&1; then
-    echo "[i] bash-completion is already installed, skipping."
+    echo "[i] bash-completion is already installed, skipping..."
     exit 0
 fi
 

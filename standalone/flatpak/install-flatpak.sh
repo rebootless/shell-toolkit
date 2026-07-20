@@ -4,6 +4,8 @@ set -euo pipefail
 
 export DEBIAN_FRONTEND=noninteractive
 
+echo "==> Installing Flatpak"
+
 echo "[1/3] Installing Flatpak..."
 sudo apt update
 sudo apt install -y flatpak

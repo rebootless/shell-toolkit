@@ -1,15 +1,15 @@
 #!/bin/bash
 
 set -euo pipefail
-
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-
 export DEBIAN_FRONTEND=noninteractive
 
 if [[ $EUID -ne 0 ]]; then
     echo "[!] Please log in as root and run this script."
     exit 1
 fi
+
+echo "==> Installing VirtualBox"
 
 echo "[*] Updating package lists..."
 apt update
@@ -84,13 +84,15 @@ fi
 echo "[*] Installing VirtualBox ($VBOX_PACKAGE)..."
 apt install -y "$VBOX_PACKAGE"
 
-echo
+echo ""
+echo "==> Summary"
+echo ""
 echo "[SUCCESS] VirtualBox ($VBOX_PACKAGE) installed successfully."
-echo
+echo ""
 if [[ "$DEBIAN_MAJOR" == "13" && "$REPO_CODENAME" != "trixie" ]]; then
     echo "[INFO] Repository for Debian 13 was not available."
     echo "       Using '${REPO_CODENAME}' repository instead."
-    echo
+    echo ""
 fi
 echo "[NOTE] It is recommended to reboot the system after installation so that the"
 echo "       vboxdrv, vboxnetflt and vboxnetadp kernel modules are loaded correctly."

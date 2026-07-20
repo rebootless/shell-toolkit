@@ -48,7 +48,7 @@ if [[ -d "$DEPLOY_DIR" ]]; then
     echo ""
 fi
 
-echo "-------------Installing dependencies-------------"
+echo "==> Installing dependencies"
 echo "[*] Updating system packages..."
 apt-get update -q
 
@@ -59,7 +59,7 @@ echo "[*] Enabling Docker service..."
 systemctl enable --now docker
 echo "[+] Docker is running."
 
-echo "------------Grafana credentials setup------------"
+echo "==> Grafana credentials setup"
 read -rp "[?] Grafana admin username [leave blank for 'admin']: " GRAFANA_USER
 GRAFANA_USER="${GRAFANA_USER:-admin}"
 
@@ -72,7 +72,7 @@ if [[ -z "$GRAFANA_PASSWORD" ]]; then
     DEFAULT_PASSWORD=true
 fi
 
-echo "----------------------Domain---------------------"
+echo "==> Domain"
 read -rp "[?] Domain for Grafana root URL (e.g. example.com) [leave blank for localhost]: " GRAFANA_DOMAIN
 GRAFANA_DOMAIN="${GRAFANA_DOMAIN:-}"
 
@@ -86,7 +86,7 @@ else
     NGINX_HINT=true
 fi
 
-echo "-----------------Directory setup-----------------"
+echo "==> Directory setup"
 echo "[*] Creating directory structure at $DEPLOY_DIR..."
 mkdir -p "$DEPLOY_DIR"/{grafana/{data,provisioning/{dashboards,datasources},dashboards},prometheus/data,secrets}
 
@@ -104,7 +104,7 @@ printf '%s' "$GRAFANA_PASSWORD" > "$DEPLOY_DIR/secrets/grafana_admin_password.tx
 chmod 600 "$DEPLOY_DIR/secrets/grafana_admin_password.txt"
 echo "[+] Secrets saved."
 
-echo "----------------Generating configs---------------"
+echo "==> Generating configs"
 
 cat > "$DEPLOY_DIR/.env" <<EOF
 GRAFANA_ADMIN_USER=${GRAFANA_USER}
@@ -231,7 +231,7 @@ EOF
 
 echo "[+] Configs written."
 
-echo "----------------Starting the stack---------------"
+echo "==> Starting the stack"
 cd "$DEPLOY_DIR"
 
 echo "[*] Pulling images..."
@@ -241,7 +241,7 @@ echo "[*] Starting containers..."
 docker compose up -d --remove-orphans
 echo "[+] Containers started."
 
-echo "------------Waiting for Grafana health-----------"
+echo "==> Waiting for Grafana health"
 echo "[*] Polling Grafana API (up to 60s)..."
 GRAFANA_READY=false
 for i in $(seq 1 30); do
@@ -264,7 +264,7 @@ if [[ "$GRAFANA_READY" == false ]]; then
     echo "           -d '{\"dashboard\":'\$(cat)',\"overwrite\":true,\"inputs\":[{\"name\":\"DS_PROMETHEUS\",\"type\":\"datasource\",\"pluginId\":\"prometheus\",\"value\":\"Prometheus\"}]}' \\"
     echo "           http://localhost:3000/api/dashboards/import"
 else
-    echo "------------Importing dashboard 19937------------"
+    echo "==> Importing dashboard 19937"
     echo "[*] Downloading Node Exporter Full dashboard from grafana.com..."
     DASHBOARD_JSON=""
     if DASHBOARD_JSON=$(curl -fsSL "https://grafana.com/api/dashboards/19937/revisions/latest/download" 2>/dev/null); then
@@ -289,12 +289,12 @@ fi
 
 echo ""
 docker compose ps
+
+echo ""
+echo "==> Summary"
 echo ""
 
-echo "-----------------Setup Complete!-----------------"
-
 if [[ "$DEFAULT_PASSWORD" == true ]]; then
-    echo ""
     echo -e "${RED}╔═══════════════════════════════════════════════════╗${NC}"
     echo -e "${RED}║     [!]  C R I T I C A L   W A R N I N G  [!]     ║${NC}"
     echo -e "${RED}╠═══════════════════════════════════════════════════╣${NC}"
@@ -305,10 +305,9 @@ if [[ "$DEFAULT_PASSWORD" == true ]]; then
     echo -e "${RED}║    Profile → Change Password                      ║${NC}"
     echo -e "${RED}║                                                   ║${NC}"
     echo -e "${RED}╚═══════════════════════════════════════════════════╝${NC}"
-    echo ""
 fi
 
-echo "[SUCCESS]"
+echo ""
 echo "Stack info:"
 echo "  Deploy dir:     $DEPLOY_DIR"
 echo "  Admin user:     $GRAFANA_USER"

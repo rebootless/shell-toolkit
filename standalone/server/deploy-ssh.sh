@@ -8,7 +8,7 @@ if [[ $EUID -ne 0 ]]; then
     exit 1
 fi
 
-echo "-------------Installing dependencies-------------"
+echo "==> Installing dependencies"
 
 echo "[*] Updating system packages..."
 apt-get update
@@ -19,7 +19,7 @@ apt-get install -y openssh-server
 echo "[*] Enabling and starting SSH service..."
 systemctl enable --now ssh
 
-echo "-----------------Firewall setup------------------"
+echo "==> Firewall setup"
 
 FIREWALL_ENABLED="n"
 
@@ -52,7 +52,7 @@ case "${FIREWALL_CHOICE,,}" in
         ;;
 esac
 
-echo "------------------SSH validation-----------------"
+echo "==> SSH validation"
 
 if sshd -t; then
     echo "[+] SSH configuration is valid."
@@ -69,8 +69,9 @@ systemctl restart ssh
 SSH_STATUS=$(systemctl is-active ssh)
 SSH_ENABLED=$(systemctl is-enabled ssh)
 
-echo "------------------Setup Complete!----------------"
-
+echo ""
+echo "==> Summary"
+echo ""
 echo "SSH Information:"
 echo "  Service:          ssh"
 echo "  Status:           $SSH_STATUS"
@@ -86,5 +87,4 @@ else
 fi
 echo ""
 
-echo "Connect using:"
-echo "  >> ssh <username>@<server-ip>"
+echo "[i] Connect using: 'ssh <username>@<server-ip>'"

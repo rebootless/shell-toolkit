@@ -2,8 +2,9 @@
 
 set -euo pipefail
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-
 export DEBIAN_FRONTEND=noninteractive
+
+echo "==> Installing Tor Browser"
 
 TMP="/tmp/torbrowser"
 INSTALL_DIR="$HOME/.local/share/tor-browser"
@@ -122,8 +123,10 @@ fi
 echo "[*] Cleaning up..."
 rm -rf "$TMP"
 
-echo
+echo ""
+echo "==> Summary"
+echo ""
 echo "[SUCCESS] Tor Browser installed in userspace:"
 echo "          $INSTALL_DIR"
-echo "          Run: tor-browser"
+echo "          Run: 'tor-browser'"
 echo "          Or open it from application menu"

@@ -15,7 +15,7 @@ TS="$(date +%Y%m%d_%H%M%S)"
 MARK_START="# >>> oh-my-bash >>>"
 MARK_END="# <<< oh-my-bash <<<"
 
-echo "---------------Installing packages---------------"
+echo "==> Installing packages"
 
 for script in install-chafa.sh install-git.sh; do
     if [[ ! -f "$CLI_DIR/$script" ]]; then
@@ -28,7 +28,7 @@ done
 
 echo "[+] Packages installed."
 
-echo "-------------------Oh My Bash--------------------"
+echo "==> Oh My Bash"
 
 MODE=""
 if [[ -d "$OSH" ]]; then
@@ -98,7 +98,7 @@ case "$MODE" in
         ;;
 esac
 
-echo "-----------------Theme selection-----------------"
+echo "==> Theme selection"
 
 THEMES=()
 while IFS= read -r -d '' f; do
@@ -119,7 +119,7 @@ while true; do
 
     clear
     echo "[Tab] = next theme, [Enter] = confirm selection"
-    echo "-------------------------------------------------"
+    echo "-----------------------------------------------"
     echo "[$((idx+1))/${#THEMES[@]}] Theme: $theme"
     echo ""
     echo "Preview:"
@@ -181,9 +181,7 @@ esac
 echo "[+] oh-my-bash theme set to: $OMB_THEME"
 
 echo ""
-echo "================================================="
-echo "               Setup Complete!                   "
-echo "================================================="
+echo "==> Summary"
 echo "[SUCCESS] oh-my-bash : $OSH"
 echo "          Mode       : $MODE"
 echo "          Theme      : $OMB_THEME"

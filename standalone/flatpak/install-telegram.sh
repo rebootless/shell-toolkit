@@ -4,6 +4,8 @@ set -euo pipefail
 
 export DEBIAN_FRONTEND=noninteractive
 
+echo "==> Installing Telegram via Flatpak"
+
 echo "[*] Installing Telegram via Flatpak..."
 
 flatpak install -y flathub org.telegram.desktop
