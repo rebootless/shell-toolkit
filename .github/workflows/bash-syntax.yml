@@ -1,0 +1,36 @@
+name: bash-syntax-check
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "**/*.sh"
+      - ".github/workflows/bash-syntax.yml"
+  pull_request:
+    paths:
+      - "**/*.sh"
+      - ".github/workflows/bash-syntax.yml"
+  workflow_dispatch: {}
+
+jobs:
+  bash-syntax:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check Bash syntax
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          failed=0
+
+          while IFS= read -r -d '' file; do
+            echo "Checking: $file"
+            if ! bash -n "$file"; then
+              failed=1
+            fi
+          done < <(find . -type f -name "*.sh" -print0)
+
+          exit "$failed"
