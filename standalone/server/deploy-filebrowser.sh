@@ -21,8 +21,8 @@ FB_GID=1000
 if [[ -d "$DEPLOY_DIR" ]]; then
     echo ""
     echo -e "${RED}Directory $DEPLOY_DIR already exists.${NC}"
-    echo -e "${RED}Proceeding will PERMANENTLY DELETE all data: ${NC}"
-    echo -e "${RED}containers, volumes, database, served files.${NC}"
+    echo -e "${RED}Proceeding will PERMANENTLY DELETE all data:${NC}"
+    echo -e "${RED}    containers, volumes, database, served files.${NC}"
     echo -e "${RED}THIS ACTION IS IRREVERSIBLE.${NC}"
     echo ""
     read -rp "[?] Wipe existing File Browser stack and all data? [y/N]: " WIPE_CHOICE
@@ -141,7 +141,7 @@ else
         --address 0.0.0.0 \
         --port 80 \
         -r /srv \
-        --minimumPasswordLength 5
+        --minimumPasswordLength 0
 
     echo "[*] Creating admin user '$FB_USER'..."
     docker run --rm \
@@ -192,8 +192,8 @@ echo ""
 if [[ "$DEFAULT_PASSWORD" == true ]]; then
     echo -e "${RED}You are using the DEFAULT password: 'admin'${NC}"
     echo -e "${RED}This is EXTREMELY INSECURE.${NC}"
-    echo -e "${RED}Change it immediately after first login: ${NC}"
-    echo -e "${RED}  Settings -> Profile -> Change Password${NC}"
+    echo -e "${RED}Change it immediately after first login:${NC}"
+    echo -e "${RED}    Settings -> Profile -> Change Password${NC}"
 fi
 
 echo ""
