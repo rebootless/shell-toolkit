@@ -8,7 +8,7 @@ if [[ $EUID -ne 0 ]]; then
     exit 1
 fi
 
-echo "------------------Installing eza------------------"
+echo "------------------Installing eza-----------------"
 
 if command -v eza >/dev/null 2>&1; then
     echo "[i] eza is already installed, skipping."

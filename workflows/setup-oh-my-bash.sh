@@ -6,6 +6,9 @@ export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 RED='\033[0;31m'
 NC='\033[0m'
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+CLI_DIR="$(cd "$SCRIPT_DIR/../standalone/apt/cli" && pwd)"
+
 BASHRC="$HOME/.bashrc"
 OSH="$HOME/.oh-my-bash"
 TS="$(date +%Y%m%d_%H%M%S)"
@@ -13,11 +16,16 @@ MARK_START="# >>> oh-my-bash >>>"
 MARK_END="# <<< oh-my-bash <<<"
 
 echo "---------------Installing packages---------------"
-echo "[*] Updating package lists..."
-sudo apt update -qq
 
-echo "[*] Installing: chafa, git"
-sudo apt install -y chafa git
+for script in install-chafa.sh install-git.sh; do
+    if [[ ! -f "$CLI_DIR/$script" ]]; then
+        echo "[!] Missing $script in $CLI_DIR"
+        exit 1
+    fi
+    echo "[*] Running $script"
+    sudo bash "$CLI_DIR/$script"
+done
+
 echo "[+] Packages installed."
 
 echo "-------------------Oh My Bash--------------------"
@@ -181,7 +189,7 @@ echo "          Mode       : $MODE"
 echo "          Theme      : $OMB_THEME"
 if [[ "$MODE" == "official" ]]; then
     echo "          ~/.bashrc was REPLACED by the installer."
-    echo "          Re-run bash-qol.sh to restore its managed block if needed."
+    echo "          Re-run setup-bash-qol.sh to restore its managed block if needed."
 else
     echo "          ~/.bashrc was only prepended; the bash-qol block is untouched."
 fi

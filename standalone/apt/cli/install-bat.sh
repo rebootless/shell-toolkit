@@ -8,7 +8,7 @@ if [[ $EUID -ne 0 ]]; then
     exit 1
 fi
 
-echo "------------------Installing bat------------------"
+echo "------------------Installing bat-----------------"
 
 if command -v bat >/dev/null 2>&1; then
     echo "[i] bat is already installed, skipping."

@@ -1,8 +1,6 @@
 #!/bin/bash
-
 set -euo pipefail
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-
 export DEBIAN_FRONTEND=noninteractive
 
 if [[ $EUID -ne 0 ]]; then
@@ -11,7 +9,7 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 echo "[*] Updating package lists..."
-apt update
+apt update -q
 
 echo "[*] Installing Docker Engine (docker.io) and Docker Compose plugin..."
 apt install -y docker.io docker-compose
