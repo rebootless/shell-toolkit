@@ -1,0 +1,44 @@
+name: chmod
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "**/*.sh"
+      - ".github/workflows/chmod.yml"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  chmod:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set executable bit
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          find . -type f -name "*.sh" -exec chmod +x {} +
+
+      - name: Commit changes
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add .
+
+          if git diff --cached --quiet; then
+            echo "No permission changes."
+            exit 0
+          fi
+
+          git commit -m "chore: restore executable bit [skip ci]"
+          git push
