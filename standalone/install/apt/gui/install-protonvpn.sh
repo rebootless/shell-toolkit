@@ -1,8 +1,6 @@
 #!/bin/bash
-
 set -euo pipefail
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-
 export DEBIAN_FRONTEND=noninteractive
 
 if [[ $EUID -ne 0 ]]; then
@@ -12,15 +10,27 @@ fi
 
 echo "==> Installing ProtonVPN"
 
-PKG="protonvpn-stable-release_1.0.8_all.deb"
-URL="https://repo.protonvpn.com/debian/dists/stable/main/binary-all/${PKG}"
-SHA256="0b14e71586b22e498eb20926c48c7b434b751149b1f2af9902ef1cfe6b03e180"
+BASE_URL="https://repo.protonvpn.com/debian/dists/stable/main/binary-all"
 
-echo "[*] Downloading Proton VPN repository package..."
-wget -O "${PKG}" "${URL}"
+echo "[*] Detecting latest Proton VPN repository package..."
+PKG="$(
+    wget -qO- "${BASE_URL}/" \
+        | grep -oE 'protonvpn-stable-release_[0-9.]+_all\.deb' \
+        | sort -V \
+        | tail -n1
+)"
 
-echo "[*] Verifying package checksum..."
-echo "${SHA256} ${PKG}" | sha256sum --check -
+if [[ -z "$PKG" ]]; then
+    echo "[!] Could not determine the latest Proton VPN repository package."
+    exit 1
+fi
+
+# The bootstrap repository package version is resolved dynamically.
+# Because of that, this initial .deb is installed without a pinned SHA256.
+# Once the repository is installed, all subsequent packages are verified
+# by apt against Proton's signed repository metadata.
+echo "[*] Downloading ${PKG}..."
+wget -O "${PKG}" "${BASE_URL}/${PKG}"
 
 echo "[*] Installing Proton VPN repository..."
 dpkg -i "./${PKG}"
@@ -34,4 +44,4 @@ apt install -y proton-vpn-gnome-desktop
 echo "[+] Proton VPN installation completed."
 echo
 echo "[NOTE] Log out and log back into your session"
-     "       (or reboot) before launching Proton VPN for the first time."
+echo "       (or reboot) before launching Proton VPN for the first time."
