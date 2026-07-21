@@ -160,6 +160,8 @@ echo "==> Summary"
 echo ""
 
 if [[ "$DEFAULT_PASSWORD" == true ]]; then
+    echo -e "${RED}It looks like the health check timed out.${NC}"
+    echo -e "${RED}The service may still become available with the default credentials.${NC}"
     echo -e "${RED}You are using the DEFAULT password: 'admin'${NC}"
     echo -e "${RED}This is EXTREMELY INSECURE.${NC}"
     echo -e "${RED}Change it immediately after first login:${NC}"
