@@ -4,8 +4,8 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-APT_CLI_DIR="$(cd "$SCRIPT_DIR/../standalone/apt/cli" && pwd)"
-PIPX_DIR="$(cd "$SCRIPT_DIR/../standalone/pipx" && pwd)"
+APT_CLI_DIR="$(cd "$SCRIPT_DIR/../standalone/install/apt/cli" && pwd)"
+PIPX_DIR="$(cd "$SCRIPT_DIR/../standalone/install/pipx" && pwd)"
 
 echo "[*] Running install-pipx.sh"
 bash "$APT_CLI_DIR/install-pipx.sh"

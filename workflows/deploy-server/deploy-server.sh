@@ -7,7 +7,8 @@ export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 export DEBIAN_FRONTEND=noninteractive
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-SERVER_DIR="$(cd "$SCRIPT_DIR/../../standalone/server" && pwd)"
+MAINTENANCE_DIR="$(cd "$SCRIPT_DIR/../../standalone/maintenance" && pwd)"
+DEPLOY_DIR="$(cd "$SCRIPT_DIR/../../standalone/deploy" && pwd)"
 ENV_FILE="$SCRIPT_DIR/.env"
 
 # Root check
@@ -67,20 +68,26 @@ if [[ "${CREATE_DEPLOY_USER,,}" =~ ^y ]]; then
 fi
 
 # Script presence check
-for s in server-bootstrap.sh deploy-nginx.sh deploy-grafana.sh deploy-portainer.sh; do
-    if [[ ! -f "$SERVER_DIR/$s" ]]; then
-        echo "[!] Missing: $SERVER_DIR/$s"
+for s in \
+    "$MAINTENANCE_DIR/server-bootstrap.sh" \
+    "$DEPLOY_DIR/deploy-nginx.sh" \
+    "$DEPLOY_DIR/deploy-grafana.sh" \
+    "$DEPLOY_DIR/deploy-portainer.sh"
+do
+    if [[ ! -f "$s" ]]; then
+        echo "[!] Missing: $s"
         exit 1
     fi
-    chmod +x "$SERVER_DIR/$s"
+    chmod +x "$s"
 done
 
 # Deployment plan
 LOCAL_IP=$(ip -4 route get 1.1.1.1 2>/dev/null | awk '{print $7; exit}' || echo "unknown")
 DISPLAY_HOST="${NGINX_DOMAIN:-${LOCAL_IP} (auto)}"
 
-echo "Config:  $ENV_FILE"
-echo "Scripts: $SERVER_DIR"
+echo "Config:      $ENV_FILE"
+echo "Maintenance: $MAINTENANCE_DIR"
+echo "Deploy:      $DEPLOY_DIR"
 echo ""
 echo "1. server-bootstrap.sh"
 echo "profile=$BOOTSTRAP_PROFILE  firewall=$BOOTSTRAP_FIREWALL  fail2ban=$BOOTSTRAP_FAIL2BAN"
@@ -126,7 +133,7 @@ printf '%s\n' \
     "0" \
     "$BOOTSTRAP_FIREWALL" \
     "$BOOTSTRAP_FAIL2BAN" \
-    | bash "$SERVER_DIR/server-bootstrap.sh"
+    | bash "$MAINTENANCE_DIR/server-bootstrap.sh"
 
 # Sudo user creation — driven by .env, handled here instead of inside bootstrap
 if [[ "${CREATE_DEPLOY_USER,,}" =~ ^y ]]; then
@@ -165,7 +172,7 @@ printf '%s\n' \
     "$NGINX_PORTAINER_PROXY" \
     "$NGINX_FIREWALL" \
     "$NGINX_DOMAIN" \
-    | bash "$SERVER_DIR/deploy-nginx.sh"
+    | bash "$DEPLOY_DIR/deploy-nginx.sh"
 
 # Step 3 — stdin order: username, password, domain
 step "deploy-grafana.sh"
@@ -173,14 +180,14 @@ printf '%s\n' \
     "$GRAFANA_USER" \
     "$GRAFANA_PASSWORD" \
     "$GRAFANA_DOMAIN" \
-    | bash "$SERVER_DIR/deploy-grafana.sh"
+    | bash "$DEPLOY_DIR/deploy-grafana.sh"
 
 # Step 4 — stdin order: password, domain
 step "deploy-portainer.sh"
 printf '%s\n' \
     "$PORTAINER_PASSWORD" \
     "$PORTAINER_DOMAIN" \
-    | bash "$SERVER_DIR/deploy-portainer.sh"
+    | bash "$DEPLOY_DIR/deploy-portainer.sh"
 
 trap - ERR
 
