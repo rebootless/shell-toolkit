@@ -16,43 +16,50 @@ apt-get update
 echo "[*] Installing OpenSSH Server..."
 apt-get install -y openssh-server
 
-echo "[*] Enabling and starting SSH service..."
-systemctl enable --now ssh
+echo "==> Configuring OpenSSH"
 
-echo "==> Firewall setup"
+echo "[*] Enabling SSH service..."
+systemctl enable ssh
+
+echo "==> Firewall"
 
 FIREWALL_ENABLED="n"
 
-read -rp "[?] Install Firewalld? [y/N]: " FIREWALL_CHOICE
+if command -v firewall-cmd >/dev/null 2>&1; then
 
-case "${FIREWALL_CHOICE,,}" in
-    y|yes)
-        echo "[*] Installing and configuring firewalld..."
+    if systemctl is-active --quiet firewalld; then
 
-        if apt-get install -y firewalld; then
-            systemctl enable --now firewalld
+        read -rp "[?] Allow SSH through Firewalld? [y/N]: " FIREWALL_CHOICE
 
-            firewall-cmd --permanent --zone=public --add-service=ssh
-            firewall-cmd --set-default-zone=public
-            firewall-cmd --reload
+        case "${FIREWALL_CHOICE,,}" in
+            y|yes)
+                echo "[*] Allowing SSH service..."
 
-            FIREWALL_ENABLED="y"
+                firewall-cmd --permanent --zone=public --add-service=ssh
+                firewall-cmd --reload
 
-            echo "[i] Active firewalld services:"
-            firewall-cmd --zone=public --list-services
-        else
-            echo "[!] Failed to install firewalld."
-        fi
-        ;;
-    n|no|"")
-        echo "[i] Firewalld setup skipped."
-        ;;
-    *)
-        echo "[!] Invalid input -> skipping firewalld setup..."
-        ;;
-esac
+                FIREWALL_ENABLED="y"
 
-echo "==> SSH validation"
+                echo "[i] Active firewalld services:"
+                firewall-cmd --zone=public --list-services
+                ;;
+            n|no|"")
+                echo "[i] Firewall configuration skipped."
+                ;;
+            *)
+                echo "[!] Invalid input -> skipping firewall configuration."
+                ;;
+        esac
+
+    else
+        echo "[i] Firewalld is installed but not running."
+    fi
+
+else
+    echo "[i] Firewalld is not installed."
+fi
+
+echo "==> Validation"
 
 if sshd -t; then
     echo "[+] SSH configuration is valid."
@@ -64,6 +71,7 @@ else
     exit 1
 fi
 
+echo "[*] Restarting SSH service..."
 systemctl restart ssh
 
 SSH_STATUS=$(systemctl is-active ssh)
@@ -72,19 +80,21 @@ SSH_ENABLED=$(systemctl is-enabled ssh)
 echo ""
 echo "==> Summary"
 echo ""
-echo "SSH Information:"
+echo "OpenSSH Information:"
 echo "  Service:          ssh"
 echo "  Status:           $SSH_STATUS"
 echo "  Startup:          $SSH_ENABLED"
 echo "  Config:           /etc/ssh/sshd_config"
 echo ""
 
-echo "Security & Firewall:"
+echo "Firewall:"
 if [[ "$FIREWALL_ENABLED" == "y" ]]; then
-    echo "  Firewall:         Firewalld (SSH allowed)"
+    echo "  Status:           SSH allowed"
+elif command -v firewall-cmd >/dev/null 2>&1; then
+    echo "  Status:           Firewalld available (SSH not allowed)"
 else
-    echo "  Firewall:         NOT CONFIGURED (Warning: SSH may be blocked)"
+    echo "  Status:           Firewalld not installed"
 fi
-echo ""
 
+echo ""
 echo "[i] Connect using: 'ssh <username>@<server-ip>'"

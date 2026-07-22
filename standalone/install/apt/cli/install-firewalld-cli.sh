@@ -28,4 +28,3 @@ fi
 echo ""
 echo "[+] firewalld installed successfully."
 echo "[i] Launch the CLI with: 'firewall-cmd'"
-

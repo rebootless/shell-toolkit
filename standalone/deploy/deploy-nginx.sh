@@ -157,6 +157,40 @@ case "${PORTAINER_CHOICE,,}" in
         ;;
 esac
 
+echo "==> File Browser setup"
+
+FILEBROWSER_BLOCK=""
+read -rp "[?] Configure File Browser reverse proxy at /files? [y/N]: " FILEBROWSER_CHOICE
+
+case "${FILEBROWSER_CHOICE,,}" in
+    y|yes)
+        echo "[*] Preparing File Browser proxy configuration..."
+        FILEBROWSER_BLOCK="
+    location = /files {
+        return 301 /files/;
+    }
+
+    location /files/ {
+        proxy_http_version 1.1;
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto \$scheme;
+        proxy_set_header Upgrade \$http_upgrade;
+        proxy_set_header Connection \"upgrade\";
+        # Trailing slash strips /files/ prefix before forwarding to File Browser
+        proxy_pass http://127.0.0.1:8080/;
+    }"
+        echo "[+] Done."
+        ;;
+    n|no|"")
+        echo "[i] File Browser proxy skipped"
+        ;;
+    *)
+        echo "[!] Invalid input -> skipping File Browser proxy setup"
+        ;;
+esac
+
 echo "==> Firewall setup"
 
 read -rp "[?] Install Firewalld? [y/N]: " FIREWALL_CHOICE
@@ -288,6 +322,8 @@ server {
     $GRAFANA_BLOCK
 
     $PORTAINER_BLOCK
+
+    $FILEBROWSER_BLOCK
 
     $PHP_BLOCK
 

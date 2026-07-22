@@ -61,5 +61,8 @@ EOF
 
 chown "$REAL_USER:$REAL_USER" "$REAL_HOME/.bashrc" "$REAL_HOME/.profile" 2>/dev/null || true
 
+echo ""
+echo "[+] Markdown LSP installed successfully."
+echo ""
 echo "[NOTE] Log out and log back into your session"
 echo "       (or reboot) for the updated PATH to take effect."

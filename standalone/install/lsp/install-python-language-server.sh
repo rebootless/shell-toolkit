@@ -34,5 +34,8 @@ export PATH="\$HOME/.local/bin:\$PATH"
 $MARK_END
 EOF
 
+echo ""
+echo "[+] Python LSP installed successfully."
+echo ""
 echo "[NOTE] Log out and log back into your session"
 echo "       (or reboot) for the updated PATH to take effect."
