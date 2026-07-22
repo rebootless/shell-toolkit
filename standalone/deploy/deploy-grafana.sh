@@ -236,9 +236,9 @@ docker compose up -d --remove-orphans
 echo "[+] Containers started."
 
 echo "==> Waiting for Grafana health"
-echo "[*] Polling Grafana API (up to 60s)..."
+echo "[*] Polling Grafana API (up to 300s)..."
 GRAFANA_READY=false
-for i in $(seq 1 30); do
+for i in $(seq 1 150); do
     if curl -sf http://localhost:3000/api/health 2>/dev/null | grep -q '"database":"ok"'; then
         echo "[+] Grafana is healthy."
         GRAFANA_READY=true
