@@ -17,4 +17,5 @@ apt update -q
 echo "[*] Installing Node.js + npm..."
 apt install -y nodejs npm
 
+echo ""
 echo "[+] Node.js + npm installed successfully."

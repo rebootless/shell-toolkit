@@ -41,6 +41,7 @@ apt update
 echo "[*] Installing Proton VPN..."
 apt install -y proton-vpn-gnome-desktop
 
+echo ""
 echo "[+] Proton VPN installation completed."
 echo
 echo "[NOTE] Log out and log back into your session"

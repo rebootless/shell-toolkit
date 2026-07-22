@@ -24,4 +24,5 @@ echo "[*] Verifying installation..."
 docker --version
 docker compose version
 
+echo ""
 echo "[+] Docker and Docker Compose installed successfully."

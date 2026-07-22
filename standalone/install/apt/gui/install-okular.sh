@@ -22,4 +22,5 @@ apt install -y \
     okular-backend-odt \
     okular-backend-odp
 
+echo ""
 echo "[+] Okular installed successfully."

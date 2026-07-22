@@ -21,4 +21,5 @@ pipx ensurepath
 
 export PATH="$HOME/.local/bin:$PATH"
 
+echo ""
 echo "[+] pipx installed and PATH configured. Version: $(pipx --version)"

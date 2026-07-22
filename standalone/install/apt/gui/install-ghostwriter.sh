@@ -22,4 +22,5 @@ apt update -q
 echo "[*] Installing ghostwriter..."
 apt install -y ghostwriter
 
+echo ""
 echo "[+] ghostwriter installed successfully."
