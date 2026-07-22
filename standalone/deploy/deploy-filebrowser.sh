@@ -114,8 +114,8 @@ services:
         - wget -qO- http://localhost/health || exit 1
       interval: 10s
       timeout: 5s
-      retries: 12
-      start_period: 20s
+      retries: 6
+      start_period: 10s
 COMPOSE
 
 echo "[+] Configs written."
@@ -164,9 +164,9 @@ docker compose up -d --remove-orphans
 echo "[+] Containers started."
 
 echo "==> Waiting for File Browser health"
-echo "[*] Polling File Browser (up to 60s)..."
+echo "[*] Polling File Browser (up to 90s)..."
 FB_READY=false
-for i in $(seq 1 30); do
+for i in $(seq 1 45); do
     if curl -sf http://localhost:8080/health >/dev/null 2>&1; then
         echo "[+] File Browser is healthy."
         FB_READY=true
@@ -179,6 +179,7 @@ echo ""
 
 if [[ "$FB_READY" == false ]]; then
     echo "[WARN] File Browser did not become healthy in time."
+    echo "       The container may still be starting."
     echo "       Check status with: docker compose -f $DEPLOY_DIR/compose.yaml ps"
 fi
 
