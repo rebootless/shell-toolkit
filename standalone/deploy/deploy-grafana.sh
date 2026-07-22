@@ -131,8 +131,8 @@ services:
         - wget -qO- http://localhost:3000/api/health | grep -q '"database":"ok"'
       interval: 10s
       timeout: 5s
-      retries: 18
-      start_period: 30s
+      retries: 30
+      start_period: 60s
     networks:
       - monitoring
 
