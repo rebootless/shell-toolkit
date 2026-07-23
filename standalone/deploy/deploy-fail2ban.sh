@@ -49,23 +49,27 @@ systemctl restart fail2ban
 
 echo "[*] Waiting for Fail2Ban..."
 
-READY=false
-
-for _ in {1..20}; do
-    if fail2ban-client ping >/dev/null 2>&1; then
-        READY=true
-        break
-    fi
-    sleep 0.5
+for _ in {1..50}; do
+    [[ -S /run/fail2ban/fail2ban.sock ]] && break
+    sleep 0.2
 done
 
-if [[ "$READY" != true ]]; then
-    echo ""
+if [[ ! -S /run/fail2ban/fail2ban.sock ]]; then
+    echo "[!] Fail2Ban socket was not created."
+    journalctl -u fail2ban --no-pager -n 30
+    exit 1
+fi
+
+for _ in {1..50}; do
+    if fail2ban-client ping >/dev/null 2>&1; then
+        break
+    fi
+    sleep 0.2
+done
+
+if ! fail2ban-client ping >/dev/null 2>&1; then
     echo "[!] Fail2Ban failed to become ready."
-    echo ""
-    systemctl status fail2ban --no-pager || true
-    echo ""
-    journalctl -u fail2ban --no-pager -n 30 || true
+    journalctl -u fail2ban --no-pager -n 30
     exit 1
 fi
 
