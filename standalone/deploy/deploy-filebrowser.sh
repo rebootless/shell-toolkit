@@ -131,8 +131,8 @@ else
     docker pull -q filebrowser/filebrowser:latest >/dev/null
 
     echo "[*] Initializing configuration..."
-    # --minimumPasswordLength 0: allows the 'admin'/'admin' default fallback,
-    # same tradeoff other stacks in this repo make (warned about below).
+    # File Browser enforces password length of 12 characters.
+    # Validate it here to avoid a failed bootstrap later.
     docker run --rm \
         -v "$DEPLOY_DIR/database:/database" \
         filebrowser/filebrowser:latest \
@@ -140,8 +140,7 @@ else
         -d /database/filebrowser.db \
         --address 0.0.0.0 \
         --port 80 \
-        -r /srv \
-        --minimumPasswordLength 0
+        -r /srv
 
     echo "[*] Creating admin user '$FB_USER'..."
     docker run --rm \
