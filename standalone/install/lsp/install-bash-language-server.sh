@@ -29,7 +29,8 @@ EOF
 
 npm install -g bash-language-server
 echo ""
-echo "[+] Bash LSP installed successfully."
+echo "Bash LSP installed successfully."
+
 echo ""
-echo "[NOTE] Log out and log back into your session"
-echo "       (or reboot) for the updated PATH to take effect."
+echo "Log out and log back into your session"
+echo "(or reboot) for the updated PATH to take effect."

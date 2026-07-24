@@ -7,18 +7,18 @@ export DEBIAN_FRONTEND=noninteractive
 echo "==> Installing Steam via Flatpak"
 
 if ! command -v flatpak >/dev/null 2>&1; then
-    echo "[i] flatpak is not installed, skipping..."
+    echo "flatpak is not installed, skipping..."
     exit 0
 fi
 
-echo "[*] Installing Steam via Flatpak..."
+echo "Installing Steam via Flatpak..."
 
 flatpak install -y flathub com.valvesoftware.Steam
 
-echo "[*] Steam installed"
+echo "Steam installed"
 
-echo "[INFO] Launch command:"
-echo "flatpak run com.valvesoftware.Steam"
+echo "Launch command:"
+echo "  flatpak run com.valvesoftware.Steam"
 
-echo "[INFO] Installed apps:"
+echo "Installed apps:"
 flatpak list | grep steam || true

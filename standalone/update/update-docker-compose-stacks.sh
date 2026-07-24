@@ -4,7 +4,7 @@ set -euo pipefail
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
 if [[ $EUID -ne 0 ]]; then
-    echo "[!] Please log in as root and run this script."
+    echo "Please log in as root and run this script."
     exit 1
 fi
 
@@ -25,7 +25,7 @@ mapfile -t STACKS < <(
 )
 
 if [[ ${#STACKS[@]} -eq 0 ]]; then
-    echo "[i] No Docker Compose stacks found."
+    echo "No Docker Compose stacks found."
     exit 0
 fi
 
@@ -35,14 +35,14 @@ for dir in "${STACKS[@]}"; do
     stack="$(basename "$dir")"
 
     if [[ ! -d "$dir" ]]; then
-        echo "[!] $stack: working directory not found, skipping"
+        echo "$stack: working directory not found, skipping"
         SKIPPED+=("$stack")
         continue
     fi
 
-    echo "[*] $stack: pulling images"
+    echo "$stack: pulling images"
     pull_output="$(cd "$dir" && docker compose pull 2>&1)" || {
-        echo "[!] $stack: pull failed"
+        echo "$stack: pull failed"
         echo "$pull_output"
         SKIPPED+=("$stack")
         continue
@@ -54,21 +54,22 @@ for dir in "${STACKS[@]}"; do
         is_updated=false
     fi
 
-    echo "[*] $stack: applying (up -d)"
+    echo "$stack: applying (up -d)"
     (cd "$dir" && docker compose up -d) >/dev/null
 
     if [[ "$is_updated" == true ]]; then
-        echo "[+] $stack: updated"
+        echo "$stack: updated"
         UPDATED+=("$stack")
     else
-        echo "[i] $stack: already up to date"
+        echo "$stack: already up to date"
         UNCHANGED+=("$stack")
     fi
 done
 
 echo ""
 echo "==> Summary"
+
 echo ""
-echo "[SUCCESS] Updated:   ${UPDATED[*]:-none}"
-echo "          Unchanged: ${UNCHANGED[*]:-none}"
-echo "          Skipped:   ${SKIPPED[*]:-none}"
+echo "  Updated:   ${UPDATED[*]:-none}"
+echo "  Unchanged: ${UNCHANGED[*]:-none}"
+echo "  Skipped:   ${SKIPPED[*]:-none}"

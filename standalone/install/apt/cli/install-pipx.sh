@@ -7,19 +7,19 @@ export DEBIAN_FRONTEND=noninteractive
 echo "==> Installing pipx"
 
 if ! command -v pipx >/dev/null 2>&1; then
-    echo "[*] Updating package index..."
+    echo "Updating package index..."
     sudo apt update
 
-    echo "[*] Installing pipx..."
+    echo "Installing pipx..."
     sudo apt install -y pipx
 else
-    echo "[i] pipx is already installed."
+    echo "pipx is already installed."
 fi
 
-echo "[*] Ensuring pipx PATH is configured..."
+echo "Ensuring pipx PATH is configured..."
 pipx ensurepath
 
 export PATH="$HOME/.local/bin:$PATH"
 
 echo ""
-echo "[+] pipx installed and PATH configured. Version: $(pipx --version)"
+echo "pipx installed and PATH configured. Version: $(pipx --version)"

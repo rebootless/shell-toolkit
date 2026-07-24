@@ -5,19 +5,18 @@ export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 export DEBIAN_FRONTEND=noninteractive
 
 if [[ $EUID -ne 0 ]]; then
-    echo "[!] Please log in as root and run this script."
+    echo "Please log in as root and run this script."
     exit 1
 fi
 
 echo "==> Installing Kate"
 
-echo "[*] Updating package lists..."
+echo "Updating package lists..."
 apt update -q
 
-echo "[*] Installing Kate..."
+echo "Installing Kate..."
 apt install -y \
-    kate \
-    kate-plugins
+    kate
 
 echo ""
-echo "[+] Kate installed successfully."
+echo "Kate installed successfully."

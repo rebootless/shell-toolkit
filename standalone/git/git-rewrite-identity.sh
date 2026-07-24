@@ -69,7 +69,7 @@ while [[ $# -gt 0 ]]; do
             exit 0
             ;;
         *)
-            echo "[!] Unknown option: $1"
+            echo "Unknown option: $1"
             usage
             exit 1
             ;;
@@ -77,49 +77,50 @@ while [[ $# -gt 0 ]]; do
 done
 
 if command -v git-filter-repo >/dev/null 2>&1; then
-    echo "[i] git-filter-repo already installed, skipping..."
+    echo "git-filter-repo already installed, skipping..."
 else
-    echo "[!] git-filter-repo not found."
-    echo "[!] Install it, e.g.: 'pipx install git-filter-repo'"
+    echo "git-filter-repo not found."
+    echo "Install it, e.g.:"
+    echo "  pipx install git-filter-repo"
     exit 1
 fi
 
 if [[ -z "$OLD_NAME" && -z "$OLD_EMAIL" ]]; then
-    echo "[!] Specify at least --old-name (with --new-name) or --old-email (with --new-email)."
+    echo "Specify at least --old-name (with --new-name) or --old-email (with --new-email)."
     usage
     exit 1
 fi
 
 if [[ ( -n "$OLD_NAME" && -z "$NEW_NAME" ) || ( -z "$OLD_NAME" && -n "$NEW_NAME" ) ]]; then
-    echo "[!] --old-name and --new-name must be used together."
+    echo "--old-name and --new-name must be used together."
     exit 1
 fi
 
 if [[ ( -n "$OLD_EMAIL" && -z "$NEW_EMAIL" ) || ( -z "$OLD_EMAIL" && -n "$NEW_EMAIL" ) ]]; then
-    echo "[!] --old-email and --new-email must be used together."
+    echo "--old-email and --new-email must be used together."
     exit 1
 fi
 
 if [[ ! -d "$REPO/.git" ]]; then
-    echo "[!] '$REPO' is not a Git repository."
+    echo "'$REPO' is not a Git repository."
     exit 1
 fi
 
 cd "$REPO"
 REPO="$(pwd)"
-echo "[+] Repository OK: $REPO"
+echo "Repository OK: $REPO"
 
 ORIGIN_URL=""
 if git remote get-url origin >/dev/null 2>&1; then
     ORIGIN_URL="$(git remote get-url origin)"
-    echo "[i] origin: $ORIGIN_URL"
+    echo "origin: $ORIGIN_URL"
 else
-    echo "[i] No 'origin' remote configured."
+    echo "No 'origin' remote configured."
 fi
 
 echo ""
-[[ -n "$OLD_NAME" ]]  && echo "[i] Name:  '$OLD_NAME'  ->  '$NEW_NAME'"
-[[ -n "$OLD_EMAIL" ]] && echo "[i] Email: '$OLD_EMAIL'  ->  '$NEW_EMAIL'"
+[[ -n "$OLD_NAME" ]]  && echo "Name:  '$OLD_NAME'  ->  '$NEW_NAME'"
+[[ -n "$OLD_EMAIL" ]] && echo "Email: '$OLD_EMAIL'  ->  '$NEW_EMAIL'"
 
 echo ""
 echo -e "${RED}This rewrites ALL commits in $REPO"
@@ -128,15 +129,15 @@ echo -e "${RED}Anyone else with a clone must re-clone or${NC}"
 echo -e "${RED}hard-reset onto the new history.${NC}"
 echo -e "${RED}THIS ACTION IS IRREVERSIBLE without a backup.${NC}"
 
-read -rp "[?] Proceed with rewriting history? [y/N]: " PROCEED
+read -rp "Proceed with rewriting history? [y/N]: " PROCEED
 if [[ ! "${PROCEED,,}" =~ ^y ]]; then
-    echo "[i] Aborted."
+    echo "Aborted."
     exit 0
 fi
 
-read -rp "[?] Are you sure? This cannot be undone. Type 'yes' to confirm: " CONFIRM
+read -rp "Are you sure? This cannot be undone. Type 'yes' to confirm: " CONFIRM
 if [[ "$CONFIRM" != "yes" ]]; then
-    echo "[i] Confirmation not received — aborting."
+    echo "Confirmation not received — aborting."
     exit 0
 fi
 
@@ -156,28 +157,31 @@ if os.environ.get("OLD_EMAIL") and commit.committer_email == os.environ["OLD_EMA
     commit.committer_email = os.environ["NEW_EMAIL"].encode()
 '
 
-echo "[+] History rewritten."
+echo "History rewritten."
 
 if [[ -n "$ORIGIN_URL" ]]; then
     if ! git remote get-url origin >/dev/null 2>&1; then
         git remote add origin "$ORIGIN_URL"
-        echo "[+] Remote 'origin' re-added: $ORIGIN_URL"
+        echo "Remote 'origin' re-added: $ORIGIN_URL"
     fi
 fi
 
 echo ""
 echo "==> Summary"
+
 echo ""
-echo "[SUCCESS] Rewrite complete."
+echo "Rewrite complete."
+
 echo ""
-echo "Repo:   $REPO"
-[[ -n "$OLD_NAME" ]]  && echo "Name:   '$OLD_NAME' -> '$NEW_NAME'"
-[[ -n "$OLD_EMAIL" ]] && echo "Email:  '$OLD_EMAIL' -> '$NEW_EMAIL'"
+echo "Repo: $REPO"
+[[ -n "$OLD_NAME" ]]  && echo "Name:  '$OLD_NAME' -> '$NEW_NAME'"
+[[ -n "$OLD_EMAIL" ]] && echo "Email: '$OLD_EMAIL' -> '$NEW_EMAIL'"
+
 echo ""
-echo "[i] Review before pushing:"
-echo "    'git log --pretty=full | less'"
+echo "Review before pushing:"
+echo "  git log --pretty=full | less"
+
 echo ""
-echo "[i] Push rewritten history:"
-echo "    'git push --force --all'"
-echo "    'git push --force --tags'"
-echo ""
+echo "Push rewritten history:"
+echo "  git push --force --all"
+echo "  git push --force --tags"
