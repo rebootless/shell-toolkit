@@ -9,13 +9,34 @@ if [[ $EUID -ne 0 ]]; then
     exit 1
 fi
 
-echo "==> Installing Installing Docker Engine (docker.io) and Docker Compose plugin"
+echo "==> Installing Docker Engine and Docker Compose plugin (official repo)"
 
-echo "[*] Updating package lists..."
-apt update -q
+if command -v docker &>/dev/null && apt-cache policy docker-ce 2>/dev/null | grep -q "Installed: [^(]"; then
+    echo "[i] Docker CE is already installed, skipping installation..."
+else
+    . /etc/os-release
+    DISTRO_ID="$ID"
 
-echo "[*] Installing Docker Engine (docker.io) and Docker Compose plugin..."
-apt install -y docker.io docker-compose
+    echo "[*] Installing prerequisites..."
+    apt update -q
+    apt install -y ca-certificates curl
+
+    echo "[*] Adding Docker's official GPG key..."
+    install -m 0755 -d /etc/apt/keyrings
+    curl -fsSL "https://download.docker.com/linux/${DISTRO_ID}/gpg" -o /etc/apt/keyrings/docker.asc
+    chmod a+r /etc/apt/keyrings/docker.asc
+
+    echo "[*] Adding Docker's official apt repository..."
+    ARCH="$(dpkg --print-architecture)"
+    CODENAME="$(. /etc/os-release && echo "$VERSION_CODENAME")"
+    cat > /etc/apt/sources.list.d/docker.list << EOF
+deb [arch=${ARCH} signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/${DISTRO_ID} ${CODENAME} stable
+EOF
+
+    echo "[*] Installing Docker Engine and Docker Compose plugin..."
+    apt update -q
+    apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+fi
 
 echo "[*] Enabling and starting Docker service..."
 systemctl enable --now docker
