@@ -116,32 +116,6 @@ detect_driver_package() {
     return 1
 }
 
-# Confirms the repo component that ships proprietary NVIDIA packages is enabled
-# (Ubuntu: restricted, Debian: non-free-firmware or the older non-free) so a
-# plain `apt-get install nvidia-driver-XXX` doesn't fail with "Unable to locate package".
-check_nonfree_component_enabled() {
-    local sources_glob=(/etc/apt/sources.list /etc/apt/sources.list.d/*.list /etc/apt/sources.list.d/*.sources)
-    local found=0
-    case "$DISTRO_ID" in
-        ubuntu)
-            grep -h -E '^[^#].*restricted' "${sources_glob[@]}" &>/dev/null && found=1
-            ;;
-        debian)
-            grep -h -E '^[^#].*(non-free-firmware|non-free)' "${sources_glob[@]}" &>/dev/null && found=1
-            ;;
-        *)
-            return 0
-            ;;
-    esac
-
-    if [[ "$found" -eq 0 ]]; then
-        echo "[!] Could not confirm the non-free/restricted component is enabled in APT sources."
-        echo "[!] 'apt-get install' may fail with 'Unable to locate package' until it's added."
-    else
-        echo "[i] Non-free/restricted component appears enabled."
-    fi
-}
-
 MODE=""
 TARGET=""
 
@@ -204,10 +178,6 @@ if [[ "$MODE" == "run" && ! -f "$TARGET" ]]; then
     exit 1
 fi
 
-if [[ "$MODE" == "package" ]]; then
-    check_nonfree_component_enabled
-fi
-
 echo "==> Detecting environment"
 
 CURRENT_TARGET="$(systemctl get-default 2>/dev/null || echo unknown)"
@@ -241,14 +211,14 @@ fi
 # Secure Boot check — an unsigned/self-signed dkms module can install cleanly
 # but still fail to load at boot under Secure Boot (nvidia-smi: "No devices were found").
 if command -v mokutil &>/dev/null && mokutil --sb-state 2>/dev/null | grep -qi "enabled"; then
-    echo -e "${YELLOW}[!] Secure Boot is enabled.${NC}"
-    echo -e "${YELLOW}[!] The NVIDIA kernel module must be signed (e.g. via dkms/mokutil MOK enrollment)${NC}"
-    echo -e "${YELLOW}[!] or it will fail to load after reboot even though installation succeeds.${NC}"
+    echo -e "${YELLOW}[INFO] Secure Boot is enabled.${NC}"
+    echo -e "${YELLOW}    The NVIDIA kernel module must be signed (e.g. via dkms/mokutil MOK enrollment)${NC}"
+    echo -e "${YELLOW}    or it will fail to load after reboot even though installation succeeds.${NC}"
 fi
 
-echo -e "${YELLOW}[!] This will stop the display manager and switch to multi-user.target.${NC}"
-echo -e "${YELLOW}[!] If you're connected via GUI, your session will end.${NC}"
-echo -e "${YELLOW}[!] Run this from SSH or a TTY, not from inside the graphical session.${NC}"
+echo -e "${YELLOW}[INFO] This will stop the display manager and switch to multi-user.target.${NC}"
+echo -e "${YELLOW}    If you're connected via GUI, your session will end.${NC}"
+echo -e "${YELLOW}    Run this from SSH or a TTY, not from inside the graphical session.${NC}"
 echo ""
 read -rp "[?] Continue? [y/N]: " PROCEED
 [[ "${PROCEED,,}" =~ ^y ]] || { echo "[i] Aborted."; exit 0; }
@@ -328,8 +298,8 @@ if [[ "${DO_REBOOT,,}" =~ ^y ]]; then
     echo "[*] Rebooting..."
     reboot
 else
-    echo "[i] Skipping reboot. To return to the graphical session manually, run:"
-    echo "      'systemctl isolate graphical.target'"
-    echo "[i] Or just reboot later with: 'reboot'"
-    echo "[i] After reboot, verify with: 'nvidia-smi' and 'lsmod | grep nvidia'"
+    echo "[INFO] Skipping reboot. To return to the graphical session manually, run:"
+    echo "    'systemctl isolate graphical.target'"
+    echo "    Or just reboot later with: 'reboot'"
+    echo "    After reboot, verify with: 'nvidia-smi' and 'lsmod | grep nvidia'"
 fi
