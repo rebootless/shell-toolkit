@@ -21,4 +21,5 @@ apt install -y \
     python3-venv \
     pipx
 
+echo ""
 echo "[+] Python development environment installed successfully."

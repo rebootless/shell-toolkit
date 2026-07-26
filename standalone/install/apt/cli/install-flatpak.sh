@@ -21,4 +21,5 @@ else
     echo "[!] KDE Discover not installed, skipping integration"
 fi
 
+echo ""
 echo "[+] Flatpak setup complete"

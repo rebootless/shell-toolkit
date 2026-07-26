@@ -21,4 +21,5 @@ apt install -y \
     kdevelop-python \
     kdevelop-php
 
+echo ""
 echo "[+] Development tools installed successfully."

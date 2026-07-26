@@ -29,4 +29,5 @@ apt install -y \
     pkg-config \
     libstdc++-12-dev
 
+echo ""
 echo "[+] C/C++ development environment installed successfully."
