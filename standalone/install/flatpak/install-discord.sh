@@ -7,18 +7,18 @@ export DEBIAN_FRONTEND=noninteractive
 echo "==> Installing Discord via Flatpak"
 
 if ! command -v flatpak >/dev/null 2>&1; then
-    echo "[i] flatpak is not installed, skipping..."
+    echo "flatpak is not installed, skipping..."
     exit 0
 fi
 
-echo "[*] Installing Discord via Flatpak..."
+echo "Installing Discord via Flatpak..."
 
 flatpak install -y flathub com.discordapp.Discord
 
-echo "[*] Discord installed"
+echo "Discord installed"
 
-echo "[INFO] Launch command:"
-echo "flatpak run com.discordapp.Discord"
+echo "Launch command:"
+echo "  flatpak run com.discordapp.Discord"
 
-echo "[INFO] Installed apps:"
+echo "Installed apps:"
 flatpak list | grep discord || true

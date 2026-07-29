@@ -3,41 +3,68 @@
 set -euo pipefail
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
-RED='\033[0;31m'
-NC='\033[0m'
+usage() {
+    echo "Usage: $0 [--yes]"
+    echo ""
+    echo "  --yes         Skip the confirmation prompt"
+    echo "  -h, --help    Show this help message"
+}
+
+ASSUME_YES=false
+
+while [ $# -gt 0 ]; do
+    case "$1" in
+        --yes)
+            ASSUME_YES=true
+            shift
+            ;;
+        -h|--help)
+            usage
+            exit 0
+            ;;
+        *)
+            echo "Error: unknown option '$1'"
+            usage
+            exit 1
+            ;;
+    esac
+done
 
 BASHRC="$HOME/.bashrc"
 SKEL_BASHRC="/etc/skel/.bashrc"
 TS="$(date +%Y%m%d_%H%M%S)"
 
 if [[ ! -f "$SKEL_BASHRC" ]]; then
-    echo "[!] $SKEL_BASHRC not found, cannot reset."
+    echo "$SKEL_BASHRC not found, cannot reset."
     exit 1
 fi
 
 echo ""
-echo -e "${RED}This will replace ~/.bashrc with the default:${NC}"
-echo -e "${RED}$SKEL_BASHRC${NC}" # SKEL_BASHRC="/etc/skel/.bashrc"
-echo -e "${RED}All customizations (bash-qol, oh-my-bash,${NC}"
-echo -e "${RED}aliases, etc.) will be REMOVED from ~/.bashrc.${NC}"
+echo "This will replace ~/.bashrc with the default:"
+echo "$SKEL_BASHRC" # SKEL_BASHRC="/etc/skel/.bashrc"
 echo ""
 
-read -rp "[?] Reset ~/.bashrc to the default? [y/N]: " CONFIRM
+if [[ "$ASSUME_YES" == true ]]; then
+    CONFIRM="y"
+else
+    read -rp "Reset ~/.bashrc to the default? [y/N]: " CONFIRM
+fi
+
 case "${CONFIRM,,}" in
     y|yes)
         if [[ -f "$BASHRC" ]]; then
             cp "$BASHRC" "${BASHRC}.bak.${TS}"
-            echo "[i] ~/.bashrc backed up to ${BASHRC}.bak.${TS}"
+            echo "~/.bashrc backed up to ${BASHRC}.bak.${TS}"
         fi
         cp "$SKEL_BASHRC" "$BASHRC"
-        echo "[+] ~/.bashrc reset to $SKEL_BASHRC."
+        echo "~/.bashrc reset to $SKEL_BASHRC."
         echo
-        echo "[i] Apply changes now with: source ~/.bashrc"
+        echo "Apply changes now with: source ~/.bashrc"
         ;;
     n|no|"")
-        echo "[i] Cancelled, ~/.bashrc left unchanged."
+        echo "Cancelled, ~/.bashrc left unchanged."
         ;;
     *)
-        echo "[!] Invalid input -> skipping ..."
+        echo "Invalid input -> skipping ..."
         ;;
 esac

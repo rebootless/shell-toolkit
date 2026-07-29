@@ -2,8 +2,12 @@
 
 set -euo pipefail
 
-echo "[*] Installing required dependencies..."
-sudo apt-get install -y jq wget
+if ! command -v yt-dlp &>/dev/null; then
+    echo "Error: yt-dlp is not installed." >&2
+    echo "Install it first, e.g.:" >&2
+    echo "  sudo pipx install yt-dlp" >&2
+    exit 1
+fi
 
 yt-dlp -i \
   --extract-audio \

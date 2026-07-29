@@ -7,18 +7,18 @@ export DEBIAN_FRONTEND=noninteractive
 echo "==> Installing Telegram via Flatpak"
 
 if ! command -v flatpak >/dev/null 2>&1; then
-    echo "[i] flatpak is not installed, skipping..."
+    echo "flatpak is not installed, skipping..."
     exit 0
 fi
 
-echo "[*] Installing Telegram via Flatpak..."
+echo "Installing Telegram via Flatpak..."
 
 flatpak install -y flathub org.telegram.desktop
 
-echo "[*] Telegram installed"
+echo "Telegram installed"
 
-echo "[INFO] Launch command:"
-echo "flatpak run org.telegram.desktop"
+echo "Launch command:"
+echo "  flatpak run org.telegram.desktop"
 
-echo "[INFO] Installed apps:"
+echo "Installed apps:"
 flatpak list | grep telegram || true

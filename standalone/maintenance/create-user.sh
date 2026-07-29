@@ -3,51 +3,50 @@
 set -euo pipefail
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
+usage() {
+    echo "Usage: $0 <username> [password]"
+}
+
 if [[ $EUID -ne 0 ]]; then
-    echo "[!] Please log in as root and run this script."
+    echo "Please log in as root and run this script."
     exit 1
 fi
 
-echo "==> Create local user"
-
-USERNAME=""
-PASSWORD=""
-
-# Read username
-if read -r -t 0; then
-    read -r USERNAME
-    read -r PASSWORD || true
-else
-    read -rp "[>] Username: " USERNAME
-    read -rsp "[>] Password (leave empty for none): " PASSWORD
-    echo
+if [[ $# -lt 1 || $# -gt 2 ]]; then
+    usage
+    exit 1
 fi
 
+USERNAME="$1"
+PASSWORD="${2:-}"
+
+echo "==> Create local user"
+
 if [[ -z "$USERNAME" ]]; then
-    echo "[!] Username cannot be empty."
+    echo "Username cannot be empty."
     exit 1
 fi
 
 # chpasswd uses "user:password"
 if [[ "$PASSWORD" == *:* ]]; then
-    echo "[!] Password must not contain ':'."
+    echo "Password must not contain ':'."
     exit 1
 fi
 
 if id "$USERNAME" &>/dev/null; then
-    echo "[i] User '$USERNAME' already exists."
+    echo "User '$USERNAME' already exists."
     exit 0
 fi
 
-echo "[*] Creating user '$USERNAME'..."
+echo "Creating user '$USERNAME'..."
 adduser --disabled-password --gecos "" "$USERNAME"
 
 if [[ -n "$PASSWORD" ]]; then
     printf '%s:%s\n' "$USERNAME" "$PASSWORD" | chpasswd
-    echo "[+] Password set."
+    echo "Password set."
 else
-    echo "[i] No password specified."
+    echo "No password specified."
 fi
 
 echo
-echo "[+] User '$USERNAME' created successfully."
+echo "User '$USERNAME' created successfully."

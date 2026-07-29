@@ -4,7 +4,7 @@ set -euo pipefail
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
 if [[ $# -lt 1 ]]; then
-    echo "[!] Usage: $0 <github-username-or-url> [target-dir]"
+    echo "Usage: $0 <github-username-or-url> [target-dir]"
     exit 1
 fi
 
@@ -21,18 +21,18 @@ cd "$DEST"
 user_info=$(curl -s "https://api.github.com/users/$USER")
 
 if echo "$user_info" | grep -q '"message": "Not Found"'; then
-    echo "[!] User not found: $USER"
+    echo "User not found: $USER"
     exit 1
 fi
 
 TOTAL=$(echo "$user_info" | grep -o '"public_repos": *[0-9]*' | grep -o '[0-9]*')
 
 if [[ -z "$TOTAL" || "$TOTAL" -eq 0 ]]; then
-    echo "[i] No public repositories found for: $USER"
+    echo "No public repositories found for: $USER"
     exit 0
 fi
 
-echo "[i] $TOTAL public repositories found for: $USER"
+echo "$TOTAL public repositories found for: $USER"
 
 counter=0
 page=1
@@ -51,9 +51,9 @@ while :; do
         name=$(basename "$url" .git)
         counter=$((counter + 1))
         if [[ -d "$name" ]]; then
-            echo "[i] [$counter/$TOTAL] Skipping existing: $name"
+            echo "[$counter/$TOTAL] Skipping existing: $name"
         else
-            echo "[*] [$counter/$TOTAL] Cloning: $name"
+            echo "[$counter/$TOTAL] Cloning: $name"
             git clone --quiet "$url"
         fi
     done <<< "$urls"
@@ -61,4 +61,4 @@ while :; do
     page=$((page + 1))
 done
 
-echo "[+] Done. Repositories saved in: $(pwd)"
+echo "Done. Repositories saved in: $(pwd)"

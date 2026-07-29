@@ -11,7 +11,7 @@ INSTALL_DIR="$HOME/.local/share/tor-browser"
 BIN_DIR="$HOME/.local/bin"
 APPS_DIR="$HOME/.local/share/applications"
 
-echo "[*] Checking dependencies..."
+echo "Checking dependencies..."
 
 REQUIRED_PKGS=(wget curl gnupg tar xz-utils grep ca-certificates)
 
@@ -24,8 +24,8 @@ for pkg in "${REQUIRED_PKGS[@]}"; do
 done
 
 if [[ ${#MISSING_PKGS[@]} -ne 0 ]]; then
-    echo "[*] Missing packages: ${MISSING_PKGS[*]}"
-    echo "[*] Installing via apt..."
+    echo "Missing packages: ${MISSING_PKGS[*]}"
+    echo "Installing via apt..."
 
     if [[ $EUID -ne 0 ]]; then
         sudo apt update
@@ -35,14 +35,14 @@ if [[ ${#MISSING_PKGS[@]} -ne 0 ]]; then
         apt install -y "${MISSING_PKGS[@]}"
     fi
 else
-    echo "[*] All dependencies already installed"
+    echo "All dependencies already installed"
 fi
 
-echo "[*] Installing Tor Browser in USERSPACE"
+echo "Installing Tor Browser in USERSPACE"
 
 mkdir -p "$TMP" "$INSTALL_DIR" "$BIN_DIR" "$APPS_DIR"
 
-echo "[*] Determining latest Tor Browser version..."
+echo "Determining latest Tor Browser version..."
 
 VERSION="$(curl -fsSL https://dist.torproject.org/torbrowser/ \
     | grep -oP '(?<=href=")[0-9]+\.[0-9]+\.[0-9]+(?=/")' \
@@ -50,48 +50,48 @@ VERSION="$(curl -fsSL https://dist.torproject.org/torbrowser/ \
     | tail -n1 | tr -d '[:space:]')"
 
 if [[ -z "$VERSION" ]]; then
-    echo "[!] Failed to determine latest version"
+    echo "Failed to determine latest version"
     exit 1
 fi
 
-echo "[i] Latest version: $VERSION"
+echo "Latest version: $VERSION"
 
 BASE_URL="https://dist.torproject.org/torbrowser/${VERSION}"
 
 TAR="tor-browser-linux-x86_64-${VERSION}.tar.xz"
 SIG="${TAR}.asc"
 
-echo "[*] Checking remote file availability..."
+echo "Checking remote file availability..."
 
 if ! curl -fI "$BASE_URL/$TAR" >/dev/null 2>&1; then
-    echo "[!] Remote file not found: $BASE_URL/$TAR"
+    echo "Remote file not found: $BASE_URL/$TAR"
     exit 1
 fi
 
-echo "[*] Downloading Tor Browser..."
+echo "Downloading Tor Browser..."
 
 wget -O "$TMP/$TAR" "$BASE_URL/$TAR"
 wget -O "$TMP/$SIG" "$BASE_URL/$SIG"
 
-echo "[*] Importing signing key..."
+echo "Importing signing key..."
 
 gpg --auto-key-locate nodefault,wkd \
     --locate-keys torbrowser@torproject.org
 
-echo "[*] Verifying signature..."
+echo "Verifying signature..."
 
 gpg --verify "$TMP/$SIG" "$TMP/$TAR"
 
-echo "[+] Signature OK"
+echo "Signature OK"
 
-echo "[*] Installing to $INSTALL_DIR..."
+echo "Installing to $INSTALL_DIR..."
 
 rm -rf "$INSTALL_DIR"
 mkdir -p "$INSTALL_DIR"
 
 tar -xJf "$TMP/$TAR" -C "$INSTALL_DIR" --strip-components=1
 
-echo "[*] Creating launcher..."
+echo "Creating launcher..."
 
 cat > "$BIN_DIR/tor-browser" <<EOF
 #!/bin/sh
@@ -101,7 +101,7 @@ EOF
 
 chmod +x "$BIN_DIR/tor-browser"
 
-echo "[*] Creating desktop entry..."
+echo "Creating desktop entry..."
 
 cat > "$APPS_DIR/tor-browser.desktop" <<EOF
 [Desktop Entry]
@@ -114,19 +114,21 @@ StartupNotify=true
 Terminal=false
 EOF
 
-echo "[*] Refreshing desktop database..."
+echo "Refreshing desktop database..."
 
 if command -v update-desktop-database >/dev/null 2>&1; then
     update-desktop-database "$APPS_DIR" >/dev/null 2>&1 || true
 fi
 
-echo "[*] Cleaning up..."
+echo "Cleaning up..."
 rm -rf "$TMP"
 
 echo ""
 echo "==> Summary"
+
 echo ""
-echo "[SUCCESS] Tor Browser installed in userspace:"
-echo "          $INSTALL_DIR"
-echo "          Run: 'tor-browser'"
-echo "          Or open it from application menu"
+echo "Tor Browser installed in userspace:"
+echo "$INSTALL_DIR"
+echo "Run:"
+echo "  tor-browser"
+echo "Or open it from application menu"
