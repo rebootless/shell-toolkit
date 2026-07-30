@@ -1,5 +1,4 @@
 #!/bin/bash
-
 set -euo pipefail
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 export DEBIAN_FRONTEND=noninteractive
@@ -9,18 +8,15 @@ if [[ $EUID -ne 0 ]]; then
     exit 1
 fi
 
-echo "==> Installing wget"
-
-if command -v wget >/dev/null 2>&1; then
-    echo "wget is already installed, skipping..."
-    exit 0
-fi
+echo "==> Installing i3 window manager"
 
 echo "Updating package lists..."
 apt update -q
 
-echo "Installing wget..."
-apt install -y wget
+echo "Installing i3 window manager..."
+apt install -y \
+    i3-wm \
+    i3status
 
 echo ""
-echo "wget installed successfully."
+echo "i3 window manager installed successfully."
