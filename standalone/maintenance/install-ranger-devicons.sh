@@ -1,0 +1,63 @@
+#!/bin/bash
+
+set -euo pipefail
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
+if ! command -v ranger >/dev/null 2>&1; then
+    echo "ranger is not installed."
+    echo "Please install ranger first."
+    exit 1
+fi
+
+if ! command -v curl >/dev/null 2>&1; then
+    echo "curl is required."
+    exit 1
+fi
+
+if ! command -v tar >/dev/null 2>&1; then
+    echo "tar is required."
+    exit 1
+fi
+
+echo "==> Installing ranger_devicons"
+
+CONFIG_DIR="$HOME/.config/ranger"
+PLUGINS_DIR="$CONFIG_DIR/plugins"
+PLUGIN_DIR="$PLUGINS_DIR/ranger_devicons"
+RC_CONF="$CONFIG_DIR/rc.conf"
+
+TMP_DIR="$(mktemp -d)"
+trap 'rm -rf "$TMP_DIR"' EXIT
+
+mkdir -p "$PLUGINS_DIR"
+
+if [[ -d "$PLUGIN_DIR" ]]; then
+    echo "Updating ranger_devicons..."
+    rm -rf "$PLUGIN_DIR"
+else
+    echo "Installing ranger_devicons..."
+fi
+
+curl -fsSL \
+    https://github.com/alexanderjeurissen/ranger_devicons/archive/refs/heads/master.tar.gz \
+    | tar -xz -C "$TMP_DIR"
+
+mv \
+    "$TMP_DIR/ranger_devicons-master" \
+    "$PLUGIN_DIR"
+
+touch "$RC_CONF"
+
+if ! grep -qxF "default_linemode devicons" "$RC_CONF"; then
+    echo "default_linemode devicons" >> "$RC_CONF"
+fi
+
+echo ""
+echo "==> Summary"
+
+echo ""
+echo "ranger_devicons installed successfully."
+
+echo ""
+echo "to display icons correctly, install a Nerd Font:"
+echo "  https://www.nerdfonts.com/ (e.g. JetBrainsMono)"
