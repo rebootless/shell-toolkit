@@ -39,12 +39,17 @@ else
 fi
 
 curl -fsSL \
-    https://github.com/alexanderjeurissen/ranger_devicons/archive/refs/heads/master.tar.gz \
+    https://github.com/alexanderjeurissen/ranger_devicons/archive/refs/heads/main.tar.gz \
     | tar -xz -C "$TMP_DIR"
 
-mv \
-    "$TMP_DIR/ranger_devicons-master" \
-    "$PLUGIN_DIR"
+EXTRACTED_DIR="$(find "$TMP_DIR" -mindepth 1 -maxdepth 1 -type d | head -n1)"
+
+if [[ -z "$EXTRACTED_DIR" ]]; then
+    echo "Failed to extract ranger_devicons."
+    exit 1
+fi
+
+mv "$EXTRACTED_DIR" "$PLUGIN_DIR"
 
 touch "$RC_CONF"
 
