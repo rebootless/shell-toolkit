@@ -1,5 +1,4 @@
 #!/bin/bash
-
 set -euo pipefail
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 export DEBIAN_FRONTEND=noninteractive
@@ -9,18 +8,14 @@ if [[ $EUID -ne 0 ]]; then
     exit 1
 fi
 
-echo "==> Installing htop"
-
-if command -v htop >/dev/null 2>&1; then
-    echo "htop is already installed, skipping..."
-    exit 0
-fi
+echo "==> Installing polkit authentication agent"
 
 echo "Updating package lists..."
 apt update -q
 
-echo "Installing htop..."
-apt install -y htop
+echo "Installing polkit authentication agent..."
+apt install -y \
+    lxqt-policykit
 
 echo ""
-echo "htop installed successfully."
+echo "polkit authentication agent installed successfully."
