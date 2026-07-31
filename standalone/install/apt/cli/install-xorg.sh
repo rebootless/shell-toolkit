@@ -14,7 +14,13 @@ echo "Updating package lists..."
 apt update -q
 
 echo "Installing Xorg window system..."
+# kitty must be installed in the same apt transaction as xorg. The xorg
+# metapackage depends on <x-terminal-emulator> (an alternative dependency),
+# which apt resolves to gnome-terminal by default, pulling in gvfs and other
+# GNOME components. Including kitty here makes apt satisfy the alternative
+# with kitty instead, so gnome-terminal is never installed.
 apt install -y \
+    kitty \
     xorg \
     xinit \
     x11-xserver-utils
