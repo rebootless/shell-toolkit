@@ -7,12 +7,12 @@ if [[ $EUID -ne 0 ]]; then
     echo "Please log in as root and run this script."
     exit 1
 fi
-echo "==> Installing core shell environment"
+echo "==> Installing base shell environment"
 
 echo "Updating package lists..."
 apt update -q
 
-echo "Installing core shell environment..."
+echo "Installing base shell environment..."
 apt install -y \
     sudo \
     bash \
@@ -31,4 +31,4 @@ apt install -y \
     which
 
 echo ""
-echo "Core shell environment installed successfully."
+echo "Base shell environment installed successfully."
