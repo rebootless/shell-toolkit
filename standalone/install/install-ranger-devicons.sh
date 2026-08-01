@@ -25,6 +25,7 @@ CONFIG_DIR="$HOME/.config/ranger"
 PLUGINS_DIR="$CONFIG_DIR/plugins"
 PLUGIN_DIR="$PLUGINS_DIR/ranger_devicons"
 RC_CONF="$CONFIG_DIR/rc.conf"
+ETC_RC_CONF="/etc/ranger/rc.conf"
 
 TMP_DIR="$(mktemp -d)"
 trap 'rm -rf "$TMP_DIR"' EXIT
@@ -51,7 +52,17 @@ fi
 
 mv "$EXTRACTED_DIR" "$PLUGIN_DIR"
 
-touch "$RC_CONF"
+mkdir -p "$CONFIG_DIR"
+
+if [[ ! -f "$RC_CONF" ]]; then
+    if [[ -f "$ETC_RC_CONF" ]]; then
+        echo "No rc.conf found, copying default from $ETC_RC_CONF..."
+        cp "$ETC_RC_CONF" "$RC_CONF"
+    else
+        echo "No rc.conf found in $CONFIG_DIR or $ETC_RC_CONF, creating empty one..."
+        touch "$RC_CONF"
+    fi
+fi
 
 if ! grep -qxF "default_linemode devicons" "$RC_CONF"; then
     echo "default_linemode devicons" >> "$RC_CONF"
