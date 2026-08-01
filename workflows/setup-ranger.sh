@@ -7,6 +7,7 @@ INSTALL_DIR="$(cd "$SCRIPT_DIR/../standalone/install" && pwd)"
 
 run_script() {
     local script="$1"
+    local needs_root="${2:-false}"
 
     if [[ ! -f "$script" ]]; then
         echo "Missing $script"
@@ -14,13 +15,32 @@ run_script() {
     fi
 
     echo "Running $(basename "$script")"
-    bash "$script"
+
+    if [[ "$needs_root" == true ]]; then
+        if [[ $EUID -eq 0 ]]; then
+            bash "$script"
+        else
+            sudo bash "$script"
+        fi
+    else
+        # Must run as the real (non-root) user so $HOME resolves correctly,
+        # even if this script itself was invoked with sudo.
+        if [[ $EUID -eq 0 && -n "${SUDO_USER:-}" ]]; then
+            sudo -u "$SUDO_USER" -H bash "$script"
+        elif [[ $EUID -eq 0 ]]; then
+            echo "Running as root with no SUDO_USER set; cannot determine the target user's HOME." >&2
+            echo "Run this script as your normal user (it will sudo internally when needed)." >&2
+            return 1
+        else
+            bash "$script"
+        fi
+    fi
 }
 
 echo "Running ranger setup..."
 
-run_script "$INSTALL_DIR/apt/cli/install-ranger.sh"
-run_script "$INSTALL_DIR/install-nerd-fonts.sh"
-run_script "$INSTALL_DIR/install-ranger-devicons.sh"
+run_script "$INSTALL_DIR/apt/cli/install-ranger.sh" true
+run_script "$INSTALL_DIR/install-nerd-fonts.sh" true
+run_script "$INSTALL_DIR/install-ranger-devicons.sh" false
 
 echo "Done."
