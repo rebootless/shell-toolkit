@@ -23,7 +23,8 @@ apt install -y \
     smartmontools \
     nvme-cli \
     usbutils \
-    pciutils
+    pciutils \
+    udisks2
 
 echo ""
 echo "Disk and hardware utilities installed successfully."
