@@ -21,4 +21,4 @@ echo "Launch command:"
 echo "  flatpak run com.valvesoftware.Steam"
 
 echo "Installed apps:"
-flatpak list | grep steam || true
+flatpak list | grep Steam || true
