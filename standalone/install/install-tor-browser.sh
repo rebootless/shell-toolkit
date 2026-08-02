@@ -107,7 +107,7 @@ cat > "$APPS_DIR/tor-browser.desktop" <<EOF
 [Desktop Entry]
 Name=Tor Browser
 Exec=$BIN_DIR/tor-browser
-Icon=$INSTALL_DIR/Browser/browser/chrome/icons/default/default128.png
+Icon=tor
 Type=Application
 Categories=Network;WebBrowser;
 StartupNotify=true
