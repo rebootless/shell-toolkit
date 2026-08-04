@@ -40,6 +40,11 @@ apt install -y \
 echo "Enabling and starting libvirtd..."
 systemctl enable --now libvirtd
 
+echo "Enabling and starting the default libvirt network..."
+virsh net-autostart default >/dev/null 2>&1 || true
+virsh net-start default >/dev/null 2>&1 || true
+virsh net-list
+
 echo ""
 echo "QEMU/KVM virtualization stack installed successfully."
 
