@@ -1,4 +1,5 @@
 #!/bin/bash
+
 set -euo pipefail
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 export DEBIAN_FRONTEND=noninteractive
@@ -8,22 +9,19 @@ if [[ $EUID -ne 0 ]]; then
     exit 1
 fi
 
-echo "==> Installing networking tools"
+echo "==> Installing Qt/GTK theming integration tools"
 
 echo "Updating package lists..."
 apt update -q
 
-echo "Installing networking tools..."
+echo "Installing Qt/GTK theming integration tools..."
 apt install -y \
-    openssh-client \
-    network-manager \
-    iproute2 \
-    iputils-ping \
-    dnsutils \
-    net-tools \
-    traceroute \
-    tcpdump \
-    nmap
+    qt5ct \
+    qt6ct \
+    nwg-look \
+    adwaita-qt \
+    adwaita-qt6 \
+    kde-style-breeze
 
 echo ""
-echo "Networking tools installed successfully."
+echo "Qt/GTK theming integration tools installed successfully."

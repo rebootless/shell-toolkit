@@ -1,4 +1,5 @@
 #!/bin/bash
+
 set -euo pipefail
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 export DEBIAN_FRONTEND=noninteractive
@@ -8,24 +9,25 @@ if [[ $EUID -ne 0 ]]; then
     exit 1
 fi
 
-echo "==> Installing disk and hardware utilities"
+echo "==> Installing disk, filesystem, and removable media tools"
 
 echo "Updating package lists..."
 apt update -q
 
-echo "Installing disk and hardware utilities..."
+echo "Installing disk, filesystem, and removable media tools..."
 apt install -y \
-    parted \
+    udisks2 \
+    gvfs \
+    gvfs-backends \
+    gvfs-fuse \
+    gnome-disk-utility \
     e2fsprogs \
+    btrfs-progs \
+    xfsprogs \
     dosfstools \
     ntfs-3g \
-    exfatprogs \
     smartmontools \
-    nvme-cli \
-    usbutils \
-    pciutils \
-    udisks2 \
-    hdparm
+    nvme-cli
 
 echo ""
-echo "Disk and hardware utilities installed successfully."
+echo "Disk, filesystem, and removable media tools installed successfully."
