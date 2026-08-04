@@ -25,7 +25,9 @@ apt install -y \
     xdg-desktop-portal-gtk \
     fuse3 \
     libfuse2t64 \
-    libnss3
+    libnss3 \
+    qt6-wayland \
+    qtwayland5
 
 echo ""
 echo "Wayland/Sway core environment installed successfully."
