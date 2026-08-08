@@ -30,8 +30,7 @@ run_root_scripts "$CLI_DIR" \
     install-cpp.sh \
     install-python.sh \
     install-php.sh \
-    install-npm.sh \
-    install-docker.sh
+    install-npm.sh
 
 echo "Running LSP installation scripts..."
 run_user_scripts "$LSP_DIR" \
