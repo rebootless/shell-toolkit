@@ -37,5 +37,7 @@ run_user_scripts "$LSP_DIR" \
     install-bash-language-server.sh \
     install-markdown-language-server.sh \
     install-python-language-server.sh
+run_root_scripts "$LSP_DIR" \
+    install-clang-language-server.sh
 
 echo "Done."
