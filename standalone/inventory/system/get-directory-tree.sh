@@ -24,7 +24,7 @@ if [[ ${#missing[@]} -gt 0 ]]; then
 fi
 
 if [[ $EUID -ne 0 ]]; then
-    echo -e "${YELLOW}Warning: Running as non-root. Some directories might be unreadable.${NC}\n"
+    echo -e "${YELLOW}Warning: Running as non-root. Some directories might be unreadable.${NC}"
 fi
 
 printf "\n${YELLOW}DIRECTORY STRUCTURE:${NC}\n\n"

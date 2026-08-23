@@ -59,7 +59,7 @@ printf "%-15s : " "Public IPv6"
 [[ "$pub_ipv6" != "Unavailable" ]] && printf "%b (%s)\n" "${GREEN}OK${NC}" "$pub_ipv6" || printf "%b\n" "${RED}FAIL${NC}"
 
 if [[ "$gw_status" == "OK" && "$dns_status" == "OK" && "$int_status" == "OK" ]]; then
-    echo -e "\n${GREEN}Overall Status: PASSED OK${NC}\n"
+    echo -e "\n${GREEN}Overall Status: PASSED OK${NC}"
 else
-    echo -e "\n${RED}Overall Status: ISSUES DETECTED FAIL${NC}\n"
+    echo -e "\n${RED}Overall Status: ISSUES DETECTED FAIL${NC}"
 fi

@@ -14,12 +14,12 @@ fi
 trap 'echo -e "\n${RED}Script interrupted${NC}"; exit 130' INT TERM
 
 if ! command -v nginx >/dev/null 2>&1; then
-    echo -e "\n${YELLOW}Nginx is not installed on this system.${NC}\n"
+    echo -e "\n${YELLOW}Nginx is not installed on this system.${NC}"
     exit 0
 fi
 
 if [[ $EUID -ne 0 ]]; then
-    echo -e "${YELLOW}Warning: Running as non-root. Config test (nginx -t) might fail due to permissions.${NC}\n"
+    echo -e "${YELLOW}Warning: Running as non-root. Config test (nginx -t) might fail due to permissions.${NC}"
 fi
 
 printf "\n${YELLOW}NGINX INFORMATION:${NC}\n\n"

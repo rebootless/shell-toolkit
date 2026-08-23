@@ -14,13 +14,13 @@ fi
 trap 'echo -e "\n${RED}Script interrupted${NC}"; exit 130' INT TERM
 
 if ! command -v docker >/dev/null 2>&1; then
-    echo -e "\n${YELLOW}Docker is not installed on this system.${NC}\n"
+    echo -e "\n${YELLOW}Docker is not installed on this system.${NC}"
     exit 0
 fi
 
 # Test Docker daemon access
 if ! docker info >/dev/null 2>&1; then
-    echo -e "\n${RED}Error: Cannot connect to the Docker daemon. Run as root or add user to 'docker' group.${NC}\n"
+    echo -e "\n${RED}Error: Cannot connect to the Docker daemon. Run as root or add user to 'docker' group.${NC}"
     exit 1
 fi
 

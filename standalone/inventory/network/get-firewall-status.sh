@@ -15,7 +15,7 @@ fi
 trap 'echo -e "\n${RED}Script interrupted${NC}"; exit 130' INT TERM
 
 if [[ $EUID -ne 0 ]]; then
-    echo -e "${YELLOW}Warning: Non-root mode. Firewall checks may fail or return incomplete info.${NC}\n"
+    echo -e "${YELLOW}Warning: Non-root mode. Firewall checks may fail or return incomplete info.${NC}"
 fi
 
 printf "\n${YELLOW}FIREWALL STATUS:${NC}\n"

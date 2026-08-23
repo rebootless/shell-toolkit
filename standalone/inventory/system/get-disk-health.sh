@@ -24,7 +24,7 @@ if [[ ${#missing[@]} -gt 0 ]]; then
 fi
 
 if [[ $EUID -ne 0 ]]; then
-    echo -e "${YELLOW}Warning: Running as non-root. smartctl may return no data.${NC}\n"
+    echo -e "${YELLOW}Warning: Running as non-root. smartctl may return no data.${NC}"
 fi
 
 printf "\n${YELLOW}DISK HEALTH (SMART):${NC}\n\n"

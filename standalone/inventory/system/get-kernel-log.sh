@@ -14,7 +14,7 @@ fi
 trap 'echo -e "\n${RED}Script interrupted${NC}"; exit 130' INT TERM
 
 if [[ $EUID -ne 0 ]]; then
-    echo -e "${YELLOW}Warning: Running as non-root. dmesg output may be restricted.${NC}\n"
+    echo -e "${YELLOW}Warning: Running as non-root. dmesg output may be restricted.${NC}"
 fi
 
 printf "\n${YELLOW}KERNEL LOG (dmesg, last 20 lines):${NC}\n\n"
