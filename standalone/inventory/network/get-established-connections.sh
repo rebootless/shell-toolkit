@@ -23,7 +23,7 @@ if [[ ${#missing[@]} -gt 0 ]]; then
 fi
 
 if [[ $EUID -ne 0 ]]; then
-    echo -e "${YELLOW}Warning: Running as non-root. Process information will be limited.${NC}\n"
+    echo -e "${YELLOW}Warning: Running as non-root. Process information will be limited.${NC}"
 fi
 
 printf "\n${YELLOW}ESTABLISHED CONNECTIONS:${NC}\n"

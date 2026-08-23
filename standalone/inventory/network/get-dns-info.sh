@@ -27,13 +27,13 @@ printf "\n${YELLOW}DNS CONFIGURATION:${NC}\n"
 
 resolved_used=0
 if command -v resolvectl >/dev/null 2>&1; then
-    echo -e "${GREEN}Using systemd-resolved (resolvectl):${NC}\n"
+    echo -e "${GREEN}Using systemd-resolved (resolvectl):${NC}"
     resolvectl status 2>/dev/null || echo "Failed to get resolvectl status."
     resolved_used=1
 fi
 
 if [[ $resolved_used -eq 0 || -L /etc/resolv.conf ]]; then
-    echo -e "\n${GREEN}Contents of /etc/resolv.conf:${NC}\n"
+    echo -e "\n${GREEN}Contents of /etc/resolv.conf:${NC}"
     if [[ -f /etc/resolv.conf ]]; then
         grep -v '^#' /etc/resolv.conf || echo "No active entries in /etc/resolv.conf"
     else

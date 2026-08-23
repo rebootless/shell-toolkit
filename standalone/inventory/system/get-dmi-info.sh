@@ -14,7 +14,7 @@ fi
 trap 'echo -e "\n${RED}Script interrupted${NC}"; exit 130' INT TERM
 
 if [[ $EUID -ne 0 ]]; then
-    echo -e "${YELLOW}Warning: Running as non-root. dmidecode may return no data.${NC}\n"
+    echo -e "${YELLOW}Warning: Running as non-root. dmidecode may return no data.${NC}"
 fi
 
 printf "\n${YELLOW}DMI / SYSTEM HARDWARE INFO:${NC}\n\n"
