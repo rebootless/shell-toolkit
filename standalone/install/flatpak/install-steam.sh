@@ -13,7 +13,7 @@ fi
 
 echo "Installing Steam via Flatpak..."
 
-flatpak install -y --user flathub com.valvesoftware.Steam
+flatpak install -y flathub com.valvesoftware.Steam
 
 echo "Steam installed"
 

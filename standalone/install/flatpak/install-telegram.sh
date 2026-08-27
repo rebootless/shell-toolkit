@@ -13,7 +13,7 @@ fi
 
 echo "Installing Telegram via Flatpak..."
 
-flatpak install -y --user flathub org.telegram.desktop
+flatpak install -y flathub org.telegram.desktop
 
 echo "Telegram installed"
 
