@@ -28,8 +28,8 @@ fi
 
 printf "\n${YELLOW}LISTENING PORTS (TCP/UDP):${NC}\n"
 
-printf "%-8s %-25s %-8s %s\n" "Proto" "Local Address" "Port" "Process"
-echo "----------------------------------------------------------------------"
+printf "%-8s %-25s %-8s %s\n" "Protocol" "Local Address" "Port" "Process"
+echo "------------------------------------------------------------------------"
 
 ss -Htnulp state listening 2>/dev/null | awk '
 {

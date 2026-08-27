@@ -8,7 +8,7 @@ usage() {
 }
 
 if [[ $EUID -ne 0 ]]; then
-    echo "Please run this script with sudo or as root."
+    echo "Please log in as root and run this script."
     exit 1
 fi
 
