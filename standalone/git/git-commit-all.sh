@@ -1,0 +1,112 @@
+#!/bin/bash
+
+set -euo pipefail
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
+usage() {
+    cat <<EOF
+Usage: $0 <github-username-or-url> [--path <dir>]
+
+Arguments:
+  <github-username-or-url>  Bare GitHub username or a github.com/<user> URL
+
+Options:
+  --path <dir>              Directory containing Git repositories (default: ./<username>)
+  -h, --help                Show this help message and exit
+EOF
+}
+
+INPUT=""
+DEST=""
+
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        -h|--help)
+            usage
+            exit 0
+            ;;
+        --path)
+            if [[ $# -lt 2 ]]; then
+                echo "Error: --path requires an argument" >&2
+                exit 1
+            fi
+            DEST="$2"
+            shift 2
+            ;;
+        *)
+            if [[ -n "$INPUT" ]]; then
+                echo "Error: unexpected argument: $1" >&2
+                usage
+                exit 1
+            fi
+            INPUT="$1"
+            shift
+            ;;
+    esac
+done
+
+if [[ -z "$INPUT" ]]; then
+    usage
+    exit 1
+fi
+
+if ! command -v nano >/dev/null 2>&1; then
+    echo "Error: nano is not installed. Install it and re-run this script." >&2
+    exit 1
+fi
+
+# Extract username from URL or use as-is
+USER=$(echo "$INPUT" | sed -E 's#https?://github\.com/##; s#/$##')
+
+if [[ -z "$DEST" ]]; then
+    DEST="./$USER"
+fi
+
+if [[ ! -d "$DEST" ]]; then
+    echo "Error: directory does not exist: $DEST" >&2
+    exit 1
+fi
+
+cd "$DEST"
+
+export GIT_EDITOR="${GIT_EDITOR:-nano}"
+
+mapfile -t REPOS < <(
+    find . -mindepth 1 -maxdepth 1 -type d -print | sort
+)
+
+TOTAL=${#REPOS[@]}
+
+if [[ "$TOTAL" -eq 0 ]]; then
+    echo "No directories found in: $(pwd)"
+    exit 0
+fi
+
+echo "$TOTAL directories found in: $(pwd)"
+
+counter=0
+
+for repo in "${REPOS[@]}"; do
+    name="${repo#./}"
+    counter=$((counter + 1))
+
+    if ! git -C "$repo" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+        echo "[$counter/$TOTAL] Skipping non-Git directory: $name"
+        continue
+    fi
+
+    if [[ -z "$(git -C "$repo" status --porcelain)" ]]; then
+        echo "[$counter/$TOTAL] Skipping unchanged repository: $name"
+        continue
+    fi
+
+    echo "[$counter/$TOTAL] Committing: $name"
+
+    git -C "$repo" add .
+
+    if ! git -C "$repo" commit; then
+        echo "[$counter/$TOTAL] Failed: $name" >&2
+    fi
+done
+
+echo "Done. Repositories committed in: $(pwd)"
