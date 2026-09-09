@@ -31,7 +31,7 @@ SWAP_FILE="/swapfile"
 usage() {
     echo "Usage: $0 --size <size> [--dry-run] [--yes]"
     echo ""
-    echo "  --size <size>   Swap file size, e.g. 4G, 8192M, 2T, 4GB, 4GiB (required)"
+    echo "  --size <size>   Swap file size, e.g. 4G, 8192M, 2T, 4GB, 4GiB"
     echo "  --dry-run       Show what would be done, without making any changes"
     echo "  --yes           Skip the confirmation prompt"
     echo "  -h, --help      Show this help message"
