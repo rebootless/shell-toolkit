@@ -4,7 +4,7 @@
 # summary: Install network and Bluetooth management tools.
 # description: |
 #   Installs `network-manager`, `network-manager-gnome`, `blueman`, `bluez`,
-#   `bluez-tools`, `firewalld`, `firewall-config`.
+#   `bluez-tools`, `firewalld`, `firewall-config`, `ethtool`.
 # sudo: true
 # interactive: false
 # idempotent: true
@@ -33,7 +33,8 @@ apt install -y \
     bluez \
     bluez-tools \
     firewalld \
-    firewall-config
+    firewall-config \
+    ethtool
 
 echo ""
 echo "Network and Bluetooth tools installed successfully."
