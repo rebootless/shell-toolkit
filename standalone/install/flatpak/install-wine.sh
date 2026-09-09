@@ -108,13 +108,6 @@ echo "  winecmd"
 echo "  winetricks"
 
 echo ""
-echo "Examples:"
-echo "  wine game.exe"
-echo "  winecfg"
-echo "  winecmd"
-echo "  winetricks corefonts"
-
-echo ""
 echo "Apply aliases to the current shell:"
 echo "  source ~/.bashrc"
 
