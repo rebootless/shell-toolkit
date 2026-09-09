@@ -22,7 +22,8 @@ apt install -y \
     bluez \
     bluez-tools \
     firewalld \
-    firewall-config
+    firewall-config \
+    ethtool
 
 echo ""
 echo "Network and Bluetooth tools installed successfully."
