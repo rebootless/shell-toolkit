@@ -1,0 +1,82 @@
+name: check-and-sync
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "**/*.sh"
+      - "generate-docs.py"
+      - ".github/workflows/check-and-sync.yml"
+  pull_request:
+    paths:
+      - "**/*.sh"
+      - "generate-docs.py"
+      - ".github/workflows/check-and-sync.yml"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: repository-writes
+  cancel-in-progress: false
+
+jobs:
+  check-and-sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check Bash syntax
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          failed=0
+
+          while IFS= read -r -d '' file; do
+            echo "Checking: $file"
+            if ! bash -n "$file"; then
+              failed=1
+            fi
+          done < <(find . -type f -name "*.sh" -print0)
+
+          exit "$failed"
+
+      - name: Set executable bit
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          find . -type f -name "*.sh" -exec chmod +x {} +
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Generate docs/index.html
+        run: python3 generate-docs.py --strict
+
+      - name: Commit changes
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add .
+
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+
+          git commit -m "chore: restore executable bits and regenerate docs [skip ci]"
+
+          git pull --rebase origin main
+          git push origin HEAD:main
