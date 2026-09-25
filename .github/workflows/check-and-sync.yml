@@ -1,11 +1,15 @@
-name: chmod-add
+name: check-and-sync
 
 on:
   push:
     branches: [main]
     paths:
       - "**/*.sh"
-      - ".github/workflows/chmod.yml"
+      - ".github/workflows/check-and-sync.yml"
+  pull_request:
+    paths:
+      - "**/*.sh"
+      - ".github/workflows/check-and-sync.yml"
   workflow_dispatch: {}
 
 permissions:
@@ -16,13 +20,29 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  chmod-add:
+  check-and-sync:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
+      - name: Check Bash syntax
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          failed=0
+
+          while IFS= read -r -d '' file; do
+            echo "Checking: $file"
+            if ! bash -n "$file"; then
+              failed=1
+            fi
+          done < <(find . -type f -name "*.sh" -print0)
+
+          exit "$failed"
 
       - name: Set executable bit
         shell: bash
@@ -31,7 +51,10 @@ jobs:
 
           find . -type f -name "*.sh" -exec chmod +x {} +
 
+
+
       - name: Commit changes
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         shell: bash
         run: |
           set -euo pipefail
@@ -42,11 +65,11 @@ jobs:
           git add .
 
           if git diff --cached --quiet; then
-            echo "No permission changes."
+            echo "No changes to commit."
             exit 0
           fi
 
-          git commit -m "chore: restore executable bit [skip ci]"
+          git commit -m "chore: restore executable bits [skip ci]"
 
           git pull --rebase origin main
           git push origin HEAD:main
