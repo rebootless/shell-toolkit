@@ -32,7 +32,7 @@ scripts and re-run <code>generate-docs.py</code> instead.</p>
 <table>
 <thead><tr><th>Directory</th><th>Scripts</th></tr></thead>
 <tbody>
-<tr><td class='dir-tag'>chmod</td><td>4</td></tr><tr><td class='dir-tag'>cleanup</td><td>14</td></tr><tr><td class='dir-tag'>docker</td><td>2</td></tr><tr><td class='dir-tag'>ffmpeg</td><td>1</td></tr><tr><td class='dir-tag'>firewalld</td><td>7</td></tr><tr><td class='dir-tag'>flatpak</td><td>6</td></tr><tr><td class='dir-tag'>git</td><td>7</td></tr><tr><td class='dir-tag'>group-management</td><td>8</td></tr><tr><td class='dir-tag'>install</td><td>20</td></tr><tr><td class='dir-tag'>inventory/network</td><td>16</td></tr><tr><td class='dir-tag'>inventory/system</td><td>23</td></tr><tr><td class='dir-tag'>lsp</td><td>4</td></tr><tr><td class='dir-tag'>maintenance</td><td>5</td></tr><tr><td class='dir-tag'>packages</td><td>5</td></tr><tr><td class='dir-tag'>pipx</td><td>7</td></tr><tr><td class='dir-tag'>sources</td><td>4</td></tr><tr><td class='dir-tag'>update</td><td>2</td></tr><tr><td class='dir-tag'>workflows</td><td>11</td></tr><tr><td class='dir-tag'>yt-dlp</td><td>4</td></tr>
+<tr><td class='dir-tag'>chmod</td><td>4</td></tr><tr><td class='dir-tag'>cleanup</td><td>14</td></tr><tr><td class='dir-tag'>docker</td><td>2</td></tr><tr><td class='dir-tag'>ffmpeg</td><td>1</td></tr><tr><td class='dir-tag'>firewalld</td><td>7</td></tr><tr><td class='dir-tag'>flatpak</td><td>6</td></tr><tr><td class='dir-tag'>git</td><td>7</td></tr><tr><td class='dir-tag'>group-management</td><td>8</td></tr><tr><td class='dir-tag'>info-network</td><td>16</td></tr><tr><td class='dir-tag'>info-system</td><td>23</td></tr><tr><td class='dir-tag'>install</td><td>20</td></tr><tr><td class='dir-tag'>lsp</td><td>4</td></tr><tr><td class='dir-tag'>maintenance</td><td>5</td></tr><tr><td class='dir-tag'>packages</td><td>5</td></tr><tr><td class='dir-tag'>pipx</td><td>7</td></tr><tr><td class='dir-tag'>sources</td><td>4</td></tr><tr><td class='dir-tag'>update</td><td>2</td></tr><tr><td class='dir-tag'>workflows</td><td>11</td></tr><tr><td class='dir-tag'>yt-dlp</td><td>4</td></tr>
 </tbody>
 </table>
 
@@ -106,6 +106,47 @@ scripts and re-run <code>generate-docs.py</code> instead.</p>
 │   ├── revoke-libvirt.sh
 │   ├── revoke-sudo.sh
 │   └── revoke-vboxusers.sh
+├── info-network/
+│   ├── get-bandwidth-summary.sh
+│   ├── get-connectivity.sh
+│   ├── get-dns-info.sh
+│   ├── get-established-connections.sh
+│   ├── get-firewall-status.sh
+│   ├── get-interface-statistics.sh
+│   ├── get-listening-ports.sh
+│   ├── get-neighbors.sh
+│   ├── get-network-interfaces.sh
+│   ├── get-network-services.sh
+│   ├── get-network-statistics.sh
+│   ├── get-network-summary.sh
+│   ├── get-public-ip.sh
+│   ├── get-routing.sh
+│   ├── get-vpn-status.sh
+│   └── get-wifi-status.sh
+├── info-system/
+│   ├── get-cpu-info.sh
+│   ├── get-directory-tree.sh
+│   ├── get-disk-health.sh
+│   ├── get-dmi-info.sh
+│   ├── get-docker-info.sh
+│   ├── get-gpu-info.sh
+│   ├── get-host-info.sh
+│   ├── get-installed-packages.sh
+│   ├── get-journal-errors.sh
+│   ├── get-kernel-log.sh
+│   ├── get-kernel-parameters.sh
+│   ├── get-local-users.sh
+│   ├── get-logged-in-users.sh
+│   ├── get-memory-info.sh
+│   ├── get-nginx-info.sh
+│   ├── get-pci-devices.sh
+│   ├── get-services-info.sh
+│   ├── get-ssl-cert-expiry.sh
+│   ├── get-storage-info.sh
+│   ├── get-systemd-timers.sh
+│   ├── get-top-processes.sh
+│   ├── get-usb-devices.sh
+│   └── get-user-crontab.sh
 ├── install/
 │   ├── install-cpp.sh
 │   ├── install-firefox.sh
@@ -127,48 +168,6 @@ scripts and re-run <code>generate-docs.py</code> instead.</p>
 │   ├── install-vhs.sh
 │   ├── install-virtualbox.sh
 │   └── install-zafiro-icons.sh
-├── inventory/
-│   ├── network/
-│   │   ├── get-bandwidth-summary.sh
-│   │   ├── get-connectivity.sh
-│   │   ├── get-dns-info.sh
-│   │   ├── get-established-connections.sh
-│   │   ├── get-firewall-status.sh
-│   │   ├── get-interface-statistics.sh
-│   │   ├── get-listening-ports.sh
-│   │   ├── get-neighbors.sh
-│   │   ├── get-network-interfaces.sh
-│   │   ├── get-network-services.sh
-│   │   ├── get-network-statistics.sh
-│   │   ├── get-network-summary.sh
-│   │   ├── get-public-ip.sh
-│   │   ├── get-routing.sh
-│   │   ├── get-vpn-status.sh
-│   │   └── get-wifi-status.sh
-│   └── system/
-│       ├── get-cpu-info.sh
-│       ├── get-directory-tree.sh
-│       ├── get-disk-health.sh
-│       ├── get-dmi-info.sh
-│       ├── get-docker-info.sh
-│       ├── get-gpu-info.sh
-│       ├── get-host-info.sh
-│       ├── get-installed-packages.sh
-│       ├── get-journal-errors.sh
-│       ├── get-kernel-log.sh
-│       ├── get-kernel-parameters.sh
-│       ├── get-local-users.sh
-│       ├── get-logged-in-users.sh
-│       ├── get-memory-info.sh
-│       ├── get-nginx-info.sh
-│       ├── get-pci-devices.sh
-│       ├── get-services-info.sh
-│       ├── get-ssl-cert-expiry.sh
-│       ├── get-storage-info.sh
-│       ├── get-systemd-timers.sh
-│       ├── get-top-processes.sh
-│       ├── get-usb-devices.sh
-│       └── get-user-crontab.sh
 ├── lsp/
 │   ├── lsp-install-bash-language-server.sh
 │   ├── lsp-install-clang-language-server.sh
@@ -281,6 +280,45 @@ scripts and re-run <code>generate-docs.py</code> instead.</p>
 <tr data-search="group-management revoke-libvirt.sh remove an existing user from the libvirt group." data-sudo="1" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="group-management">group-management</td><td data-value="revoke-libvirt.sh"><a href="#script-group-management-revoke-libvirt-sh"><code>revoke-libvirt.sh</code></a></td><td data-value="remove an existing user from the libvirt group.">Remove an existing user from the libvirt group.</td><td class="badge" data-value="1">✅</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
 <tr data-search="group-management revoke-sudo.sh remove an existing user from the sudo group." data-sudo="1" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="group-management">group-management</td><td data-value="revoke-sudo.sh"><a href="#script-group-management-revoke-sudo-sh"><code>revoke-sudo.sh</code></a></td><td data-value="remove an existing user from the sudo group.">Remove an existing user from the sudo group.</td><td class="badge" data-value="1">✅</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
 <tr data-search="group-management revoke-vboxusers.sh remove an existing user from the vboxusers group." data-sudo="1" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="group-management">group-management</td><td data-value="revoke-vboxusers.sh"><a href="#script-group-management-revoke-vboxusers-sh"><code>revoke-vboxusers.sh</code></a></td><td data-value="remove an existing user from the vboxusers group.">Remove an existing user from the vboxusers group.</td><td class="badge" data-value="1">✅</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
+<tr data-search="info-network get-bandwidth-summary.sh per-interface link speed, duplex, carrier state, and mtu." data-sudo="0" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="info-network">info-network</td><td data-value="get-bandwidth-summary.sh"><a href="#script-info-network-get-bandwidth-summary-sh"><code>get-bandwidth-summary.sh</code></a></td><td data-value="per-interface link speed, duplex, carrier state, and mtu.">Per-interface link speed, duplex, carrier state, and MTU.</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
+<tr data-search="info-network get-connectivity.sh same checks as network-summary.sh plus dns query time and ipv6 internet reachability." data-sudo="0" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="info-network">info-network</td><td data-value="get-connectivity.sh"><a href="#script-info-network-get-connectivity-sh"><code>get-connectivity.sh</code></a></td><td data-value="same checks as network-summary.sh plus dns query time and ipv6 internet reachability.">Same checks as network-summary.sh plus DNS query time and IPv6 internet reachability.</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
+<tr data-search="info-network get-dns-info.sh resolvectl status or /etc/resolv.conf, active nameservers, and search domains." data-sudo="0" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="info-network">info-network</td><td data-value="get-dns-info.sh"><a href="#script-info-network-get-dns-info-sh"><code>get-dns-info.sh</code></a></td><td data-value="resolvectl status or /etc/resolv.conf, active nameservers, and search domains.">resolvectl status or /etc/resolv.conf, active nameservers, and search domains.</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
+<tr data-search="info-network get-established-connections.sh established tcp connections with local/remote endpoints and owning process." data-sudo="1" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="info-network">info-network</td><td data-value="get-established-connections.sh"><a href="#script-info-network-get-established-connections-sh"><code>get-established-connections.sh</code></a></td><td data-value="established tcp connections with local/remote endpoints and owning process.">Established TCP connections with local/remote endpoints and owning process.</td><td class="badge" data-value="1">✅</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
+<tr data-search="info-network get-firewall-status.sh status across ufw, firewalld, nftables, and iptables — whichever are installed." data-sudo="1" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="info-network">info-network</td><td data-value="get-firewall-status.sh"><a href="#script-info-network-get-firewall-status-sh"><code>get-firewall-status.sh</code></a></td><td data-value="status across ufw, firewalld, nftables, and iptables — whichever are installed.">Status across UFW, Firewalld, nftables, and iptables — whichever are installed.</td><td class="badge" data-value="1">✅</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
+<tr data-search="info-network get-interface-statistics.sh per-interface rx/tx bytes, packets, errors, drops, and collisions." data-sudo="0" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="info-network">info-network</td><td data-value="get-interface-statistics.sh"><a href="#script-info-network-get-interface-statistics-sh"><code>get-interface-statistics.sh</code></a></td><td data-value="per-interface rx/tx bytes, packets, errors, drops, and collisions.">Per-interface RX/TX bytes, packets, errors, drops, and collisions.</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
+<tr data-search="info-network get-listening-ports.sh listening tcp/udp ports with the owning process, via ss." data-sudo="1" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="info-network">info-network</td><td data-value="get-listening-ports.sh"><a href="#script-info-network-get-listening-ports-sh"><code>get-listening-ports.sh</code></a></td><td data-value="listening tcp/udp ports with the owning process, via ss.">Listening TCP/UDP ports with the owning process, via ss.</td><td class="badge" data-value="1">✅</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
+<tr data-search="info-network get-neighbors.sh arp table (ipv4) and neighbor cache (ipv6)." data-sudo="0" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="info-network">info-network</td><td data-value="get-neighbors.sh"><a href="#script-info-network-get-neighbors-sh"><code>get-neighbors.sh</code></a></td><td data-value="arp table (ipv4) and neighbor cache (ipv6).">ARP table (IPv4) and neighbor cache (IPv6).</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
+<tr data-search="info-network get-network-interfaces.sh per-interface state, mac, mtu, driver, speed, and ipv4/ipv6 addresses." data-sudo="0" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="info-network">info-network</td><td data-value="get-network-interfaces.sh"><a href="#script-info-network-get-network-interfaces-sh"><code>get-network-interfaces.sh</code></a></td><td data-value="per-interface state, mac, mtu, driver, speed, and ipv4/ipv6 addresses.">Per-interface state, MAC, MTU, driver, speed, and IPv4/IPv6 addresses.</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
+<tr data-search="info-network get-network-services.sh active state of networkmanager, systemd-networkd/-resolved, dhcpcd, wpa_supplicant, iwd." data-sudo="0" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="info-network">info-network</td><td data-value="get-network-services.sh"><a href="#script-info-network-get-network-services-sh"><code>get-network-services.sh</code></a></td><td data-value="active state of networkmanager, systemd-networkd/-resolved, dhcpcd, wpa_supplicant, iwd.">Active state of NetworkManager, systemd-networkd/-resolved, dhcpcd, wpa_supplicant, iwd.</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
+<tr data-search="info-network get-network-statistics.sh tcp congestion control algorithm, ipv4/ipv6 forwarding, and bbr status via sysctl." data-sudo="0" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="info-network">info-network</td><td data-value="get-network-statistics.sh"><a href="#script-info-network-get-network-statistics-sh"><code>get-network-statistics.sh</code></a></td><td data-value="tcp congestion control algorithm, ipv4/ipv6 forwarding, and bbr status via sysctl.">TCP congestion control algorithm, IPv4/IPv6 forwarding, and BBR status via sysctl.</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
+<tr data-search="info-network get-network-summary.sh one-shot pass/fail overview: gateway, dns, internet, public ipv4/ipv6." data-sudo="0" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="info-network">info-network</td><td data-value="get-network-summary.sh"><a href="#script-info-network-get-network-summary-sh"><code>get-network-summary.sh</code></a></td><td data-value="one-shot pass/fail overview: gateway, dns, internet, public ipv4/ipv6.">One-shot pass/fail overview: gateway, DNS, internet, public IPv4/IPv6.</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
+<tr data-search="info-network get-public-ip.sh public ipv4/ipv6 via ipify, falling back to ifconfig.me/ifconfig.co." data-sudo="0" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="info-network">info-network</td><td data-value="get-public-ip.sh"><a href="#script-info-network-get-public-ip-sh"><code>get-public-ip.sh</code></a></td><td data-value="public ipv4/ipv6 via ipify, falling back to ifconfig.me/ifconfig.co.">Public IPv4/IPv6 via ipify, falling back to ifconfig.me/ifconfig.co.</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
+<tr data-search="info-network get-routing.sh ipv4/ipv6 routing tables and the default gateway/interface." data-sudo="0" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="info-network">info-network</td><td data-value="get-routing.sh"><a href="#script-info-network-get-routing-sh"><code>get-routing.sh</code></a></td><td data-value="ipv4/ipv6 routing tables and the default gateway/interface.">IPv4/IPv6 routing tables and the default gateway/interface.</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
+<tr data-search="info-network get-vpn-status.sh wireguard/tun/tap interfaces, tailscale status, and zerotier status." data-sudo="0" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="info-network">info-network</td><td data-value="get-vpn-status.sh"><a href="#script-info-network-get-vpn-status-sh"><code>get-vpn-status.sh</code></a></td><td data-value="wireguard/tun/tap interfaces, tailscale status, and zerotier status.">WireGuard/TUN/TAP interfaces, Tailscale status, and ZeroTier status.</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
+<tr data-search="info-network get-wifi-status.sh ssid, signal, bitrate, and frequency for wireless interfaces via iw or nmcli." data-sudo="0" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="info-network">info-network</td><td data-value="get-wifi-status.sh"><a href="#script-info-network-get-wifi-status-sh"><code>get-wifi-status.sh</code></a></td><td data-value="ssid, signal, bitrate, and frequency for wireless interfaces via iw or nmcli.">SSID, signal, bitrate, and frequency for wireless interfaces via iw or nmcli.</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
+<tr data-search="info-system get-cpu-info.sh cpu architecture, model, core, and thread information." data-sudo="0" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="info-system">info-system</td><td data-value="get-cpu-info.sh"><a href="#script-info-system-get-cpu-info-sh"><code>get-cpu-info.sh</code></a></td><td data-value="cpu architecture, model, core, and thread information.">CPU architecture, model, core, and thread information.</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
+<tr data-search="info-system get-directory-tree.sh displays structural hierarchy of common server directories." data-sudo="1" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="info-system">info-system</td><td data-value="get-directory-tree.sh"><a href="#script-info-system-get-directory-tree-sh"><code>get-directory-tree.sh</code></a></td><td data-value="displays structural hierarchy of common server directories.">Displays structural hierarchy of common server directories.</td><td class="badge" data-value="1">✅</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
+<tr data-search="info-system get-disk-health.sh smart health status for all detected physical disks." data-sudo="1" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="info-system">info-system</td><td data-value="get-disk-health.sh"><a href="#script-info-system-get-disk-health-sh"><code>get-disk-health.sh</code></a></td><td data-value="smart health status for all detected physical disks.">SMART health status for all detected physical disks.</td><td class="badge" data-value="1">✅</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
+<tr data-search="info-system get-dmi-info.sh system-level dmi/smbios hardware component info." data-sudo="1" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="info-system">info-system</td><td data-value="get-dmi-info.sh"><a href="#script-info-system-get-dmi-info-sh"><code>get-dmi-info.sh</code></a></td><td data-value="system-level dmi/smbios hardware component info.">System-level DMI/SMBIOS hardware component info.</td><td class="badge" data-value="1">✅</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
+<tr data-search="info-system get-docker-info.sh docker containers, networks, volumes, and system info." data-sudo="1" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="info-system">info-system</td><td data-value="get-docker-info.sh"><a href="#script-info-system-get-docker-info-sh"><code>get-docker-info.sh</code></a></td><td data-value="docker containers, networks, volumes, and system info.">Docker containers, networks, volumes, and system info.</td><td class="badge" data-value="1">✅</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
+<tr data-search="info-system get-gpu-info.sh gpu hardware detection and live nvidia driver metrics." data-sudo="0" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="info-system">info-system</td><td data-value="get-gpu-info.sh"><a href="#script-info-system-get-gpu-info-sh"><code>get-gpu-info.sh</code></a></td><td data-value="gpu hardware detection and live nvidia driver metrics.">GPU hardware detection and live NVIDIA driver metrics.</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
+<tr data-search="info-system get-host-info.sh hostname, os release, kernel version, and uptime." data-sudo="0" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="info-system">info-system</td><td data-value="get-host-info.sh"><a href="#script-info-system-get-host-info-sh"><code>get-host-info.sh</code></a></td><td data-value="hostname, os release, kernel version, and uptime.">Hostname, OS release, kernel version, and uptime.</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
+<tr data-search="info-system get-installed-packages.sh count of installed os packages (dpkg or rpm)." data-sudo="0" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="info-system">info-system</td><td data-value="get-installed-packages.sh"><a href="#script-info-system-get-installed-packages-sh"><code>get-installed-packages.sh</code></a></td><td data-value="count of installed os packages (dpkg or rpm).">Count of installed OS packages (dpkg or rpm).</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
+<tr data-search="info-system get-journal-errors.sh recent critical/error entries from the system journal." data-sudo="1" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="info-system">info-system</td><td data-value="get-journal-errors.sh"><a href="#script-info-system-get-journal-errors-sh"><code>get-journal-errors.sh</code></a></td><td data-value="recent critical/error entries from the system journal.">Recent critical/error entries from the system journal.</td><td class="badge" data-value="1">✅</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
+<tr data-search="info-system get-kernel-log.sh recent kernel ring buffer messages (dmesg)." data-sudo="1" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="info-system">info-system</td><td data-value="get-kernel-log.sh"><a href="#script-info-system-get-kernel-log-sh"><code>get-kernel-log.sh</code></a></td><td data-value="recent kernel ring buffer messages (dmesg).">Recent kernel ring buffer messages (dmesg).</td><td class="badge" data-value="1">✅</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
+<tr data-search="info-system get-kernel-parameters.sh kernel runtime parameters via sysctl (truncated preview)." data-sudo="0" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="info-system">info-system</td><td data-value="get-kernel-parameters.sh"><a href="#script-info-system-get-kernel-parameters-sh"><code>get-kernel-parameters.sh</code></a></td><td data-value="kernel runtime parameters via sysctl (truncated preview).">Kernel runtime parameters via sysctl (truncated preview).</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
+<tr data-search="info-system get-local-users.sh non-system local user accounts from /etc/passwd." data-sudo="0" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="info-system">info-system</td><td data-value="get-local-users.sh"><a href="#script-info-system-get-local-users-sh"><code>get-local-users.sh</code></a></td><td data-value="non-system local user accounts from /etc/passwd.">Non-system local user accounts from /etc/passwd.</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
+<tr data-search="info-system get-logged-in-users.sh currently logged-in users and recent login history." data-sudo="0" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="info-system">info-system</td><td data-value="get-logged-in-users.sh"><a href="#script-info-system-get-logged-in-users-sh"><code>get-logged-in-users.sh</code></a></td><td data-value="currently logged-in users and recent login history.">Currently logged-in users and recent login history.</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
+<tr data-search="info-system get-memory-info.sh system memory usage (ram and swap)." data-sudo="0" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="info-system">info-system</td><td data-value="get-memory-info.sh"><a href="#script-info-system-get-memory-info-sh"><code>get-memory-info.sh</code></a></td><td data-value="system memory usage (ram and swap).">System memory usage (RAM and swap).</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
+<tr data-search="info-system get-nginx-info.sh nginx version, compilation flags, and configuration check." data-sudo="1" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="info-system">info-system</td><td data-value="get-nginx-info.sh"><a href="#script-info-system-get-nginx-info-sh"><code>get-nginx-info.sh</code></a></td><td data-value="nginx version, compilation flags, and configuration check.">Nginx version, compilation flags, and configuration check.</td><td class="badge" data-value="1">✅</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
+<tr data-search="info-system get-pci-devices.sh pci device inventory." data-sudo="0" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="info-system">info-system</td><td data-value="get-pci-devices.sh"><a href="#script-info-system-get-pci-devices-sh"><code>get-pci-devices.sh</code></a></td><td data-value="pci device inventory.">PCI device inventory.</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
+<tr data-search="info-system get-services-info.sh running and enabled systemd services." data-sudo="0" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="info-system">info-system</td><td data-value="get-services-info.sh"><a href="#script-info-system-get-services-info-sh"><code>get-services-info.sh</code></a></td><td data-value="running and enabled systemd services.">Running and enabled Systemd services.</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
+<tr data-search="info-system get-ssl-cert-expiry.sh ssl/tls certificate expiry status for one or more domains." data-sudo="0" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="info-system">info-system</td><td data-value="get-ssl-cert-expiry.sh"><a href="#script-info-system-get-ssl-cert-expiry-sh"><code>get-ssl-cert-expiry.sh</code></a></td><td data-value="ssl/tls certificate expiry status for one or more domains.">SSL/TLS certificate expiry status for one or more domains.</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
+<tr data-search="info-system get-storage-info.sh disk usage per mount point and block device layout." data-sudo="0" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="info-system">info-system</td><td data-value="get-storage-info.sh"><a href="#script-info-system-get-storage-info-sh"><code>get-storage-info.sh</code></a></td><td data-value="disk usage per mount point and block device layout.">Disk usage per mount point and block device layout.</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
+<tr data-search="info-system get-systemd-timers.sh all systemd timers and the health of the units they activate." data-sudo="0" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="info-system">info-system</td><td data-value="get-systemd-timers.sh"><a href="#script-info-system-get-systemd-timers-sh"><code>get-systemd-timers.sh</code></a></td><td data-value="all systemd timers and the health of the units they activate.">All systemd timers and the health of the units they activate.</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
+<tr data-search="info-system get-top-processes.sh top 10 processes by cpu usage." data-sudo="0" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="info-system">info-system</td><td data-value="get-top-processes.sh"><a href="#script-info-system-get-top-processes-sh"><code>get-top-processes.sh</code></a></td><td data-value="top 10 processes by cpu usage.">Top 10 processes by CPU usage.</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
+<tr data-search="info-system get-usb-devices.sh usb device inventory." data-sudo="0" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="info-system">info-system</td><td data-value="get-usb-devices.sh"><a href="#script-info-system-get-usb-devices-sh"><code>get-usb-devices.sh</code></a></td><td data-value="usb device inventory.">USB device inventory.</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
+<tr data-search="info-system get-user-crontab.sh current user&#x27;s crontab entries." data-sudo="1" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="info-system">info-system</td><td data-value="get-user-crontab.sh"><a href="#script-info-system-get-user-crontab-sh"><code>get-user-crontab.sh</code></a></td><td data-value="current user&#x27;s crontab entries.">Current user's crontab entries.</td><td class="badge" data-value="1">✅</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
 <tr data-search="install install-cpp.sh install the c and c++ development environment." data-sudo="1" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="install">install</td><td data-value="install-cpp.sh"><a href="#script-install-install-cpp-sh"><code>install-cpp.sh</code></a></td><td data-value="install the c and c++ development environment.">Install the C and C++ development environment.</td><td class="badge" data-value="1">✅</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
 <tr data-search="install install-firefox.sh install firefox from the distribution repositories." data-sudo="1" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="install">install</td><td data-value="install-firefox.sh"><a href="#script-install-install-firefox-sh"><code>install-firefox.sh</code></a></td><td data-value="install firefox from the distribution repositories.">Install Firefox from the distribution repositories.</td><td class="badge" data-value="1">✅</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
 <tr data-search="install install-java.sh eclipse temurin jdk/jre installer (v8, 17, 21, 25)." data-sudo="0" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="install">install</td><td data-value="install-java.sh"><a href="#script-install-install-java-sh"><code>install-java.sh</code></a></td><td data-value="eclipse temurin jdk/jre installer (v8, 17, 21, 25).">Eclipse Temurin JDK/JRE installer (v8, 17, 21, 25).</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
@@ -301,45 +339,6 @@ scripts and re-run <code>generate-docs.py</code> instead.</p>
 <tr data-search="install install-vhs.sh install vhs from the official charm apt repository." data-sudo="1" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="install">install</td><td data-value="install-vhs.sh"><a href="#script-install-install-vhs-sh"><code>install-vhs.sh</code></a></td><td data-value="install vhs from the official charm apt repository.">Install VHS from the official Charm APT repository.</td><td class="badge" data-value="1">✅</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
 <tr data-search="install install-virtualbox.sh install virtualbox from the official oracle apt repository." data-sudo="1" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="install">install</td><td data-value="install-virtualbox.sh"><a href="#script-install-install-virtualbox-sh"><code>install-virtualbox.sh</code></a></td><td data-value="install virtualbox from the official oracle apt repository.">Install VirtualBox from the official Oracle apt repository.</td><td class="badge" data-value="1">✅</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="1">⚠️</td><td class="deps-count" data-value="0">—</td></tr>
 <tr data-search="install install-zafiro-icons.sh install the latest zafiro icon themes from the official github releases." data-sudo="0" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="install">install</td><td data-value="install-zafiro-icons.sh"><a href="#script-install-install-zafiro-icons-sh"><code>install-zafiro-icons.sh</code></a></td><td data-value="install the latest zafiro icon themes from the official github releases.">Install the latest Zafiro icon themes from the official GitHub releases.</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
-<tr data-search="inventory/network get-bandwidth-summary.sh per-interface link speed, duplex, carrier state, and mtu." data-sudo="0" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="inventory/network">inventory/network</td><td data-value="get-bandwidth-summary.sh"><a href="#script-inventory-network-get-bandwidth-summary-sh"><code>get-bandwidth-summary.sh</code></a></td><td data-value="per-interface link speed, duplex, carrier state, and mtu.">Per-interface link speed, duplex, carrier state, and MTU.</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
-<tr data-search="inventory/network get-connectivity.sh same checks as network-summary.sh plus dns query time and ipv6 internet reachability." data-sudo="0" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="inventory/network">inventory/network</td><td data-value="get-connectivity.sh"><a href="#script-inventory-network-get-connectivity-sh"><code>get-connectivity.sh</code></a></td><td data-value="same checks as network-summary.sh plus dns query time and ipv6 internet reachability.">Same checks as network-summary.sh plus DNS query time and IPv6 internet reachability.</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
-<tr data-search="inventory/network get-dns-info.sh resolvectl status or /etc/resolv.conf, active nameservers, and search domains." data-sudo="0" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="inventory/network">inventory/network</td><td data-value="get-dns-info.sh"><a href="#script-inventory-network-get-dns-info-sh"><code>get-dns-info.sh</code></a></td><td data-value="resolvectl status or /etc/resolv.conf, active nameservers, and search domains.">resolvectl status or /etc/resolv.conf, active nameservers, and search domains.</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
-<tr data-search="inventory/network get-established-connections.sh established tcp connections with local/remote endpoints and owning process." data-sudo="1" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="inventory/network">inventory/network</td><td data-value="get-established-connections.sh"><a href="#script-inventory-network-get-established-connections-sh"><code>get-established-connections.sh</code></a></td><td data-value="established tcp connections with local/remote endpoints and owning process.">Established TCP connections with local/remote endpoints and owning process.</td><td class="badge" data-value="1">✅</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
-<tr data-search="inventory/network get-firewall-status.sh status across ufw, firewalld, nftables, and iptables — whichever are installed." data-sudo="1" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="inventory/network">inventory/network</td><td data-value="get-firewall-status.sh"><a href="#script-inventory-network-get-firewall-status-sh"><code>get-firewall-status.sh</code></a></td><td data-value="status across ufw, firewalld, nftables, and iptables — whichever are installed.">Status across UFW, Firewalld, nftables, and iptables — whichever are installed.</td><td class="badge" data-value="1">✅</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
-<tr data-search="inventory/network get-interface-statistics.sh per-interface rx/tx bytes, packets, errors, drops, and collisions." data-sudo="0" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="inventory/network">inventory/network</td><td data-value="get-interface-statistics.sh"><a href="#script-inventory-network-get-interface-statistics-sh"><code>get-interface-statistics.sh</code></a></td><td data-value="per-interface rx/tx bytes, packets, errors, drops, and collisions.">Per-interface RX/TX bytes, packets, errors, drops, and collisions.</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
-<tr data-search="inventory/network get-listening-ports.sh listening tcp/udp ports with the owning process, via ss." data-sudo="1" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="inventory/network">inventory/network</td><td data-value="get-listening-ports.sh"><a href="#script-inventory-network-get-listening-ports-sh"><code>get-listening-ports.sh</code></a></td><td data-value="listening tcp/udp ports with the owning process, via ss.">Listening TCP/UDP ports with the owning process, via ss.</td><td class="badge" data-value="1">✅</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
-<tr data-search="inventory/network get-neighbors.sh arp table (ipv4) and neighbor cache (ipv6)." data-sudo="0" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="inventory/network">inventory/network</td><td data-value="get-neighbors.sh"><a href="#script-inventory-network-get-neighbors-sh"><code>get-neighbors.sh</code></a></td><td data-value="arp table (ipv4) and neighbor cache (ipv6).">ARP table (IPv4) and neighbor cache (IPv6).</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
-<tr data-search="inventory/network get-network-interfaces.sh per-interface state, mac, mtu, driver, speed, and ipv4/ipv6 addresses." data-sudo="0" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="inventory/network">inventory/network</td><td data-value="get-network-interfaces.sh"><a href="#script-inventory-network-get-network-interfaces-sh"><code>get-network-interfaces.sh</code></a></td><td data-value="per-interface state, mac, mtu, driver, speed, and ipv4/ipv6 addresses.">Per-interface state, MAC, MTU, driver, speed, and IPv4/IPv6 addresses.</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
-<tr data-search="inventory/network get-network-services.sh active state of networkmanager, systemd-networkd/-resolved, dhcpcd, wpa_supplicant, iwd." data-sudo="0" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="inventory/network">inventory/network</td><td data-value="get-network-services.sh"><a href="#script-inventory-network-get-network-services-sh"><code>get-network-services.sh</code></a></td><td data-value="active state of networkmanager, systemd-networkd/-resolved, dhcpcd, wpa_supplicant, iwd.">Active state of NetworkManager, systemd-networkd/-resolved, dhcpcd, wpa_supplicant, iwd.</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
-<tr data-search="inventory/network get-network-statistics.sh tcp congestion control algorithm, ipv4/ipv6 forwarding, and bbr status via sysctl." data-sudo="0" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="inventory/network">inventory/network</td><td data-value="get-network-statistics.sh"><a href="#script-inventory-network-get-network-statistics-sh"><code>get-network-statistics.sh</code></a></td><td data-value="tcp congestion control algorithm, ipv4/ipv6 forwarding, and bbr status via sysctl.">TCP congestion control algorithm, IPv4/IPv6 forwarding, and BBR status via sysctl.</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
-<tr data-search="inventory/network get-network-summary.sh one-shot pass/fail overview: gateway, dns, internet, public ipv4/ipv6." data-sudo="0" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="inventory/network">inventory/network</td><td data-value="get-network-summary.sh"><a href="#script-inventory-network-get-network-summary-sh"><code>get-network-summary.sh</code></a></td><td data-value="one-shot pass/fail overview: gateway, dns, internet, public ipv4/ipv6.">One-shot pass/fail overview: gateway, DNS, internet, public IPv4/IPv6.</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
-<tr data-search="inventory/network get-public-ip.sh public ipv4/ipv6 via ipify, falling back to ifconfig.me/ifconfig.co." data-sudo="0" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="inventory/network">inventory/network</td><td data-value="get-public-ip.sh"><a href="#script-inventory-network-get-public-ip-sh"><code>get-public-ip.sh</code></a></td><td data-value="public ipv4/ipv6 via ipify, falling back to ifconfig.me/ifconfig.co.">Public IPv4/IPv6 via ipify, falling back to ifconfig.me/ifconfig.co.</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
-<tr data-search="inventory/network get-routing.sh ipv4/ipv6 routing tables and the default gateway/interface." data-sudo="0" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="inventory/network">inventory/network</td><td data-value="get-routing.sh"><a href="#script-inventory-network-get-routing-sh"><code>get-routing.sh</code></a></td><td data-value="ipv4/ipv6 routing tables and the default gateway/interface.">IPv4/IPv6 routing tables and the default gateway/interface.</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
-<tr data-search="inventory/network get-vpn-status.sh wireguard/tun/tap interfaces, tailscale status, and zerotier status." data-sudo="0" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="inventory/network">inventory/network</td><td data-value="get-vpn-status.sh"><a href="#script-inventory-network-get-vpn-status-sh"><code>get-vpn-status.sh</code></a></td><td data-value="wireguard/tun/tap interfaces, tailscale status, and zerotier status.">WireGuard/TUN/TAP interfaces, Tailscale status, and ZeroTier status.</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
-<tr data-search="inventory/network get-wifi-status.sh ssid, signal, bitrate, and frequency for wireless interfaces via iw or nmcli." data-sudo="0" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="inventory/network">inventory/network</td><td data-value="get-wifi-status.sh"><a href="#script-inventory-network-get-wifi-status-sh"><code>get-wifi-status.sh</code></a></td><td data-value="ssid, signal, bitrate, and frequency for wireless interfaces via iw or nmcli.">SSID, signal, bitrate, and frequency for wireless interfaces via iw or nmcli.</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
-<tr data-search="inventory/system get-cpu-info.sh cpu architecture, model, core, and thread information." data-sudo="0" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="inventory/system">inventory/system</td><td data-value="get-cpu-info.sh"><a href="#script-inventory-system-get-cpu-info-sh"><code>get-cpu-info.sh</code></a></td><td data-value="cpu architecture, model, core, and thread information.">CPU architecture, model, core, and thread information.</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
-<tr data-search="inventory/system get-directory-tree.sh displays structural hierarchy of common server directories." data-sudo="1" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="inventory/system">inventory/system</td><td data-value="get-directory-tree.sh"><a href="#script-inventory-system-get-directory-tree-sh"><code>get-directory-tree.sh</code></a></td><td data-value="displays structural hierarchy of common server directories.">Displays structural hierarchy of common server directories.</td><td class="badge" data-value="1">✅</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
-<tr data-search="inventory/system get-disk-health.sh smart health status for all detected physical disks." data-sudo="1" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="inventory/system">inventory/system</td><td data-value="get-disk-health.sh"><a href="#script-inventory-system-get-disk-health-sh"><code>get-disk-health.sh</code></a></td><td data-value="smart health status for all detected physical disks.">SMART health status for all detected physical disks.</td><td class="badge" data-value="1">✅</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
-<tr data-search="inventory/system get-dmi-info.sh system-level dmi/smbios hardware component info." data-sudo="1" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="inventory/system">inventory/system</td><td data-value="get-dmi-info.sh"><a href="#script-inventory-system-get-dmi-info-sh"><code>get-dmi-info.sh</code></a></td><td data-value="system-level dmi/smbios hardware component info.">System-level DMI/SMBIOS hardware component info.</td><td class="badge" data-value="1">✅</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
-<tr data-search="inventory/system get-docker-info.sh docker containers, networks, volumes, and system info." data-sudo="1" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="inventory/system">inventory/system</td><td data-value="get-docker-info.sh"><a href="#script-inventory-system-get-docker-info-sh"><code>get-docker-info.sh</code></a></td><td data-value="docker containers, networks, volumes, and system info.">Docker containers, networks, volumes, and system info.</td><td class="badge" data-value="1">✅</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
-<tr data-search="inventory/system get-gpu-info.sh gpu hardware detection and live nvidia driver metrics." data-sudo="0" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="inventory/system">inventory/system</td><td data-value="get-gpu-info.sh"><a href="#script-inventory-system-get-gpu-info-sh"><code>get-gpu-info.sh</code></a></td><td data-value="gpu hardware detection and live nvidia driver metrics.">GPU hardware detection and live NVIDIA driver metrics.</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
-<tr data-search="inventory/system get-host-info.sh hostname, os release, kernel version, and uptime." data-sudo="0" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="inventory/system">inventory/system</td><td data-value="get-host-info.sh"><a href="#script-inventory-system-get-host-info-sh"><code>get-host-info.sh</code></a></td><td data-value="hostname, os release, kernel version, and uptime.">Hostname, OS release, kernel version, and uptime.</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
-<tr data-search="inventory/system get-installed-packages.sh count of installed os packages (dpkg or rpm)." data-sudo="0" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="inventory/system">inventory/system</td><td data-value="get-installed-packages.sh"><a href="#script-inventory-system-get-installed-packages-sh"><code>get-installed-packages.sh</code></a></td><td data-value="count of installed os packages (dpkg or rpm).">Count of installed OS packages (dpkg or rpm).</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
-<tr data-search="inventory/system get-journal-errors.sh recent critical/error entries from the system journal." data-sudo="1" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="inventory/system">inventory/system</td><td data-value="get-journal-errors.sh"><a href="#script-inventory-system-get-journal-errors-sh"><code>get-journal-errors.sh</code></a></td><td data-value="recent critical/error entries from the system journal.">Recent critical/error entries from the system journal.</td><td class="badge" data-value="1">✅</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
-<tr data-search="inventory/system get-kernel-log.sh recent kernel ring buffer messages (dmesg)." data-sudo="1" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="inventory/system">inventory/system</td><td data-value="get-kernel-log.sh"><a href="#script-inventory-system-get-kernel-log-sh"><code>get-kernel-log.sh</code></a></td><td data-value="recent kernel ring buffer messages (dmesg).">Recent kernel ring buffer messages (dmesg).</td><td class="badge" data-value="1">✅</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
-<tr data-search="inventory/system get-kernel-parameters.sh kernel runtime parameters via sysctl (truncated preview)." data-sudo="0" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="inventory/system">inventory/system</td><td data-value="get-kernel-parameters.sh"><a href="#script-inventory-system-get-kernel-parameters-sh"><code>get-kernel-parameters.sh</code></a></td><td data-value="kernel runtime parameters via sysctl (truncated preview).">Kernel runtime parameters via sysctl (truncated preview).</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
-<tr data-search="inventory/system get-local-users.sh non-system local user accounts from /etc/passwd." data-sudo="0" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="inventory/system">inventory/system</td><td data-value="get-local-users.sh"><a href="#script-inventory-system-get-local-users-sh"><code>get-local-users.sh</code></a></td><td data-value="non-system local user accounts from /etc/passwd.">Non-system local user accounts from /etc/passwd.</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
-<tr data-search="inventory/system get-logged-in-users.sh currently logged-in users and recent login history." data-sudo="0" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="inventory/system">inventory/system</td><td data-value="get-logged-in-users.sh"><a href="#script-inventory-system-get-logged-in-users-sh"><code>get-logged-in-users.sh</code></a></td><td data-value="currently logged-in users and recent login history.">Currently logged-in users and recent login history.</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
-<tr data-search="inventory/system get-memory-info.sh system memory usage (ram and swap)." data-sudo="0" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="inventory/system">inventory/system</td><td data-value="get-memory-info.sh"><a href="#script-inventory-system-get-memory-info-sh"><code>get-memory-info.sh</code></a></td><td data-value="system memory usage (ram and swap).">System memory usage (RAM and swap).</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
-<tr data-search="inventory/system get-nginx-info.sh nginx version, compilation flags, and configuration check." data-sudo="1" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="inventory/system">inventory/system</td><td data-value="get-nginx-info.sh"><a href="#script-inventory-system-get-nginx-info-sh"><code>get-nginx-info.sh</code></a></td><td data-value="nginx version, compilation flags, and configuration check.">Nginx version, compilation flags, and configuration check.</td><td class="badge" data-value="1">✅</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
-<tr data-search="inventory/system get-pci-devices.sh pci device inventory." data-sudo="0" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="inventory/system">inventory/system</td><td data-value="get-pci-devices.sh"><a href="#script-inventory-system-get-pci-devices-sh"><code>get-pci-devices.sh</code></a></td><td data-value="pci device inventory.">PCI device inventory.</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
-<tr data-search="inventory/system get-services-info.sh running and enabled systemd services." data-sudo="0" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="inventory/system">inventory/system</td><td data-value="get-services-info.sh"><a href="#script-inventory-system-get-services-info-sh"><code>get-services-info.sh</code></a></td><td data-value="running and enabled systemd services.">Running and enabled Systemd services.</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
-<tr data-search="inventory/system get-ssl-cert-expiry.sh ssl/tls certificate expiry status for one or more domains." data-sudo="0" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="inventory/system">inventory/system</td><td data-value="get-ssl-cert-expiry.sh"><a href="#script-inventory-system-get-ssl-cert-expiry-sh"><code>get-ssl-cert-expiry.sh</code></a></td><td data-value="ssl/tls certificate expiry status for one or more domains.">SSL/TLS certificate expiry status for one or more domains.</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
-<tr data-search="inventory/system get-storage-info.sh disk usage per mount point and block device layout." data-sudo="0" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="inventory/system">inventory/system</td><td data-value="get-storage-info.sh"><a href="#script-inventory-system-get-storage-info-sh"><code>get-storage-info.sh</code></a></td><td data-value="disk usage per mount point and block device layout.">Disk usage per mount point and block device layout.</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
-<tr data-search="inventory/system get-systemd-timers.sh all systemd timers and the health of the units they activate." data-sudo="0" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="inventory/system">inventory/system</td><td data-value="get-systemd-timers.sh"><a href="#script-inventory-system-get-systemd-timers-sh"><code>get-systemd-timers.sh</code></a></td><td data-value="all systemd timers and the health of the units they activate.">All systemd timers and the health of the units they activate.</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
-<tr data-search="inventory/system get-top-processes.sh top 10 processes by cpu usage." data-sudo="0" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="inventory/system">inventory/system</td><td data-value="get-top-processes.sh"><a href="#script-inventory-system-get-top-processes-sh"><code>get-top-processes.sh</code></a></td><td data-value="top 10 processes by cpu usage.">Top 10 processes by CPU usage.</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
-<tr data-search="inventory/system get-usb-devices.sh usb device inventory." data-sudo="0" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="inventory/system">inventory/system</td><td data-value="get-usb-devices.sh"><a href="#script-inventory-system-get-usb-devices-sh"><code>get-usb-devices.sh</code></a></td><td data-value="usb device inventory.">USB device inventory.</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
-<tr data-search="inventory/system get-user-crontab.sh current user&#x27;s crontab entries." data-sudo="1" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="inventory/system">inventory/system</td><td data-value="get-user-crontab.sh"><a href="#script-inventory-system-get-user-crontab-sh"><code>get-user-crontab.sh</code></a></td><td data-value="current user&#x27;s crontab entries.">Current user's crontab entries.</td><td class="badge" data-value="1">✅</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
 <tr data-search="lsp lsp-install-bash-language-server.sh install bash-language-server via npm for editor/ide lsp integration." data-sudo="0" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="lsp">lsp</td><td data-value="lsp-install-bash-language-server.sh"><a href="#script-lsp-lsp-install-bash-language-server-sh"><code>lsp-install-bash-language-server.sh</code></a></td><td data-value="install bash-language-server via npm for editor/ide lsp integration.">Install bash-language-server via npm for editor/IDE LSP integration.</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
 <tr data-search="lsp lsp-install-clang-language-server.sh install clangd (llvm c/c++ language server) for editor/ide lsp integration." data-sudo="1" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="lsp">lsp</td><td data-value="lsp-install-clang-language-server.sh"><a href="#script-lsp-lsp-install-clang-language-server-sh"><code>lsp-install-clang-language-server.sh</code></a></td><td data-value="install clangd (llvm c/c++ language server) for editor/ide lsp integration.">Install clangd (LLVM C/C++ language server) for editor/IDE LSP integration.</td><td class="badge" data-value="1">✅</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
 <tr data-search="lsp lsp-install-markdown-language-server.sh install marksman markdown language server for editor/ide lsp integration." data-sudo="0" data-interactive="0" data-hasdeps="0"><td class="dir-tag" data-value="lsp">lsp</td><td data-value="lsp-install-markdown-language-server.sh"><a href="#script-lsp-lsp-install-markdown-language-server-sh"><code>lsp-install-markdown-language-server.sh</code></a></td><td data-value="install marksman markdown language server for editor/ide lsp integration.">Install marksman Markdown language server for editor/IDE LSP integration.</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="0">❌</td><td class="badge" data-value="2">✅</td><td class="deps-count" data-value="0">—</td></tr>
@@ -974,6 +973,498 @@ scripts and re-run <code>generate-docs.py</code> instead.</p>
 <p>Safe to re-run — users not in the vboxusers group are skipped.</p>
 <div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
 <div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
+</div><h2 id="dir-info-network" class="dir-heading"><code>info-network/</code><a class="permalink" href="#dir-info-network" aria-label="Link to this section">#</a></h2>
+<div class="script-card" id="script-info-network-get-bandwidth-summary-sh" data-search="info-network get-bandwidth-summary.sh per-interface link speed, duplex, carrier state, and mtu." data-sudo="0" data-interactive="0" data-hasdeps="0">
+<h3><code>info-network/get-bandwidth-summary.sh</code><a class="permalink" href="#script-info-network-get-bandwidth-summary-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="info-network/get-bandwidth-summary.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
+<div class="meta-row">
+<span class="badge">Sudo: ❌</span>
+<span class="badge">Interactive: ❌</span>
+<span class="badge">Idempotent: ✅ (true)</span>
+</div>
+<p>Read-only status and diagnostic script — does not modify system configuration. Works without root; colored output degrades gracefully to plain text when not attached to a terminal.</p>
+<ul><li>Per-interface link speed, duplex, carrier state, and MTU</li></ul>
+<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
+<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
+</div>
+<div class="script-card" id="script-info-network-get-connectivity-sh" data-search="info-network get-connectivity.sh same checks as network-summary.sh plus dns query time and ipv6 internet reachability." data-sudo="0" data-interactive="0" data-hasdeps="0">
+<h3><code>info-network/get-connectivity.sh</code><a class="permalink" href="#script-info-network-get-connectivity-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="info-network/get-connectivity.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
+<div class="meta-row">
+<span class="badge">Sudo: ❌</span>
+<span class="badge">Interactive: ❌</span>
+<span class="badge">Idempotent: ✅ (true)</span>
+</div>
+<p>Read-only status and diagnostic script — does not modify system configuration. Works without root; colored output degrades gracefully to plain text when not attached to a terminal.</p>
+<ul><li>Same checks as <code>network-summary.sh</code> plus DNS query time and IPv6 internet reachability</li></ul>
+<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
+<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
+</div>
+<div class="script-card" id="script-info-network-get-dns-info-sh" data-search="info-network get-dns-info.sh resolvectl status or /etc/resolv.conf, active nameservers, and search domains." data-sudo="0" data-interactive="0" data-hasdeps="0">
+<h3><code>info-network/get-dns-info.sh</code><a class="permalink" href="#script-info-network-get-dns-info-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="info-network/get-dns-info.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
+<div class="meta-row">
+<span class="badge">Sudo: ❌</span>
+<span class="badge">Interactive: ❌</span>
+<span class="badge">Idempotent: ✅ (true)</span>
+</div>
+<p>Read-only status and diagnostic script — does not modify system configuration. Works without root; colored output degrades gracefully to plain text when not attached to a terminal.</p>
+<ul><li><code>resolvectl</code> status or <code>/etc/resolv.conf</code>, active nameservers, and search domains</li></ul>
+<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
+<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
+</div>
+<div class="script-card" id="script-info-network-get-established-connections-sh" data-search="info-network get-established-connections.sh established tcp connections with local/remote endpoints and owning process." data-sudo="1" data-interactive="0" data-hasdeps="0">
+<h3><code>info-network/get-established-connections.sh</code><a class="permalink" href="#script-info-network-get-established-connections-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="info-network/get-established-connections.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
+<div class="meta-row">
+<span class="badge">Sudo: ✅</span>
+<span class="badge">Interactive: ❌</span>
+<span class="badge">Idempotent: ✅ (true)</span>
+</div>
+<p>Read-only status and diagnostic script — does not modify system configuration. Works without root; colored output degrades gracefully to plain text when not attached to a terminal.</p>
+<ul><li>Established TCP connections with local/remote endpoints and owning process</li></ul>
+<blockquote>Running as <code>sudo</code> gives fuller process detail on this script; it still works without root, but with a warning and reduced detail.</blockquote>
+<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
+<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
+</div>
+<div class="script-card" id="script-info-network-get-firewall-status-sh" data-search="info-network get-firewall-status.sh status across ufw, firewalld, nftables, and iptables — whichever are installed." data-sudo="1" data-interactive="0" data-hasdeps="0">
+<h3><code>info-network/get-firewall-status.sh</code><a class="permalink" href="#script-info-network-get-firewall-status-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="info-network/get-firewall-status.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
+<div class="meta-row">
+<span class="badge">Sudo: ✅</span>
+<span class="badge">Interactive: ❌</span>
+<span class="badge">Idempotent: ✅ (true)</span>
+</div>
+<p>Read-only status and diagnostic script — does not modify system configuration. Works without root; colored output degrades gracefully to plain text when not attached to a terminal.</p>
+<ul><li>Status across UFW, Firewalld, nftables, and iptables — whichever are installed</li></ul>
+<blockquote>Running as <code>sudo</code> gives fuller process detail on this script; it still works without root, but with a warning and reduced detail.</blockquote>
+<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
+<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
+</div>
+<div class="script-card" id="script-info-network-get-interface-statistics-sh" data-search="info-network get-interface-statistics.sh per-interface rx/tx bytes, packets, errors, drops, and collisions." data-sudo="0" data-interactive="0" data-hasdeps="0">
+<h3><code>info-network/get-interface-statistics.sh</code><a class="permalink" href="#script-info-network-get-interface-statistics-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="info-network/get-interface-statistics.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
+<div class="meta-row">
+<span class="badge">Sudo: ❌</span>
+<span class="badge">Interactive: ❌</span>
+<span class="badge">Idempotent: ✅ (true)</span>
+</div>
+<p>Read-only status and diagnostic script — does not modify system configuration. Works without root; colored output degrades gracefully to plain text when not attached to a terminal.</p>
+<ul><li>Per-interface RX/TX bytes, packets, errors, drops, and collisions from <code>/sys/class/net</code></li></ul>
+<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
+<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
+</div>
+<div class="script-card" id="script-info-network-get-listening-ports-sh" data-search="info-network get-listening-ports.sh listening tcp/udp ports with the owning process, via ss." data-sudo="1" data-interactive="0" data-hasdeps="0">
+<h3><code>info-network/get-listening-ports.sh</code><a class="permalink" href="#script-info-network-get-listening-ports-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="info-network/get-listening-ports.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
+<div class="meta-row">
+<span class="badge">Sudo: ✅</span>
+<span class="badge">Interactive: ❌</span>
+<span class="badge">Idempotent: ✅ (true)</span>
+</div>
+<p>Read-only status and diagnostic script — does not modify system configuration. Works without root; colored output degrades gracefully to plain text when not attached to a terminal.</p>
+<ul><li>Listening TCP/UDP ports with the owning process, via <code>ss</code></li></ul>
+<blockquote>Running as <code>sudo</code> gives fuller process detail on this script; it still works without root, but with a warning and reduced detail.</blockquote>
+<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
+<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
+</div>
+<div class="script-card" id="script-info-network-get-neighbors-sh" data-search="info-network get-neighbors.sh arp table (ipv4) and neighbor cache (ipv6)." data-sudo="0" data-interactive="0" data-hasdeps="0">
+<h3><code>info-network/get-neighbors.sh</code><a class="permalink" href="#script-info-network-get-neighbors-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="info-network/get-neighbors.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
+<div class="meta-row">
+<span class="badge">Sudo: ❌</span>
+<span class="badge">Interactive: ❌</span>
+<span class="badge">Idempotent: ✅ (true)</span>
+</div>
+<p>Read-only status and diagnostic script — does not modify system configuration. Works without root; colored output degrades gracefully to plain text when not attached to a terminal.</p>
+<ul><li>ARP table (IPv4) and neighbor cache (IPv6)</li></ul>
+<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
+<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
+</div>
+<div class="script-card" id="script-info-network-get-network-interfaces-sh" data-search="info-network get-network-interfaces.sh per-interface state, mac, mtu, driver, speed, and ipv4/ipv6 addresses." data-sudo="0" data-interactive="0" data-hasdeps="0">
+<h3><code>info-network/get-network-interfaces.sh</code><a class="permalink" href="#script-info-network-get-network-interfaces-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="info-network/get-network-interfaces.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
+<div class="meta-row">
+<span class="badge">Sudo: ❌</span>
+<span class="badge">Interactive: ❌</span>
+<span class="badge">Idempotent: ✅ (true)</span>
+</div>
+<p>Read-only status and diagnostic script — does not modify system configuration. Works without root; colored output degrades gracefully to plain text when not attached to a terminal.</p>
+<ul><li>Per-interface state, MAC, MTU, driver, speed, and IPv4/IPv6 addresses</li></ul>
+<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
+<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
+</div>
+<div class="script-card" id="script-info-network-get-network-services-sh" data-search="info-network get-network-services.sh active state of networkmanager, systemd-networkd/-resolved, dhcpcd, wpa_supplicant, iwd." data-sudo="0" data-interactive="0" data-hasdeps="0">
+<h3><code>info-network/get-network-services.sh</code><a class="permalink" href="#script-info-network-get-network-services-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="info-network/get-network-services.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
+<div class="meta-row">
+<span class="badge">Sudo: ❌</span>
+<span class="badge">Interactive: ❌</span>
+<span class="badge">Idempotent: ✅ (true)</span>
+</div>
+<p>Read-only status and diagnostic script — does not modify system configuration. Works without root; colored output degrades gracefully to plain text when not attached to a terminal.</p>
+<ul><li>Active state of NetworkManager, systemd-networkd/-resolved, dhcpcd, wpa_supplicant, iwd</li></ul>
+<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
+<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
+</div>
+<div class="script-card" id="script-info-network-get-network-statistics-sh" data-search="info-network get-network-statistics.sh tcp congestion control algorithm, ipv4/ipv6 forwarding, and bbr status via sysctl." data-sudo="0" data-interactive="0" data-hasdeps="0">
+<h3><code>info-network/get-network-statistics.sh</code><a class="permalink" href="#script-info-network-get-network-statistics-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="info-network/get-network-statistics.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
+<div class="meta-row">
+<span class="badge">Sudo: ❌</span>
+<span class="badge">Interactive: ❌</span>
+<span class="badge">Idempotent: ✅ (true)</span>
+</div>
+<p>Read-only status and diagnostic script — does not modify system configuration. Works without root; colored output degrades gracefully to plain text when not attached to a terminal.</p>
+<ul><li>TCP congestion control algorithm, IPv4/IPv6 forwarding, and BBR status via <code>sysctl</code></li></ul>
+<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
+<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
+</div>
+<div class="script-card" id="script-info-network-get-network-summary-sh" data-search="info-network get-network-summary.sh one-shot pass/fail overview: gateway, dns, internet, public ipv4/ipv6." data-sudo="0" data-interactive="0" data-hasdeps="0">
+<h3><code>info-network/get-network-summary.sh</code><a class="permalink" href="#script-info-network-get-network-summary-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="info-network/get-network-summary.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
+<div class="meta-row">
+<span class="badge">Sudo: ❌</span>
+<span class="badge">Interactive: ❌</span>
+<span class="badge">Idempotent: ✅ (true)</span>
+</div>
+<p>Read-only status and diagnostic script — does not modify system configuration. Works without root; colored output degrades gracefully to plain text when not attached to a terminal.</p>
+<ul><li>One-shot pass/fail overview: gateway, DNS, internet, public IPv4/IPv6</li></ul>
+<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
+<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
+</div>
+<div class="script-card" id="script-info-network-get-public-ip-sh" data-search="info-network get-public-ip.sh public ipv4/ipv6 via ipify, falling back to ifconfig.me/ifconfig.co." data-sudo="0" data-interactive="0" data-hasdeps="0">
+<h3><code>info-network/get-public-ip.sh</code><a class="permalink" href="#script-info-network-get-public-ip-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="info-network/get-public-ip.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
+<div class="meta-row">
+<span class="badge">Sudo: ❌</span>
+<span class="badge">Interactive: ❌</span>
+<span class="badge">Idempotent: ✅ (true)</span>
+</div>
+<p>Read-only status and diagnostic script — does not modify system configuration. Works without root; colored output degrades gracefully to plain text when not attached to a terminal.</p>
+<ul><li>Public IPv4/IPv6 via ipify, falling back to ifconfig.me/ifconfig.co</li></ul>
+<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
+<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
+</div>
+<div class="script-card" id="script-info-network-get-routing-sh" data-search="info-network get-routing.sh ipv4/ipv6 routing tables and the default gateway/interface." data-sudo="0" data-interactive="0" data-hasdeps="0">
+<h3><code>info-network/get-routing.sh</code><a class="permalink" href="#script-info-network-get-routing-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="info-network/get-routing.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
+<div class="meta-row">
+<span class="badge">Sudo: ❌</span>
+<span class="badge">Interactive: ❌</span>
+<span class="badge">Idempotent: ✅ (true)</span>
+</div>
+<p>Read-only status and diagnostic script — does not modify system configuration. Works without root; colored output degrades gracefully to plain text when not attached to a terminal.</p>
+<ul><li>IPv4/IPv6 routing tables and the default gateway/interface</li></ul>
+<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
+<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
+</div>
+<div class="script-card" id="script-info-network-get-vpn-status-sh" data-search="info-network get-vpn-status.sh wireguard/tun/tap interfaces, tailscale status, and zerotier status." data-sudo="0" data-interactive="0" data-hasdeps="0">
+<h3><code>info-network/get-vpn-status.sh</code><a class="permalink" href="#script-info-network-get-vpn-status-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="info-network/get-vpn-status.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
+<div class="meta-row">
+<span class="badge">Sudo: ❌</span>
+<span class="badge">Interactive: ❌</span>
+<span class="badge">Idempotent: ✅ (true)</span>
+</div>
+<p>Read-only status and diagnostic script — does not modify system configuration. Works without root; colored output degrades gracefully to plain text when not attached to a terminal.</p>
+<ul><li>WireGuard/TUN/TAP interfaces, Tailscale status, and ZeroTier status</li></ul>
+<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
+<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
+</div>
+<div class="script-card" id="script-info-network-get-wifi-status-sh" data-search="info-network get-wifi-status.sh ssid, signal, bitrate, and frequency for wireless interfaces via iw or nmcli." data-sudo="0" data-interactive="0" data-hasdeps="0">
+<h3><code>info-network/get-wifi-status.sh</code><a class="permalink" href="#script-info-network-get-wifi-status-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="info-network/get-wifi-status.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
+<div class="meta-row">
+<span class="badge">Sudo: ❌</span>
+<span class="badge">Interactive: ❌</span>
+<span class="badge">Idempotent: ✅ (true)</span>
+</div>
+<p>Read-only status and diagnostic script — does not modify system configuration. Works without root; colored output degrades gracefully to plain text when not attached to a terminal.</p>
+<ul><li>SSID, signal, bitrate, and frequency for wireless interfaces via <code>iw</code> or <code>nmcli</code></li></ul>
+<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
+<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
+</div><h2 id="dir-info-system" class="dir-heading"><code>info-system/</code><a class="permalink" href="#dir-info-system" aria-label="Link to this section">#</a></h2>
+<div class="script-card" id="script-info-system-get-cpu-info-sh" data-search="info-system get-cpu-info.sh cpu architecture, model, core, and thread information." data-sudo="0" data-interactive="0" data-hasdeps="0">
+<h3><code>info-system/get-cpu-info.sh</code><a class="permalink" href="#script-info-system-get-cpu-info-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="info-system/get-cpu-info.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
+<div class="meta-row">
+<span class="badge">Sudo: ❌</span>
+<span class="badge">Interactive: ❌</span>
+<span class="badge">Idempotent: ✅ (true)</span>
+</div>
+<p>Read-only status and diagnostic script. Works without root.</p>
+<ul><li>Collects architecture, model name, core/thread counts via <code>lscpu</code>.</li></ul>
+<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
+<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
+</div>
+<div class="script-card" id="script-info-system-get-directory-tree-sh" data-search="info-system get-directory-tree.sh displays structural hierarchy of common server directories." data-sudo="1" data-interactive="0" data-hasdeps="0">
+<h3><code>info-system/get-directory-tree.sh</code><a class="permalink" href="#script-info-system-get-directory-tree-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="info-system/get-directory-tree.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
+<div class="meta-row">
+<span class="badge">Sudo: ✅</span>
+<span class="badge">Interactive: ❌</span>
+<span class="badge">Idempotent: ✅ (true)</span>
+</div>
+<p>Read-only status and diagnostic script. Works without root.</p>
+<ul><li>Displays a 2-level deep tree for /srv, /opt, and /var/www.</li></ul>
+<blockquote>Running as <code>sudo</code> prevents "Permission denied" errors in restricted folders.</blockquote>
+<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
+<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
+</div>
+<div class="script-card" id="script-info-system-get-disk-health-sh" data-search="info-system get-disk-health.sh smart health status for all detected physical disks." data-sudo="1" data-interactive="0" data-hasdeps="0">
+<h3><code>info-system/get-disk-health.sh</code><a class="permalink" href="#script-info-system-get-disk-health-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="info-system/get-disk-health.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
+<div class="meta-row">
+<span class="badge">Sudo: ✅</span>
+<span class="badge">Interactive: ❌</span>
+<span class="badge">Idempotent: ✅ (true)</span>
+</div>
+<p>Read-only status and diagnostic script.</p>
+<ul><li>Enumerates physical disks via <code>lsblk</code> and reports SMART overall</li></ul>
+<p>health, temperature, power-on hours, and reallocated/pending sector counts via <code>smartctl</code> (SATA, SAS, and NVMe).</p>
+<ul><li>Complements <code>get-storage-info.sh</code>, which reports filesystem usage</li></ul>
+<p>rather than drive health.</p>
+<blockquote>Running as <code>sudo</code> is required; <code>smartctl</code> returns limited or no<br>data for non-root users.</blockquote>
+<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
+<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
+</div>
+<div class="script-card" id="script-info-system-get-dmi-info-sh" data-search="info-system get-dmi-info.sh system-level dmi/smbios hardware component info." data-sudo="1" data-interactive="0" data-hasdeps="0">
+<h3><code>info-system/get-dmi-info.sh</code><a class="permalink" href="#script-info-system-get-dmi-info-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="info-system/get-dmi-info.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
+<div class="meta-row">
+<span class="badge">Sudo: ✅</span>
+<span class="badge">Interactive: ❌</span>
+<span class="badge">Idempotent: ✅ (true)</span>
+</div>
+<p>Read-only status and diagnostic script.</p>
+<ul><li>Collects system manufacturer/model/serial info via <code>dmidecode -t system</code>.</li></ul>
+<blockquote>Running as <code>sudo</code> is required; <code>dmidecode</code> returns no data for non-root users.</blockquote>
+<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
+<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
+</div>
+<div class="script-card" id="script-info-system-get-docker-info-sh" data-search="info-system get-docker-info.sh docker containers, networks, volumes, and system info." data-sudo="1" data-interactive="0" data-hasdeps="0">
+<h3><code>info-system/get-docker-info.sh</code><a class="permalink" href="#script-info-system-get-docker-info-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="info-system/get-docker-info.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
+<div class="meta-row">
+<span class="badge">Sudo: ✅</span>
+<span class="badge">Interactive: ❌</span>
+<span class="badge">Idempotent: ✅ (true)</span>
+</div>
+<p>Read-only status and diagnostic script.</p>
+<ul><li>Collects docker ps, network ls, volume ls, and docker info.</li></ul>
+<blockquote>Running as <code>sudo</code> is required unless the user is part of the <code>docker</code> group.</blockquote>
+<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
+<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
+</div>
+<div class="script-card" id="script-info-system-get-gpu-info-sh" data-search="info-system get-gpu-info.sh gpu hardware detection and live nvidia driver metrics." data-sudo="0" data-interactive="0" data-hasdeps="0">
+<h3><code>info-system/get-gpu-info.sh</code><a class="permalink" href="#script-info-system-get-gpu-info-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="info-system/get-gpu-info.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
+<div class="meta-row">
+<span class="badge">Sudo: ❌</span>
+<span class="badge">Interactive: ❌</span>
+<span class="badge">Idempotent: ✅ (true)</span>
+</div>
+<p>Read-only status and diagnostic script. Works without root.</p>
+<ul><li>Detects GPU devices via <code>lspci</code> (VGA/3D/display controllers).</li><li>If <code>nvidia-smi</code> is present, also shows driver/CUDA version, per-GPU</li></ul>
+<p>temperature, utilization, memory usage, power draw, and active compute processes.</p>
+<blockquote>If no NVIDIA driver is found, run <code>install-nvidia-driver.sh</code> first.</blockquote>
+<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
+<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
+</div>
+<div class="script-card" id="script-info-system-get-host-info-sh" data-search="info-system get-host-info.sh hostname, os release, kernel version, and uptime." data-sudo="0" data-interactive="0" data-hasdeps="0">
+<h3><code>info-system/get-host-info.sh</code><a class="permalink" href="#script-info-system-get-host-info-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="info-system/get-host-info.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
+<div class="meta-row">
+<span class="badge">Sudo: ❌</span>
+<span class="badge">Interactive: ❌</span>
+<span class="badge">Idempotent: ✅ (true)</span>
+</div>
+<p>Read-only status and diagnostic script — does not modify system configuration. Works without root.</p>
+<ul><li>Collects <code>hostnamectl</code>, <code>/etc/os-release</code>, <code>uname -a</code>, and <code>uptime</code>.</li></ul>
+<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
+<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
+</div>
+<div class="script-card" id="script-info-system-get-installed-packages-sh" data-search="info-system get-installed-packages.sh count of installed os packages (dpkg or rpm)." data-sudo="0" data-interactive="0" data-hasdeps="0">
+<h3><code>info-system/get-installed-packages.sh</code><a class="permalink" href="#script-info-system-get-installed-packages-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="info-system/get-installed-packages.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
+<div class="meta-row">
+<span class="badge">Sudo: ❌</span>
+<span class="badge">Interactive: ❌</span>
+<span class="badge">Idempotent: ✅ (true)</span>
+</div>
+<p>Read-only status and diagnostic script. Works without root.</p>
+<ul><li>Counts installed packages via <code>dpkg-query</code> (Debian/Ubuntu) or <code>rpm</code> fallback.</li></ul>
+<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
+<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
+</div>
+<div class="script-card" id="script-info-system-get-journal-errors-sh" data-search="info-system get-journal-errors.sh recent critical/error entries from the system journal." data-sudo="1" data-interactive="0" data-hasdeps="0">
+<h3><code>info-system/get-journal-errors.sh</code><a class="permalink" href="#script-info-system-get-journal-errors-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="info-system/get-journal-errors.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
+<div class="meta-row">
+<span class="badge">Sudo: ✅</span>
+<span class="badge">Interactive: ❌</span>
+<span class="badge">Idempotent: ✅ (true)</span>
+</div>
+<p>Read-only status and diagnostic script.</p>
+<ul><li>Collects the last 15 critical/error priority events via <code>journalctl -p 3 -xb</code>.</li></ul>
+<blockquote>Running as <code>sudo</code> is required to read full system journal logs.</blockquote>
+<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
+<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
+</div>
+<div class="script-card" id="script-info-system-get-kernel-log-sh" data-search="info-system get-kernel-log.sh recent kernel ring buffer messages (dmesg)." data-sudo="1" data-interactive="0" data-hasdeps="0">
+<h3><code>info-system/get-kernel-log.sh</code><a class="permalink" href="#script-info-system-get-kernel-log-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="info-system/get-kernel-log.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
+<div class="meta-row">
+<span class="badge">Sudo: ✅</span>
+<span class="badge">Interactive: ❌</span>
+<span class="badge">Idempotent: ✅ (true)</span>
+</div>
+<p>Read-only status and diagnostic script — does not modify system configuration.</p>
+<ul><li>Collects the last 20 lines of <code>dmesg</code>.</li></ul>
+<blockquote>Running as <code>sudo</code> is required on systems with <code>kernel.dmesg_restrict</code> enabled.</blockquote>
+<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
+<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
+</div>
+<div class="script-card" id="script-info-system-get-kernel-parameters-sh" data-search="info-system get-kernel-parameters.sh kernel runtime parameters via sysctl (truncated preview)." data-sudo="0" data-interactive="0" data-hasdeps="0">
+<h3><code>info-system/get-kernel-parameters.sh</code><a class="permalink" href="#script-info-system-get-kernel-parameters-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="info-system/get-kernel-parameters.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
+<div class="meta-row">
+<span class="badge">Sudo: ❌</span>
+<span class="badge">Interactive: ❌</span>
+<span class="badge">Idempotent: ✅ (true)</span>
+</div>
+<p>Read-only status and diagnostic script — does not modify system configuration. Works without root; some restricted parameters may be hidden.</p>
+<ul><li>Collects the first 20 lines of <code>sysctl -a</code> for a quick preview.</li></ul>
+<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
+<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
+</div>
+<div class="script-card" id="script-info-system-get-local-users-sh" data-search="info-system get-local-users.sh non-system local user accounts from /etc/passwd." data-sudo="0" data-interactive="0" data-hasdeps="0">
+<h3><code>info-system/get-local-users.sh</code><a class="permalink" href="#script-info-system-get-local-users-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="info-system/get-local-users.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
+<div class="meta-row">
+<span class="badge">Sudo: ❌</span>
+<span class="badge">Interactive: ❌</span>
+<span class="badge">Idempotent: ✅ (true)</span>
+</div>
+<p>Read-only status and diagnostic script. Works without root.</p>
+<ul><li>Lists local users with UID &gt;= 1000 (excluding <code>nobody</code>) from <code>/etc/passwd</code>.</li></ul>
+<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
+<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
+</div>
+<div class="script-card" id="script-info-system-get-logged-in-users-sh" data-search="info-system get-logged-in-users.sh currently logged-in users and recent login history." data-sudo="0" data-interactive="0" data-hasdeps="0">
+<h3><code>info-system/get-logged-in-users.sh</code><a class="permalink" href="#script-info-system-get-logged-in-users-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="info-system/get-logged-in-users.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
+<div class="meta-row">
+<span class="badge">Sudo: ❌</span>
+<span class="badge">Interactive: ❌</span>
+<span class="badge">Idempotent: ✅ (true)</span>
+</div>
+<p>Read-only status and diagnostic script. Works without root.</p>
+<ul><li>Collects currently logged-in users (<code>w</code>) and the last 10 logins (<code>last</code>).</li></ul>
+<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
+<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
+</div>
+<div class="script-card" id="script-info-system-get-memory-info-sh" data-search="info-system get-memory-info.sh system memory usage (ram and swap)." data-sudo="0" data-interactive="0" data-hasdeps="0">
+<h3><code>info-system/get-memory-info.sh</code><a class="permalink" href="#script-info-system-get-memory-info-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="info-system/get-memory-info.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
+<div class="meta-row">
+<span class="badge">Sudo: ❌</span>
+<span class="badge">Interactive: ❌</span>
+<span class="badge">Idempotent: ✅ (true)</span>
+</div>
+<p>Read-only status and diagnostic script. Works without root.</p>
+<ul><li>Collects RAM and swap usage via <code>free -h</code>.</li></ul>
+<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
+<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
+</div>
+<div class="script-card" id="script-info-system-get-nginx-info-sh" data-search="info-system get-nginx-info.sh nginx version, compilation flags, and configuration check." data-sudo="1" data-interactive="0" data-hasdeps="0">
+<h3><code>info-system/get-nginx-info.sh</code><a class="permalink" href="#script-info-system-get-nginx-info-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="info-system/get-nginx-info.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
+<div class="meta-row">
+<span class="badge">Sudo: ✅</span>
+<span class="badge">Interactive: ❌</span>
+<span class="badge">Idempotent: ✅ (true)</span>
+</div>
+<p>Read-only status and diagnostic script.</p>
+<ul><li>Collects nginx -V and checks config syntax.</li></ul>
+<blockquote>Running as <code>sudo</code> is required to read SSL certificates or specific config files during <code>nginx -t</code>.</blockquote>
+<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
+<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
+</div>
+<div class="script-card" id="script-info-system-get-pci-devices-sh" data-search="info-system get-pci-devices.sh pci device inventory." data-sudo="0" data-interactive="0" data-hasdeps="0">
+<h3><code>info-system/get-pci-devices.sh</code><a class="permalink" href="#script-info-system-get-pci-devices-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="info-system/get-pci-devices.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
+<div class="meta-row">
+<span class="badge">Sudo: ❌</span>
+<span class="badge">Interactive: ❌</span>
+<span class="badge">Idempotent: ✅ (true)</span>
+</div>
+<p>Read-only status and diagnostic script. Works without root.</p>
+<ul><li>Collects the PCI device list via <code>lspci</code>.</li></ul>
+<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
+<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
+</div>
+<div class="script-card" id="script-info-system-get-services-info-sh" data-search="info-system get-services-info.sh running and enabled systemd services." data-sudo="0" data-interactive="0" data-hasdeps="0">
+<h3><code>info-system/get-services-info.sh</code><a class="permalink" href="#script-info-system-get-services-info-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="info-system/get-services-info.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
+<div class="meta-row">
+<span class="badge">Sudo: ❌</span>
+<span class="badge">Interactive: ❌</span>
+<span class="badge">Idempotent: ✅ (true)</span>
+</div>
+<p>Read-only status and diagnostic script. Works without root.</p>
+<ul><li>Collects currently running services and enabled systemd units.</li></ul>
+<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
+<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
+</div>
+<div class="script-card" id="script-info-system-get-ssl-cert-expiry-sh" data-search="info-system get-ssl-cert-expiry.sh ssl/tls certificate expiry status for one or more domains." data-sudo="0" data-interactive="0" data-hasdeps="0">
+<h3><code>info-system/get-ssl-cert-expiry.sh</code><a class="permalink" href="#script-info-system-get-ssl-cert-expiry-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="info-system/get-ssl-cert-expiry.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
+<div class="meta-row">
+<span class="badge">Sudo: ❌</span>
+<span class="badge">Interactive: ❌</span>
+<span class="badge">Idempotent: ✅ (true)</span>
+</div>
+<p>Read-only status and diagnostic script. Works without root.</p>
+<ul><li>Connects to each domain (default port 443, or <code>host:port</code>) via</li></ul>
+<p><code>openssl s_client</code> and reports the certificate's expiry date and days remaining.</p>
+<ul><li>Domains are given as CLI arguments, or edited into the <code>domains</code></li></ul>
+<p>array at the top of the script.</p>
+<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
+<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
+</div>
+<div class="script-card" id="script-info-system-get-storage-info-sh" data-search="info-system get-storage-info.sh disk usage per mount point and block device layout." data-sudo="0" data-interactive="0" data-hasdeps="0">
+<h3><code>info-system/get-storage-info.sh</code><a class="permalink" href="#script-info-system-get-storage-info-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="info-system/get-storage-info.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
+<div class="meta-row">
+<span class="badge">Sudo: ❌</span>
+<span class="badge">Interactive: ❌</span>
+<span class="badge">Idempotent: ✅ (true)</span>
+</div>
+<p>Read-only status and diagnostic script. Works without root.</p>
+<ul><li>Collects filesystem usage via <code>df -h</code> and block device layout via <code>lsblk</code>.</li></ul>
+<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
+<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
+</div>
+<div class="script-card" id="script-info-system-get-systemd-timers-sh" data-search="info-system get-systemd-timers.sh all systemd timers and the health of the units they activate." data-sudo="0" data-interactive="0" data-hasdeps="0">
+<h3><code>info-system/get-systemd-timers.sh</code><a class="permalink" href="#script-info-system-get-systemd-timers-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="info-system/get-systemd-timers.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
+<div class="meta-row">
+<span class="badge">Sudo: ❌</span>
+<span class="badge">Interactive: ❌</span>
+<span class="badge">Idempotent: ✅ (true)</span>
+</div>
+<p>Read-only status and diagnostic script. Works without root.</p>
+<ul><li>Lists every systemd timer via <code>systemctl list-timers</code>, showing next</li></ul>
+<p>and last run times and the unit each one activates.</p>
+<ul><li>Cross-checks each activated unit and flags any currently in a</li></ul>
+<p>failed state.</p>
+<ul><li>Complements crontab-based scheduling reports, which do not cover</li></ul>
+<p>systemd timers.</p>
+<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
+<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
+</div>
+<div class="script-card" id="script-info-system-get-top-processes-sh" data-search="info-system get-top-processes.sh top 10 processes by cpu usage." data-sudo="0" data-interactive="0" data-hasdeps="0">
+<h3><code>info-system/get-top-processes.sh</code><a class="permalink" href="#script-info-system-get-top-processes-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="info-system/get-top-processes.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
+<div class="meta-row">
+<span class="badge">Sudo: ❌</span>
+<span class="badge">Interactive: ❌</span>
+<span class="badge">Idempotent: ✅ (true)</span>
+</div>
+<p>Read-only status and diagnostic script. Works without root.</p>
+<ul><li>Collects the top 10 processes by CPU usage via <code>ps aux --sort=-%cpu</code>.</li></ul>
+<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
+<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
+</div>
+<div class="script-card" id="script-info-system-get-usb-devices-sh" data-search="info-system get-usb-devices.sh usb device inventory." data-sudo="0" data-interactive="0" data-hasdeps="0">
+<h3><code>info-system/get-usb-devices.sh</code><a class="permalink" href="#script-info-system-get-usb-devices-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="info-system/get-usb-devices.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
+<div class="meta-row">
+<span class="badge">Sudo: ❌</span>
+<span class="badge">Interactive: ❌</span>
+<span class="badge">Idempotent: ✅ (true)</span>
+</div>
+<p>Read-only status and diagnostic script. Works without root.</p>
+<ul><li>Collects the USB device list via <code>lsusb</code>.</li></ul>
+<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
+<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
+</div>
+<div class="script-card" id="script-info-system-get-user-crontab-sh" data-search="info-system get-user-crontab.sh current user&#x27;s crontab entries." data-sudo="1" data-interactive="0" data-hasdeps="0">
+<h3><code>info-system/get-user-crontab.sh</code><a class="permalink" href="#script-info-system-get-user-crontab-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="info-system/get-user-crontab.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
+<div class="meta-row">
+<span class="badge">Sudo: ✅</span>
+<span class="badge">Interactive: ❌</span>
+<span class="badge">Idempotent: ✅ (true)</span>
+</div>
+<p>Read-only status and diagnostic script.</p>
+<ul><li>Collects the crontab entries for the current user via <code>crontab -l</code>.</li></ul>
+<blockquote>Running as <code>sudo</code> reads root's crontab instead of the invoking user's.</blockquote>
+<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
+<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
 </div><h2 id="dir-install" class="dir-heading"><code>install/</code><a class="permalink" href="#dir-install" aria-label="Link to this section">#</a></h2>
 <div class="script-card" id="script-install-install-cpp-sh" data-search="install install-cpp.sh install the c and c++ development environment." data-sudo="1" data-interactive="0" data-hasdeps="0">
 <h3><code>install/install-cpp.sh</code><a class="permalink" href="#script-install-install-cpp-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="install/install-cpp.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
@@ -1214,498 +1705,6 @@ scripts and re-run <code>generate-docs.py</code> instead.</p>
 <ul><li>${XDG_DATA_HOME:-$HOME/.local/share}/icons</li></ul>
 <p>Installed themes:</p>
 <ul><li>Zafiro-Icons-Dark</li><li>Zafiro-Icons-Light</li></ul>
-<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
-<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
-</div><h2 id="dir-inventory-network" class="dir-heading"><code>inventory/network/</code><a class="permalink" href="#dir-inventory-network" aria-label="Link to this section">#</a></h2>
-<div class="script-card" id="script-inventory-network-get-bandwidth-summary-sh" data-search="inventory/network get-bandwidth-summary.sh per-interface link speed, duplex, carrier state, and mtu." data-sudo="0" data-interactive="0" data-hasdeps="0">
-<h3><code>inventory/network/get-bandwidth-summary.sh</code><a class="permalink" href="#script-inventory-network-get-bandwidth-summary-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="inventory/network/get-bandwidth-summary.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
-<div class="meta-row">
-<span class="badge">Sudo: ❌</span>
-<span class="badge">Interactive: ❌</span>
-<span class="badge">Idempotent: ✅ (true)</span>
-</div>
-<p>Read-only status and diagnostic script — does not modify system configuration. Works without root; colored output degrades gracefully to plain text when not attached to a terminal.</p>
-<ul><li>Per-interface link speed, duplex, carrier state, and MTU</li></ul>
-<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
-<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
-</div>
-<div class="script-card" id="script-inventory-network-get-connectivity-sh" data-search="inventory/network get-connectivity.sh same checks as network-summary.sh plus dns query time and ipv6 internet reachability." data-sudo="0" data-interactive="0" data-hasdeps="0">
-<h3><code>inventory/network/get-connectivity.sh</code><a class="permalink" href="#script-inventory-network-get-connectivity-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="inventory/network/get-connectivity.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
-<div class="meta-row">
-<span class="badge">Sudo: ❌</span>
-<span class="badge">Interactive: ❌</span>
-<span class="badge">Idempotent: ✅ (true)</span>
-</div>
-<p>Read-only status and diagnostic script — does not modify system configuration. Works without root; colored output degrades gracefully to plain text when not attached to a terminal.</p>
-<ul><li>Same checks as <code>network-summary.sh</code> plus DNS query time and IPv6 internet reachability</li></ul>
-<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
-<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
-</div>
-<div class="script-card" id="script-inventory-network-get-dns-info-sh" data-search="inventory/network get-dns-info.sh resolvectl status or /etc/resolv.conf, active nameservers, and search domains." data-sudo="0" data-interactive="0" data-hasdeps="0">
-<h3><code>inventory/network/get-dns-info.sh</code><a class="permalink" href="#script-inventory-network-get-dns-info-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="inventory/network/get-dns-info.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
-<div class="meta-row">
-<span class="badge">Sudo: ❌</span>
-<span class="badge">Interactive: ❌</span>
-<span class="badge">Idempotent: ✅ (true)</span>
-</div>
-<p>Read-only status and diagnostic script — does not modify system configuration. Works without root; colored output degrades gracefully to plain text when not attached to a terminal.</p>
-<ul><li><code>resolvectl</code> status or <code>/etc/resolv.conf</code>, active nameservers, and search domains</li></ul>
-<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
-<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
-</div>
-<div class="script-card" id="script-inventory-network-get-established-connections-sh" data-search="inventory/network get-established-connections.sh established tcp connections with local/remote endpoints and owning process." data-sudo="1" data-interactive="0" data-hasdeps="0">
-<h3><code>inventory/network/get-established-connections.sh</code><a class="permalink" href="#script-inventory-network-get-established-connections-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="inventory/network/get-established-connections.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
-<div class="meta-row">
-<span class="badge">Sudo: ✅</span>
-<span class="badge">Interactive: ❌</span>
-<span class="badge">Idempotent: ✅ (true)</span>
-</div>
-<p>Read-only status and diagnostic script — does not modify system configuration. Works without root; colored output degrades gracefully to plain text when not attached to a terminal.</p>
-<ul><li>Established TCP connections with local/remote endpoints and owning process</li></ul>
-<blockquote>Running as <code>sudo</code> gives fuller process detail on this script; it still works without root, but with a warning and reduced detail.</blockquote>
-<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
-<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
-</div>
-<div class="script-card" id="script-inventory-network-get-firewall-status-sh" data-search="inventory/network get-firewall-status.sh status across ufw, firewalld, nftables, and iptables — whichever are installed." data-sudo="1" data-interactive="0" data-hasdeps="0">
-<h3><code>inventory/network/get-firewall-status.sh</code><a class="permalink" href="#script-inventory-network-get-firewall-status-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="inventory/network/get-firewall-status.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
-<div class="meta-row">
-<span class="badge">Sudo: ✅</span>
-<span class="badge">Interactive: ❌</span>
-<span class="badge">Idempotent: ✅ (true)</span>
-</div>
-<p>Read-only status and diagnostic script — does not modify system configuration. Works without root; colored output degrades gracefully to plain text when not attached to a terminal.</p>
-<ul><li>Status across UFW, Firewalld, nftables, and iptables — whichever are installed</li></ul>
-<blockquote>Running as <code>sudo</code> gives fuller process detail on this script; it still works without root, but with a warning and reduced detail.</blockquote>
-<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
-<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
-</div>
-<div class="script-card" id="script-inventory-network-get-interface-statistics-sh" data-search="inventory/network get-interface-statistics.sh per-interface rx/tx bytes, packets, errors, drops, and collisions." data-sudo="0" data-interactive="0" data-hasdeps="0">
-<h3><code>inventory/network/get-interface-statistics.sh</code><a class="permalink" href="#script-inventory-network-get-interface-statistics-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="inventory/network/get-interface-statistics.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
-<div class="meta-row">
-<span class="badge">Sudo: ❌</span>
-<span class="badge">Interactive: ❌</span>
-<span class="badge">Idempotent: ✅ (true)</span>
-</div>
-<p>Read-only status and diagnostic script — does not modify system configuration. Works without root; colored output degrades gracefully to plain text when not attached to a terminal.</p>
-<ul><li>Per-interface RX/TX bytes, packets, errors, drops, and collisions from <code>/sys/class/net</code></li></ul>
-<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
-<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
-</div>
-<div class="script-card" id="script-inventory-network-get-listening-ports-sh" data-search="inventory/network get-listening-ports.sh listening tcp/udp ports with the owning process, via ss." data-sudo="1" data-interactive="0" data-hasdeps="0">
-<h3><code>inventory/network/get-listening-ports.sh</code><a class="permalink" href="#script-inventory-network-get-listening-ports-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="inventory/network/get-listening-ports.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
-<div class="meta-row">
-<span class="badge">Sudo: ✅</span>
-<span class="badge">Interactive: ❌</span>
-<span class="badge">Idempotent: ✅ (true)</span>
-</div>
-<p>Read-only status and diagnostic script — does not modify system configuration. Works without root; colored output degrades gracefully to plain text when not attached to a terminal.</p>
-<ul><li>Listening TCP/UDP ports with the owning process, via <code>ss</code></li></ul>
-<blockquote>Running as <code>sudo</code> gives fuller process detail on this script; it still works without root, but with a warning and reduced detail.</blockquote>
-<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
-<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
-</div>
-<div class="script-card" id="script-inventory-network-get-neighbors-sh" data-search="inventory/network get-neighbors.sh arp table (ipv4) and neighbor cache (ipv6)." data-sudo="0" data-interactive="0" data-hasdeps="0">
-<h3><code>inventory/network/get-neighbors.sh</code><a class="permalink" href="#script-inventory-network-get-neighbors-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="inventory/network/get-neighbors.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
-<div class="meta-row">
-<span class="badge">Sudo: ❌</span>
-<span class="badge">Interactive: ❌</span>
-<span class="badge">Idempotent: ✅ (true)</span>
-</div>
-<p>Read-only status and diagnostic script — does not modify system configuration. Works without root; colored output degrades gracefully to plain text when not attached to a terminal.</p>
-<ul><li>ARP table (IPv4) and neighbor cache (IPv6)</li></ul>
-<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
-<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
-</div>
-<div class="script-card" id="script-inventory-network-get-network-interfaces-sh" data-search="inventory/network get-network-interfaces.sh per-interface state, mac, mtu, driver, speed, and ipv4/ipv6 addresses." data-sudo="0" data-interactive="0" data-hasdeps="0">
-<h3><code>inventory/network/get-network-interfaces.sh</code><a class="permalink" href="#script-inventory-network-get-network-interfaces-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="inventory/network/get-network-interfaces.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
-<div class="meta-row">
-<span class="badge">Sudo: ❌</span>
-<span class="badge">Interactive: ❌</span>
-<span class="badge">Idempotent: ✅ (true)</span>
-</div>
-<p>Read-only status and diagnostic script — does not modify system configuration. Works without root; colored output degrades gracefully to plain text when not attached to a terminal.</p>
-<ul><li>Per-interface state, MAC, MTU, driver, speed, and IPv4/IPv6 addresses</li></ul>
-<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
-<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
-</div>
-<div class="script-card" id="script-inventory-network-get-network-services-sh" data-search="inventory/network get-network-services.sh active state of networkmanager, systemd-networkd/-resolved, dhcpcd, wpa_supplicant, iwd." data-sudo="0" data-interactive="0" data-hasdeps="0">
-<h3><code>inventory/network/get-network-services.sh</code><a class="permalink" href="#script-inventory-network-get-network-services-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="inventory/network/get-network-services.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
-<div class="meta-row">
-<span class="badge">Sudo: ❌</span>
-<span class="badge">Interactive: ❌</span>
-<span class="badge">Idempotent: ✅ (true)</span>
-</div>
-<p>Read-only status and diagnostic script — does not modify system configuration. Works without root; colored output degrades gracefully to plain text when not attached to a terminal.</p>
-<ul><li>Active state of NetworkManager, systemd-networkd/-resolved, dhcpcd, wpa_supplicant, iwd</li></ul>
-<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
-<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
-</div>
-<div class="script-card" id="script-inventory-network-get-network-statistics-sh" data-search="inventory/network get-network-statistics.sh tcp congestion control algorithm, ipv4/ipv6 forwarding, and bbr status via sysctl." data-sudo="0" data-interactive="0" data-hasdeps="0">
-<h3><code>inventory/network/get-network-statistics.sh</code><a class="permalink" href="#script-inventory-network-get-network-statistics-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="inventory/network/get-network-statistics.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
-<div class="meta-row">
-<span class="badge">Sudo: ❌</span>
-<span class="badge">Interactive: ❌</span>
-<span class="badge">Idempotent: ✅ (true)</span>
-</div>
-<p>Read-only status and diagnostic script — does not modify system configuration. Works without root; colored output degrades gracefully to plain text when not attached to a terminal.</p>
-<ul><li>TCP congestion control algorithm, IPv4/IPv6 forwarding, and BBR status via <code>sysctl</code></li></ul>
-<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
-<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
-</div>
-<div class="script-card" id="script-inventory-network-get-network-summary-sh" data-search="inventory/network get-network-summary.sh one-shot pass/fail overview: gateway, dns, internet, public ipv4/ipv6." data-sudo="0" data-interactive="0" data-hasdeps="0">
-<h3><code>inventory/network/get-network-summary.sh</code><a class="permalink" href="#script-inventory-network-get-network-summary-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="inventory/network/get-network-summary.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
-<div class="meta-row">
-<span class="badge">Sudo: ❌</span>
-<span class="badge">Interactive: ❌</span>
-<span class="badge">Idempotent: ✅ (true)</span>
-</div>
-<p>Read-only status and diagnostic script — does not modify system configuration. Works without root; colored output degrades gracefully to plain text when not attached to a terminal.</p>
-<ul><li>One-shot pass/fail overview: gateway, DNS, internet, public IPv4/IPv6</li></ul>
-<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
-<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
-</div>
-<div class="script-card" id="script-inventory-network-get-public-ip-sh" data-search="inventory/network get-public-ip.sh public ipv4/ipv6 via ipify, falling back to ifconfig.me/ifconfig.co." data-sudo="0" data-interactive="0" data-hasdeps="0">
-<h3><code>inventory/network/get-public-ip.sh</code><a class="permalink" href="#script-inventory-network-get-public-ip-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="inventory/network/get-public-ip.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
-<div class="meta-row">
-<span class="badge">Sudo: ❌</span>
-<span class="badge">Interactive: ❌</span>
-<span class="badge">Idempotent: ✅ (true)</span>
-</div>
-<p>Read-only status and diagnostic script — does not modify system configuration. Works without root; colored output degrades gracefully to plain text when not attached to a terminal.</p>
-<ul><li>Public IPv4/IPv6 via ipify, falling back to ifconfig.me/ifconfig.co</li></ul>
-<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
-<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
-</div>
-<div class="script-card" id="script-inventory-network-get-routing-sh" data-search="inventory/network get-routing.sh ipv4/ipv6 routing tables and the default gateway/interface." data-sudo="0" data-interactive="0" data-hasdeps="0">
-<h3><code>inventory/network/get-routing.sh</code><a class="permalink" href="#script-inventory-network-get-routing-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="inventory/network/get-routing.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
-<div class="meta-row">
-<span class="badge">Sudo: ❌</span>
-<span class="badge">Interactive: ❌</span>
-<span class="badge">Idempotent: ✅ (true)</span>
-</div>
-<p>Read-only status and diagnostic script — does not modify system configuration. Works without root; colored output degrades gracefully to plain text when not attached to a terminal.</p>
-<ul><li>IPv4/IPv6 routing tables and the default gateway/interface</li></ul>
-<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
-<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
-</div>
-<div class="script-card" id="script-inventory-network-get-vpn-status-sh" data-search="inventory/network get-vpn-status.sh wireguard/tun/tap interfaces, tailscale status, and zerotier status." data-sudo="0" data-interactive="0" data-hasdeps="0">
-<h3><code>inventory/network/get-vpn-status.sh</code><a class="permalink" href="#script-inventory-network-get-vpn-status-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="inventory/network/get-vpn-status.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
-<div class="meta-row">
-<span class="badge">Sudo: ❌</span>
-<span class="badge">Interactive: ❌</span>
-<span class="badge">Idempotent: ✅ (true)</span>
-</div>
-<p>Read-only status and diagnostic script — does not modify system configuration. Works without root; colored output degrades gracefully to plain text when not attached to a terminal.</p>
-<ul><li>WireGuard/TUN/TAP interfaces, Tailscale status, and ZeroTier status</li></ul>
-<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
-<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
-</div>
-<div class="script-card" id="script-inventory-network-get-wifi-status-sh" data-search="inventory/network get-wifi-status.sh ssid, signal, bitrate, and frequency for wireless interfaces via iw or nmcli." data-sudo="0" data-interactive="0" data-hasdeps="0">
-<h3><code>inventory/network/get-wifi-status.sh</code><a class="permalink" href="#script-inventory-network-get-wifi-status-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="inventory/network/get-wifi-status.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
-<div class="meta-row">
-<span class="badge">Sudo: ❌</span>
-<span class="badge">Interactive: ❌</span>
-<span class="badge">Idempotent: ✅ (true)</span>
-</div>
-<p>Read-only status and diagnostic script — does not modify system configuration. Works without root; colored output degrades gracefully to plain text when not attached to a terminal.</p>
-<ul><li>SSID, signal, bitrate, and frequency for wireless interfaces via <code>iw</code> or <code>nmcli</code></li></ul>
-<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
-<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
-</div><h2 id="dir-inventory-system" class="dir-heading"><code>inventory/system/</code><a class="permalink" href="#dir-inventory-system" aria-label="Link to this section">#</a></h2>
-<div class="script-card" id="script-inventory-system-get-cpu-info-sh" data-search="inventory/system get-cpu-info.sh cpu architecture, model, core, and thread information." data-sudo="0" data-interactive="0" data-hasdeps="0">
-<h3><code>inventory/system/get-cpu-info.sh</code><a class="permalink" href="#script-inventory-system-get-cpu-info-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="inventory/system/get-cpu-info.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
-<div class="meta-row">
-<span class="badge">Sudo: ❌</span>
-<span class="badge">Interactive: ❌</span>
-<span class="badge">Idempotent: ✅ (true)</span>
-</div>
-<p>Read-only status and diagnostic script. Works without root.</p>
-<ul><li>Collects architecture, model name, core/thread counts via <code>lscpu</code>.</li></ul>
-<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
-<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
-</div>
-<div class="script-card" id="script-inventory-system-get-directory-tree-sh" data-search="inventory/system get-directory-tree.sh displays structural hierarchy of common server directories." data-sudo="1" data-interactive="0" data-hasdeps="0">
-<h3><code>inventory/system/get-directory-tree.sh</code><a class="permalink" href="#script-inventory-system-get-directory-tree-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="inventory/system/get-directory-tree.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
-<div class="meta-row">
-<span class="badge">Sudo: ✅</span>
-<span class="badge">Interactive: ❌</span>
-<span class="badge">Idempotent: ✅ (true)</span>
-</div>
-<p>Read-only status and diagnostic script. Works without root.</p>
-<ul><li>Displays a 2-level deep tree for /srv, /opt, and /var/www.</li></ul>
-<blockquote>Running as <code>sudo</code> prevents "Permission denied" errors in restricted folders.</blockquote>
-<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
-<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
-</div>
-<div class="script-card" id="script-inventory-system-get-disk-health-sh" data-search="inventory/system get-disk-health.sh smart health status for all detected physical disks." data-sudo="1" data-interactive="0" data-hasdeps="0">
-<h3><code>inventory/system/get-disk-health.sh</code><a class="permalink" href="#script-inventory-system-get-disk-health-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="inventory/system/get-disk-health.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
-<div class="meta-row">
-<span class="badge">Sudo: ✅</span>
-<span class="badge">Interactive: ❌</span>
-<span class="badge">Idempotent: ✅ (true)</span>
-</div>
-<p>Read-only status and diagnostic script.</p>
-<ul><li>Enumerates physical disks via <code>lsblk</code> and reports SMART overall</li></ul>
-<p>health, temperature, power-on hours, and reallocated/pending sector counts via <code>smartctl</code> (SATA, SAS, and NVMe).</p>
-<ul><li>Complements <code>get-storage-info.sh</code>, which reports filesystem usage</li></ul>
-<p>rather than drive health.</p>
-<blockquote>Running as <code>sudo</code> is required; <code>smartctl</code> returns limited or no<br>data for non-root users.</blockquote>
-<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
-<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
-</div>
-<div class="script-card" id="script-inventory-system-get-dmi-info-sh" data-search="inventory/system get-dmi-info.sh system-level dmi/smbios hardware component info." data-sudo="1" data-interactive="0" data-hasdeps="0">
-<h3><code>inventory/system/get-dmi-info.sh</code><a class="permalink" href="#script-inventory-system-get-dmi-info-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="inventory/system/get-dmi-info.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
-<div class="meta-row">
-<span class="badge">Sudo: ✅</span>
-<span class="badge">Interactive: ❌</span>
-<span class="badge">Idempotent: ✅ (true)</span>
-</div>
-<p>Read-only status and diagnostic script.</p>
-<ul><li>Collects system manufacturer/model/serial info via <code>dmidecode -t system</code>.</li></ul>
-<blockquote>Running as <code>sudo</code> is required; <code>dmidecode</code> returns no data for non-root users.</blockquote>
-<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
-<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
-</div>
-<div class="script-card" id="script-inventory-system-get-docker-info-sh" data-search="inventory/system get-docker-info.sh docker containers, networks, volumes, and system info." data-sudo="1" data-interactive="0" data-hasdeps="0">
-<h3><code>inventory/system/get-docker-info.sh</code><a class="permalink" href="#script-inventory-system-get-docker-info-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="inventory/system/get-docker-info.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
-<div class="meta-row">
-<span class="badge">Sudo: ✅</span>
-<span class="badge">Interactive: ❌</span>
-<span class="badge">Idempotent: ✅ (true)</span>
-</div>
-<p>Read-only status and diagnostic script.</p>
-<ul><li>Collects docker ps, network ls, volume ls, and docker info.</li></ul>
-<blockquote>Running as <code>sudo</code> is required unless the user is part of the <code>docker</code> group.</blockquote>
-<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
-<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
-</div>
-<div class="script-card" id="script-inventory-system-get-gpu-info-sh" data-search="inventory/system get-gpu-info.sh gpu hardware detection and live nvidia driver metrics." data-sudo="0" data-interactive="0" data-hasdeps="0">
-<h3><code>inventory/system/get-gpu-info.sh</code><a class="permalink" href="#script-inventory-system-get-gpu-info-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="inventory/system/get-gpu-info.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
-<div class="meta-row">
-<span class="badge">Sudo: ❌</span>
-<span class="badge">Interactive: ❌</span>
-<span class="badge">Idempotent: ✅ (true)</span>
-</div>
-<p>Read-only status and diagnostic script. Works without root.</p>
-<ul><li>Detects GPU devices via <code>lspci</code> (VGA/3D/display controllers).</li><li>If <code>nvidia-smi</code> is present, also shows driver/CUDA version, per-GPU</li></ul>
-<p>temperature, utilization, memory usage, power draw, and active compute processes.</p>
-<blockquote>If no NVIDIA driver is found, run <code>install-nvidia-driver.sh</code> first.</blockquote>
-<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
-<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
-</div>
-<div class="script-card" id="script-inventory-system-get-host-info-sh" data-search="inventory/system get-host-info.sh hostname, os release, kernel version, and uptime." data-sudo="0" data-interactive="0" data-hasdeps="0">
-<h3><code>inventory/system/get-host-info.sh</code><a class="permalink" href="#script-inventory-system-get-host-info-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="inventory/system/get-host-info.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
-<div class="meta-row">
-<span class="badge">Sudo: ❌</span>
-<span class="badge">Interactive: ❌</span>
-<span class="badge">Idempotent: ✅ (true)</span>
-</div>
-<p>Read-only status and diagnostic script — does not modify system configuration. Works without root.</p>
-<ul><li>Collects <code>hostnamectl</code>, <code>/etc/os-release</code>, <code>uname -a</code>, and <code>uptime</code>.</li></ul>
-<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
-<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
-</div>
-<div class="script-card" id="script-inventory-system-get-installed-packages-sh" data-search="inventory/system get-installed-packages.sh count of installed os packages (dpkg or rpm)." data-sudo="0" data-interactive="0" data-hasdeps="0">
-<h3><code>inventory/system/get-installed-packages.sh</code><a class="permalink" href="#script-inventory-system-get-installed-packages-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="inventory/system/get-installed-packages.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
-<div class="meta-row">
-<span class="badge">Sudo: ❌</span>
-<span class="badge">Interactive: ❌</span>
-<span class="badge">Idempotent: ✅ (true)</span>
-</div>
-<p>Read-only status and diagnostic script. Works without root.</p>
-<ul><li>Counts installed packages via <code>dpkg-query</code> (Debian/Ubuntu) or <code>rpm</code> fallback.</li></ul>
-<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
-<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
-</div>
-<div class="script-card" id="script-inventory-system-get-journal-errors-sh" data-search="inventory/system get-journal-errors.sh recent critical/error entries from the system journal." data-sudo="1" data-interactive="0" data-hasdeps="0">
-<h3><code>inventory/system/get-journal-errors.sh</code><a class="permalink" href="#script-inventory-system-get-journal-errors-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="inventory/system/get-journal-errors.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
-<div class="meta-row">
-<span class="badge">Sudo: ✅</span>
-<span class="badge">Interactive: ❌</span>
-<span class="badge">Idempotent: ✅ (true)</span>
-</div>
-<p>Read-only status and diagnostic script.</p>
-<ul><li>Collects the last 15 critical/error priority events via <code>journalctl -p 3 -xb</code>.</li></ul>
-<blockquote>Running as <code>sudo</code> is required to read full system journal logs.</blockquote>
-<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
-<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
-</div>
-<div class="script-card" id="script-inventory-system-get-kernel-log-sh" data-search="inventory/system get-kernel-log.sh recent kernel ring buffer messages (dmesg)." data-sudo="1" data-interactive="0" data-hasdeps="0">
-<h3><code>inventory/system/get-kernel-log.sh</code><a class="permalink" href="#script-inventory-system-get-kernel-log-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="inventory/system/get-kernel-log.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
-<div class="meta-row">
-<span class="badge">Sudo: ✅</span>
-<span class="badge">Interactive: ❌</span>
-<span class="badge">Idempotent: ✅ (true)</span>
-</div>
-<p>Read-only status and diagnostic script — does not modify system configuration.</p>
-<ul><li>Collects the last 20 lines of <code>dmesg</code>.</li></ul>
-<blockquote>Running as <code>sudo</code> is required on systems with <code>kernel.dmesg_restrict</code> enabled.</blockquote>
-<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
-<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
-</div>
-<div class="script-card" id="script-inventory-system-get-kernel-parameters-sh" data-search="inventory/system get-kernel-parameters.sh kernel runtime parameters via sysctl (truncated preview)." data-sudo="0" data-interactive="0" data-hasdeps="0">
-<h3><code>inventory/system/get-kernel-parameters.sh</code><a class="permalink" href="#script-inventory-system-get-kernel-parameters-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="inventory/system/get-kernel-parameters.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
-<div class="meta-row">
-<span class="badge">Sudo: ❌</span>
-<span class="badge">Interactive: ❌</span>
-<span class="badge">Idempotent: ✅ (true)</span>
-</div>
-<p>Read-only status and diagnostic script — does not modify system configuration. Works without root; some restricted parameters may be hidden.</p>
-<ul><li>Collects the first 20 lines of <code>sysctl -a</code> for a quick preview.</li></ul>
-<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
-<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
-</div>
-<div class="script-card" id="script-inventory-system-get-local-users-sh" data-search="inventory/system get-local-users.sh non-system local user accounts from /etc/passwd." data-sudo="0" data-interactive="0" data-hasdeps="0">
-<h3><code>inventory/system/get-local-users.sh</code><a class="permalink" href="#script-inventory-system-get-local-users-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="inventory/system/get-local-users.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
-<div class="meta-row">
-<span class="badge">Sudo: ❌</span>
-<span class="badge">Interactive: ❌</span>
-<span class="badge">Idempotent: ✅ (true)</span>
-</div>
-<p>Read-only status and diagnostic script. Works without root.</p>
-<ul><li>Lists local users with UID &gt;= 1000 (excluding <code>nobody</code>) from <code>/etc/passwd</code>.</li></ul>
-<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
-<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
-</div>
-<div class="script-card" id="script-inventory-system-get-logged-in-users-sh" data-search="inventory/system get-logged-in-users.sh currently logged-in users and recent login history." data-sudo="0" data-interactive="0" data-hasdeps="0">
-<h3><code>inventory/system/get-logged-in-users.sh</code><a class="permalink" href="#script-inventory-system-get-logged-in-users-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="inventory/system/get-logged-in-users.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
-<div class="meta-row">
-<span class="badge">Sudo: ❌</span>
-<span class="badge">Interactive: ❌</span>
-<span class="badge">Idempotent: ✅ (true)</span>
-</div>
-<p>Read-only status and diagnostic script. Works without root.</p>
-<ul><li>Collects currently logged-in users (<code>w</code>) and the last 10 logins (<code>last</code>).</li></ul>
-<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
-<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
-</div>
-<div class="script-card" id="script-inventory-system-get-memory-info-sh" data-search="inventory/system get-memory-info.sh system memory usage (ram and swap)." data-sudo="0" data-interactive="0" data-hasdeps="0">
-<h3><code>inventory/system/get-memory-info.sh</code><a class="permalink" href="#script-inventory-system-get-memory-info-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="inventory/system/get-memory-info.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
-<div class="meta-row">
-<span class="badge">Sudo: ❌</span>
-<span class="badge">Interactive: ❌</span>
-<span class="badge">Idempotent: ✅ (true)</span>
-</div>
-<p>Read-only status and diagnostic script. Works without root.</p>
-<ul><li>Collects RAM and swap usage via <code>free -h</code>.</li></ul>
-<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
-<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
-</div>
-<div class="script-card" id="script-inventory-system-get-nginx-info-sh" data-search="inventory/system get-nginx-info.sh nginx version, compilation flags, and configuration check." data-sudo="1" data-interactive="0" data-hasdeps="0">
-<h3><code>inventory/system/get-nginx-info.sh</code><a class="permalink" href="#script-inventory-system-get-nginx-info-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="inventory/system/get-nginx-info.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
-<div class="meta-row">
-<span class="badge">Sudo: ✅</span>
-<span class="badge">Interactive: ❌</span>
-<span class="badge">Idempotent: ✅ (true)</span>
-</div>
-<p>Read-only status and diagnostic script.</p>
-<ul><li>Collects nginx -V and checks config syntax.</li></ul>
-<blockquote>Running as <code>sudo</code> is required to read SSL certificates or specific config files during <code>nginx -t</code>.</blockquote>
-<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
-<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
-</div>
-<div class="script-card" id="script-inventory-system-get-pci-devices-sh" data-search="inventory/system get-pci-devices.sh pci device inventory." data-sudo="0" data-interactive="0" data-hasdeps="0">
-<h3><code>inventory/system/get-pci-devices.sh</code><a class="permalink" href="#script-inventory-system-get-pci-devices-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="inventory/system/get-pci-devices.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
-<div class="meta-row">
-<span class="badge">Sudo: ❌</span>
-<span class="badge">Interactive: ❌</span>
-<span class="badge">Idempotent: ✅ (true)</span>
-</div>
-<p>Read-only status and diagnostic script. Works without root.</p>
-<ul><li>Collects the PCI device list via <code>lspci</code>.</li></ul>
-<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
-<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
-</div>
-<div class="script-card" id="script-inventory-system-get-services-info-sh" data-search="inventory/system get-services-info.sh running and enabled systemd services." data-sudo="0" data-interactive="0" data-hasdeps="0">
-<h3><code>inventory/system/get-services-info.sh</code><a class="permalink" href="#script-inventory-system-get-services-info-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="inventory/system/get-services-info.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
-<div class="meta-row">
-<span class="badge">Sudo: ❌</span>
-<span class="badge">Interactive: ❌</span>
-<span class="badge">Idempotent: ✅ (true)</span>
-</div>
-<p>Read-only status and diagnostic script. Works without root.</p>
-<ul><li>Collects currently running services and enabled systemd units.</li></ul>
-<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
-<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
-</div>
-<div class="script-card" id="script-inventory-system-get-ssl-cert-expiry-sh" data-search="inventory/system get-ssl-cert-expiry.sh ssl/tls certificate expiry status for one or more domains." data-sudo="0" data-interactive="0" data-hasdeps="0">
-<h3><code>inventory/system/get-ssl-cert-expiry.sh</code><a class="permalink" href="#script-inventory-system-get-ssl-cert-expiry-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="inventory/system/get-ssl-cert-expiry.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
-<div class="meta-row">
-<span class="badge">Sudo: ❌</span>
-<span class="badge">Interactive: ❌</span>
-<span class="badge">Idempotent: ✅ (true)</span>
-</div>
-<p>Read-only status and diagnostic script. Works without root.</p>
-<ul><li>Connects to each domain (default port 443, or <code>host:port</code>) via</li></ul>
-<p><code>openssl s_client</code> and reports the certificate's expiry date and days remaining.</p>
-<ul><li>Domains are given as CLI arguments, or edited into the <code>domains</code></li></ul>
-<p>array at the top of the script.</p>
-<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
-<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
-</div>
-<div class="script-card" id="script-inventory-system-get-storage-info-sh" data-search="inventory/system get-storage-info.sh disk usage per mount point and block device layout." data-sudo="0" data-interactive="0" data-hasdeps="0">
-<h3><code>inventory/system/get-storage-info.sh</code><a class="permalink" href="#script-inventory-system-get-storage-info-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="inventory/system/get-storage-info.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
-<div class="meta-row">
-<span class="badge">Sudo: ❌</span>
-<span class="badge">Interactive: ❌</span>
-<span class="badge">Idempotent: ✅ (true)</span>
-</div>
-<p>Read-only status and diagnostic script. Works without root.</p>
-<ul><li>Collects filesystem usage via <code>df -h</code> and block device layout via <code>lsblk</code>.</li></ul>
-<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
-<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
-</div>
-<div class="script-card" id="script-inventory-system-get-systemd-timers-sh" data-search="inventory/system get-systemd-timers.sh all systemd timers and the health of the units they activate." data-sudo="0" data-interactive="0" data-hasdeps="0">
-<h3><code>inventory/system/get-systemd-timers.sh</code><a class="permalink" href="#script-inventory-system-get-systemd-timers-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="inventory/system/get-systemd-timers.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
-<div class="meta-row">
-<span class="badge">Sudo: ❌</span>
-<span class="badge">Interactive: ❌</span>
-<span class="badge">Idempotent: ✅ (true)</span>
-</div>
-<p>Read-only status and diagnostic script. Works without root.</p>
-<ul><li>Lists every systemd timer via <code>systemctl list-timers</code>, showing next</li></ul>
-<p>and last run times and the unit each one activates.</p>
-<ul><li>Cross-checks each activated unit and flags any currently in a</li></ul>
-<p>failed state.</p>
-<ul><li>Complements crontab-based scheduling reports, which do not cover</li></ul>
-<p>systemd timers.</p>
-<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
-<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
-</div>
-<div class="script-card" id="script-inventory-system-get-top-processes-sh" data-search="inventory/system get-top-processes.sh top 10 processes by cpu usage." data-sudo="0" data-interactive="0" data-hasdeps="0">
-<h3><code>inventory/system/get-top-processes.sh</code><a class="permalink" href="#script-inventory-system-get-top-processes-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="inventory/system/get-top-processes.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
-<div class="meta-row">
-<span class="badge">Sudo: ❌</span>
-<span class="badge">Interactive: ❌</span>
-<span class="badge">Idempotent: ✅ (true)</span>
-</div>
-<p>Read-only status and diagnostic script. Works without root.</p>
-<ul><li>Collects the top 10 processes by CPU usage via <code>ps aux --sort=-%cpu</code>.</li></ul>
-<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
-<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
-</div>
-<div class="script-card" id="script-inventory-system-get-usb-devices-sh" data-search="inventory/system get-usb-devices.sh usb device inventory." data-sudo="0" data-interactive="0" data-hasdeps="0">
-<h3><code>inventory/system/get-usb-devices.sh</code><a class="permalink" href="#script-inventory-system-get-usb-devices-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="inventory/system/get-usb-devices.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
-<div class="meta-row">
-<span class="badge">Sudo: ❌</span>
-<span class="badge">Interactive: ❌</span>
-<span class="badge">Idempotent: ✅ (true)</span>
-</div>
-<p>Read-only status and diagnostic script. Works without root.</p>
-<ul><li>Collects the USB device list via <code>lsusb</code>.</li></ul>
-<div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
-<div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
-</div>
-<div class="script-card" id="script-inventory-system-get-user-crontab-sh" data-search="inventory/system get-user-crontab.sh current user&#x27;s crontab entries." data-sudo="1" data-interactive="0" data-hasdeps="0">
-<h3><code>inventory/system/get-user-crontab.sh</code><a class="permalink" href="#script-inventory-system-get-user-crontab-sh" aria-label="Link to this section">#</a><button type="button" class="copy-btn" data-path="inventory/system/get-user-crontab.sh" title="Copy path" aria-label="Copy path">&#10697;</button></h3>
-<div class="meta-row">
-<span class="badge">Sudo: ✅</span>
-<span class="badge">Interactive: ❌</span>
-<span class="badge">Idempotent: ✅ (true)</span>
-</div>
-<p>Read-only status and diagnostic script.</p>
-<ul><li>Collects the crontab entries for the current user via <code>crontab -l</code>.</li></ul>
-<blockquote>Running as <code>sudo</code> reads root's crontab instead of the invoking user's.</blockquote>
 <div class="dep-section"><strong>Dependencies:</strong> <span class="dep-none">none</span></div>
 <div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
 </div><h2 id="dir-lsp" class="dir-heading"><code>lsp/</code><a class="permalink" href="#dir-lsp" aria-label="Link to this section">#</a></h2>
@@ -2209,7 +2208,7 @@ scripts and re-run <code>generate-docs.py</code> instead.</p>
 <div class="dep-section"><strong>Used by:</strong> <span class="dep-none">none</span></div>
 </div>
 
-<p class="generated-note">Generated by <code>generate-docs.py</code> on 2026-10-09 07:14 UTC &middot;
+<p class="generated-note">Generated by <code>generate-docs.py</code> on 2026-10-09 07:22 UTC &middot;
 150 scripts documented.</p>
 
 </div>
@@ -2218,7 +2217,7 @@ scripts and re-run <code>generate-docs.py</code> instead.</p>
 <ul>
 <li><a href="#at-a-glance">At a Glance</a></li><li><a href="#repository-structure">Repository Structure</a></li><li><a href="#all-scripts">All Scripts</a></li>
 <li class="toc-divider">Directories</li>
-<li><a href="#dir-chmod">chmod/<span class="toc-count"> (4)</span></a></li><li><a href="#dir-cleanup">cleanup/<span class="toc-count"> (14)</span></a></li><li><a href="#dir-docker">docker/<span class="toc-count"> (2)</span></a></li><li><a href="#dir-ffmpeg">ffmpeg/<span class="toc-count"> (1)</span></a></li><li><a href="#dir-firewalld">firewalld/<span class="toc-count"> (7)</span></a></li><li><a href="#dir-flatpak">flatpak/<span class="toc-count"> (6)</span></a></li><li><a href="#dir-git">git/<span class="toc-count"> (7)</span></a></li><li><a href="#dir-group-management">group-management/<span class="toc-count"> (8)</span></a></li><li><a href="#dir-install">install/<span class="toc-count"> (20)</span></a></li><li><a href="#dir-inventory-network">inventory/network/<span class="toc-count"> (16)</span></a></li><li><a href="#dir-inventory-system">inventory/system/<span class="toc-count"> (23)</span></a></li><li><a href="#dir-lsp">lsp/<span class="toc-count"> (4)</span></a></li><li><a href="#dir-maintenance">maintenance/<span class="toc-count"> (5)</span></a></li><li><a href="#dir-packages">packages/<span class="toc-count"> (5)</span></a></li><li><a href="#dir-pipx">pipx/<span class="toc-count"> (7)</span></a></li><li><a href="#dir-sources">sources/<span class="toc-count"> (4)</span></a></li><li><a href="#dir-update">update/<span class="toc-count"> (2)</span></a></li><li><a href="#dir-workflows">workflows/<span class="toc-count"> (11)</span></a></li><li><a href="#dir-yt-dlp">yt-dlp/<span class="toc-count"> (4)</span></a></li>
+<li><a href="#dir-chmod">chmod/<span class="toc-count"> (4)</span></a></li><li><a href="#dir-cleanup">cleanup/<span class="toc-count"> (14)</span></a></li><li><a href="#dir-docker">docker/<span class="toc-count"> (2)</span></a></li><li><a href="#dir-ffmpeg">ffmpeg/<span class="toc-count"> (1)</span></a></li><li><a href="#dir-firewalld">firewalld/<span class="toc-count"> (7)</span></a></li><li><a href="#dir-flatpak">flatpak/<span class="toc-count"> (6)</span></a></li><li><a href="#dir-git">git/<span class="toc-count"> (7)</span></a></li><li><a href="#dir-group-management">group-management/<span class="toc-count"> (8)</span></a></li><li><a href="#dir-info-network">info-network/<span class="toc-count"> (16)</span></a></li><li><a href="#dir-info-system">info-system/<span class="toc-count"> (23)</span></a></li><li><a href="#dir-install">install/<span class="toc-count"> (20)</span></a></li><li><a href="#dir-lsp">lsp/<span class="toc-count"> (4)</span></a></li><li><a href="#dir-maintenance">maintenance/<span class="toc-count"> (5)</span></a></li><li><a href="#dir-packages">packages/<span class="toc-count"> (5)</span></a></li><li><a href="#dir-pipx">pipx/<span class="toc-count"> (7)</span></a></li><li><a href="#dir-sources">sources/<span class="toc-count"> (4)</span></a></li><li><a href="#dir-update">update/<span class="toc-count"> (2)</span></a></li><li><a href="#dir-workflows">workflows/<span class="toc-count"> (11)</span></a></li><li><a href="#dir-yt-dlp">yt-dlp/<span class="toc-count"> (4)</span></a></li>
 </ul>
 <a class="toc-back-to-top" href="#top">&uarr; Back to top</a>
 </nav>
