@@ -3,7 +3,7 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-INSTALL_DIR="$(cd "$SCRIPT_DIR/../standalone/install" && pwd)"
+INSTALL_DIR="$(cd "$SCRIPT_DIR/../install" && pwd)"
 
 run_script() {
     local script="$1"
@@ -39,7 +39,7 @@ run_script() {
 
 echo "Running ranger setup..."
 
-run_script "$INSTALL_DIR/apt/cli/install-ranger.sh" true
+run_script "$INSTALL_DIR/install-ranger.sh" true
 run_script "$INSTALL_DIR/install-nerd-fonts.sh" true
 run_script "$INSTALL_DIR/install-ranger-devicons.sh" false
 

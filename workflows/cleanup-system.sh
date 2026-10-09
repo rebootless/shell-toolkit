@@ -38,7 +38,7 @@ fi
 ORIGINAL_ARGS=("$@")
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-CLEANUP_DIR="$(cd "$SCRIPT_DIR/../standalone/cleanup" && pwd)"
+CLEANUP_DIR="$(cd "$SCRIPT_DIR/../cleanup" && pwd)"
 
 TASKS=()
 NEED_ROOT=false

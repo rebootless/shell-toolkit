@@ -22,8 +22,8 @@ run_user_scripts() {
 }
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-CLI_DIR="$(cd "$SCRIPT_DIR/../standalone/install/apt/cli" && pwd)"
-LSP_DIR="$(cd "$SCRIPT_DIR/../standalone/install/lsp" && pwd)"
+CLI_DIR="$(cd "$SCRIPT_DIR/../install" && pwd)"
+LSP_DIR="$(cd "$SCRIPT_DIR/../lsp" && pwd)"
 
 echo "Running CLI installation scripts..."
 run_root_scripts "$CLI_DIR" \
@@ -34,10 +34,10 @@ run_root_scripts "$CLI_DIR" \
 
 echo "Running LSP installation scripts..."
 run_user_scripts "$LSP_DIR" \
-    install-bash-language-server.sh \
-    install-markdown-language-server.sh \
-    install-python-language-server.sh
+    lsp-install-bash-language-server.sh \
+    lsp-install-markdown-language-server.sh \
+    lsp-install-python-language-server.sh
 run_root_scripts "$LSP_DIR" \
-    install-clang-language-server.sh
+    lsp-install-clang-language-server.sh
 
 echo "Done."
