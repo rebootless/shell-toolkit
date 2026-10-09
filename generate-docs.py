@@ -19,6 +19,9 @@ Scans every *.sh file in the repository for a documentation metadata block:
 table and a detailed, per-directory breakdown of every script -- including,
 for each script, a dependency tree built from its `dependencies` field.
 
+Only index.html is generated. The page skeleton lives next to it in docs/ and is
+edited by hand: template.html (markup with {{PLACEHOLDERS}}), style.css, app.js.
+
 Usage:
     ./generate-docs.py                 # scan repo root, write docs/index.html
     ./generate-docs.py --strict        # exit non-zero if any *.sh has no block
@@ -422,322 +425,19 @@ def build_used_by_section(doc: ScriptDoc, reverse_deps: dict[str, list[str]],
 
 # HTML rendering
 
-CSS = """
-:root {
-  color-scheme: light dark;
-  --bg: #ffffff;
-  --fg: #1f2328;
-  --muted: #59636e;
-  --border: #d1d9e0;
-  --link: #0969da;
-  --code-bg: #f6f8fa;
-  --row-alt: #f6f8fa;
-  --missing-fg: #9a6700;
-  --missing-bg: #fff8c5;
-  --cycle-fg: #cf222e;
-  --cycle-bg: #ffebe9;
-  --btn-bg: #f6f8fa;
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #0d1117;
-    --fg: #e6edf3;
-    --muted: #8b949e;
-    --border: #30363d;
-    --link: #4493f8;
-    --code-bg: #161b22;
-    --row-alt: #161b22;
-    --missing-fg: #f0c674;
-    --missing-bg: #3b2f00;
-    --cycle-fg: #ff7b72;
-    --cycle-bg: #3b0d0c;
-    --btn-bg: #161b22;
-  }
-}
-* { box-sizing: border-box; }
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-  color: var(--fg);
-  background: var(--bg);
-  max-width: 1320px;
-  margin: 0 auto;
-  padding: 32px 24px 80px;
-  line-height: 1.5;
-}
-h1, h2, h3 { line-height: 1.25; }
-h1 {
-  font-size: 2em;
-  border-bottom: 1px solid var(--border);
-  padding-bottom: .3em;
-}
-h2 {
-  font-size: 1.5em;
-  border-bottom: 1px solid var(--border);
-  padding-bottom: .3em;
-  margin-top: 2em;
-}
-h2, h3 { position: relative; }
-h3 {
-  font-size: 1.15em;
-  margin-top: 1.6em;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-}
-p { margin: .6em 0; }
-a { color: var(--link); text-decoration: none; }
-a:hover { text-decoration: underline; }
-code {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  background: var(--code-bg);
-  padding: .15em .4em;
-  border-radius: 6px;
-  font-size: .9em;
-}
-pre {
-  background: var(--code-bg);
-  border-radius: 6px;
-  padding: 16px;
-  overflow-x: auto;
-}
-pre code {
-  background: none;
-  padding: 0;
-  font-size: .85em;
-  white-space: pre;
-}
-blockquote {
-  margin: .8em 0;
-  padding: 0 1em;
-  color: var(--muted);
-  border-left: .25em solid var(--border);
-}
-ul { padding-left: 1.4em; }
-li { margin: .2em 0; }
-table {
-  border-collapse: collapse;
-  width: 100%;
-  margin: 1em 0;
-  font-size: .95em;
-}
-th, td {
-  border: 1px solid var(--border);
-  padding: 6px 10px;
-  text-align: left;
-  vertical-align: top;
-}
-th { background: var(--code-bg); }
-tr:nth-child(2n) { background: var(--row-alt); }
-th.sortable { cursor: pointer; user-select: none; white-space: nowrap; }
-th.sortable:hover { color: var(--link); }
-.sort-indicator::after {
-  content: "\\2195";
-  display: inline-block;
-  margin-left: .35em;
-  color: var(--muted);
-  font-size: .85em;
-}
-th.sort-asc .sort-indicator::after { content: "\\2191"; color: var(--link); }
-th.sort-desc .sort-indicator::after { content: "\\2193"; color: var(--link); }
-.badge { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
-.meta-row { margin: .8em 0; font-size: .95em; color: var(--muted); }
-.meta-row span { margin-right: 1.4em; }
-.script-card {
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 16px 20px;
-  margin: 1em 0 1.6em;
-}
-.script-card.filtered-out, .dir-heading.filtered-out, tr.filtered-out { display: none; }
-.dir-tag {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  color: var(--muted);
-  font-size: .85em;
-}
-.generated-note {
-  color: var(--muted);
-  font-size: .9em;
-  margin-top: 3em;
-  border-top: 1px solid var(--border);
-  padding-top: 1em;
-}
-.permalink {
-  opacity: 0;
-  margin-left: .5em;
-  color: var(--muted);
-  font-weight: 400;
-  text-decoration: none;
-  font-size: .85em;
-}
-h2:hover .permalink, h3:hover .permalink { opacity: 1; }
-.permalink:hover { color: var(--link); text-decoration: none; }
-.copy-btn {
-  border: 1px solid var(--border);
-  background: var(--code-bg);
-  color: var(--muted);
-  border-radius: 5px;
-  font-size: .8em;
-  line-height: 1;
-  padding: .3em .5em;
-  margin-left: .6em;
-  cursor: pointer;
-  vertical-align: middle;
-}
-.copy-btn:hover { color: var(--link); border-color: var(--link); }
-.copy-btn.copied { color: #1a7f37; border-color: #1a7f37; }
-.issue-block { margin: .8em 0 1.4em; }
-.issue-title {
-  display: inline-block;
-  padding: .15em .5em;
-  border-radius: 5px;
-  margin-bottom: .4em;
-}
-.issue-title.dep-missing { color: var(--missing-fg); background: var(--missing-bg); }
-.issue-title.dep-cycle { color: var(--cycle-fg); background: var(--cycle-bg); }
-.toc-issues-link { color: var(--cycle-fg) !important; }
+TEMPLATE_NAME = "template.html"
+PLACEHOLDER_RE = re.compile(r"\{\{([A-Z_]+)\}\}")
 
-/* Two-column layout: main content + sticky right-hand table of contents */
-.layout {
-  display: flex;
-  align-items: flex-start;
-  gap: 40px;
-}
-.content {
-  flex: 1 1 auto;
-  min-width: 0;
-}
-.toc {
-  flex: 0 0 240px;
-  position: sticky;
-  top: 20px;
-  max-height: calc(100vh - 40px);
-  overflow-y: auto;
-  font-size: .85em;
-  border-left: 1px solid var(--border);
-  padding-left: 16px;
-}
-.toc-title {
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: .04em;
-  font-size: .78em;
-  color: var(--muted);
-  margin-bottom: .6em;
-}
-.toc ul {
-  list-style: none;
-  padding-left: 0;
-  margin: 0;
-}
-.toc li { margin: 0; }
-.toc a {
-  display: block;
-  color: var(--muted);
-  padding: 3px 0 3px 10px;
-  border-left: 2px solid transparent;
-}
-.toc a:hover {
-  color: var(--link);
-  text-decoration: none;
-}
-.toc a.active {
-  color: var(--link);
-  border-left-color: var(--link);
-  font-weight: 600;
-}
-.toc .toc-divider {
-  margin-top: 1em;
-  padding-top: .6em;
-  border-top: 1px solid var(--border);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: .04em;
-  font-size: .78em;
-  color: var(--muted);
-}
-.toc .toc-count {
-  color: var(--muted);
-  font-size: .9em;
-}
-.toc-back-to-top {
-  display: inline-block;
-  margin-top: 1em;
-}
 
-.filter-box {
-  margin: 1em 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  align-items: center;
-}
-.filter-box input {
-  flex: 1 1 260px;
-  padding: 8px 12px;
-  font-size: .95em;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  font-family: inherit;
-  background: var(--bg);
-  color: var(--fg);
-}
-.filter-box input:focus {
-  outline: none;
-  border-color: var(--link);
-}
-.filter-reset {
-  flex: 0 0 auto;
-  border: 1px solid var(--border);
-  background: var(--btn-bg);
-  color: var(--fg);
-  border-radius: 6px;
-  padding: 8px 14px;
-  font-size: .9em;
-  cursor: pointer;
-  font-family: inherit;
-}
-.filter-reset:hover { border-color: var(--link); color: var(--link); }
-.filter-hint {
-  flex: 1 0 100%;
-  font-size: .82em;
-  color: var(--muted);
-  margin-top: .2em;
-}
+def render_template(template: str, values: dict[str, str]) -> str:
+    """Fill {{NAME}} placeholders in a single pass (inserted content is never re-scanned)."""
+    def substitute(m: re.Match) -> str:
+        key = m.group(1)
+        if key not in values:
+            raise KeyError(f"unknown placeholder {{{{{key}}}}} in {TEMPLATE_NAME}")
+        return values[key]
+    return PLACEHOLDER_RE.sub(substitute, template)
 
-.dep-section { margin: .8em 0; font-size: .95em; }
-.dep-tree, .dep-tree ul {
-  list-style: none;
-  padding-left: 1.2em;
-  margin: .3em 0 0;
-}
-.dep-tree li {
-  margin: .15em 0;
-  border-left: 1px dashed var(--border);
-  padding-left: .8em;
-}
-.dep-none { color: var(--muted); }
-.dep-flag {
-  font-size: .82em;
-  padding: 0 .4em;
-  border-radius: 4px;
-  margin-left: .3em;
-}
-.dep-missing { color: var(--missing-fg); background: var(--missing-bg); }
-.dep-cycle { color: var(--cycle-fg); background: var(--cycle-bg); }
-.deps-count { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
-
-@media (max-width: 900px) {
-  .layout { flex-direction: column-reverse; gap: 0; }
-  .toc {
-    position: static;
-    max-height: none;
-    width: 100%;
-    border-left: none;
-    border-top: 1px solid var(--border);
-    padding-left: 0;
-    padding-top: 16px;
-    margin-bottom: 1em;
-  }
-}
-"""
 
 IDEMPOTENT_BADGE = {"true": "\u2705", "false": "\u274c", "mostly": "\u26a0\ufe0f"}
 BOOL_BADGE = {True: "\u2705", False: "\u274c"}
@@ -904,7 +604,7 @@ def build_toc(by_dir: dict[str, list[ScriptDoc]], has_issues: bool = False) -> s
 </nav>"""
 
 
-def build_html(docs: list[ScriptDoc], repo_root: str) -> str:
+def build_html(docs: list[ScriptDoc], repo_root: str, template: str) -> str:
     by_dir: dict[str, list[ScriptDoc]] = {}
     for d in docs:
         by_dir.setdefault(d.directory, []).append(d)
@@ -928,180 +628,17 @@ def build_html(docs: list[ScriptDoc], repo_root: str) -> str:
     cycles = find_circular_dependencies(docs)
     issues_html = build_issues_section(missing_deps, cycles, docs_by_path)
 
-    return f"""<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>shell-toolkit — Script Documentation</title>
-<style>{CSS}</style>
-</head>
-<body>
-<a id="top"></a>
-<h1>Shell-Toolkit — Script Documentation</h1>
-<p>Auto-generated from the <code># ---DOC-START---</code> / <code># ---DOC-END---</code> metadata
-block at the top of every script. Do not edit this file by hand — edit the metadata in the
-scripts and re-run <code>generate-docs.py</code> instead.</p>
+    return render_template(template, {
+        "STATS": build_stats_block(stats),
+        "ISSUES": issues_html,
+        "TREE": html.escape(tree_text),
+        "TABLE": build_summary_table(docs),
+        "SECTIONS": "".join(sections),
+        "TOC": build_toc(by_dir, has_issues=bool(missing_deps or cycles)),
+        "GENERATED_AT": generated_at,
+        "SCRIPT_COUNT": str(len(docs)),
+    })
 
-<div class="layout">
-<div class="content">
-
-{build_stats_block(stats)}
-
-{issues_html}
-
-<h2 id="repository-structure">Repository Structure</h2>
-<pre><code>{html.escape(tree_text)}</code></pre>
-
-<h2 id="all-scripts">All Scripts</h2>
-<div class="filter-box">
-<input type="text" id="script-filter" placeholder="Filter scripts by name, summary, or directory…" autocomplete="off">
-<button type="button" id="filter-reset" class="filter-reset">Reset filter</button>
-<div class="filter-hint" id="filter-hint"></div>
-</div>
-{build_summary_table(docs)}
-
-{''.join(sections)}
-
-<p class="generated-note">Generated by <code>generate-docs.py</code> on {generated_at} &middot;
-{len(docs)} scripts documented.</p>
-
-</div>
-{build_toc(by_dir, has_issues=bool(missing_deps or cycles))}
-</div>
-
-<script>
-(function() {{
-  // --- Live text filter, applied to both the summary table AND the detailed
-  // script cards below it, so the two views never disagree. ---
-  var input = document.getElementById('script-filter');
-  var resetBtn = document.getElementById('filter-reset');
-  var hint = document.getElementById('filter-hint');
-  var rows = Array.prototype.slice.call(document.querySelectorAll('#all-scripts-table tbody tr'));
-  var cards = Array.prototype.slice.call(document.querySelectorAll('.script-card'));
-  var dirHeadings = Array.prototype.slice.call(document.querySelectorAll('.dir-heading'));
-
-  function matches(el, q) {{
-    return !q || (el.getAttribute('data-search') || '').indexOf(q) !== -1;
-  }}
-
-  function applyFilters() {{
-    var q = input ? input.value.trim().toLowerCase() : '';
-    var shown = 0;
-    rows.forEach(function(row) {{
-      var match = matches(row, q);
-      row.classList.toggle('filtered-out', !match);
-      if (match) shown++;
-    }});
-    cards.forEach(function(card) {{
-      card.classList.toggle('filtered-out', !matches(card, q));
-    }});
-    // Hide a directory heading once every card underneath it is filtered out.
-    dirHeadings.forEach(function(heading) {{
-      var sib = heading.nextElementSibling;
-      var anyVisible = false;
-      while (sib && !sib.classList.contains('dir-heading')) {{
-        if (sib.classList.contains('script-card') && !sib.classList.contains('filtered-out')) {{
-          anyVisible = true;
-        }}
-        sib = sib.nextElementSibling;
-      }}
-      heading.classList.toggle('filtered-out', !anyVisible);
-    }});
-    if (hint) hint.textContent = q ? (shown + ' of ' + rows.length + ' scripts match') : '';
-  }}
-
-  if (input) input.addEventListener('input', applyFilters);
-  if (resetBtn) {{
-    resetBtn.addEventListener('click', function() {{
-      if (input) input.value = '';
-      applyFilters();
-      if (input) input.focus();
-    }});
-  }}
-  applyFilters();
-
-  // --- Sortable summary table: click a sortable header to sort by that column. ---
-  var table = document.getElementById('all-scripts-table');
-  if (table) {{
-    var tbody = table.querySelector('tbody');
-    var sortState = {{ col: null, dir: 1 }};
-    Array.prototype.slice.call(table.querySelectorAll('th.sortable')).forEach(function(th) {{
-      th.addEventListener('click', function() {{
-        var col = parseInt(th.getAttribute('data-col'), 10);
-        var type = th.getAttribute('data-type');
-        sortState.dir = (sortState.col === col) ? -sortState.dir : 1;
-        sortState.col = col;
-
-        Array.prototype.slice.call(table.querySelectorAll('th.sortable')).forEach(function(h) {{
-          h.classList.remove('sort-asc', 'sort-desc');
-        }});
-        th.classList.add(sortState.dir === 1 ? 'sort-asc' : 'sort-desc');
-
-        var sorted = rows.slice().sort(function(a, b) {{
-          var av = a.children[col].getAttribute('data-value') || '';
-          var bv = b.children[col].getAttribute('data-value') || '';
-          if (type === 'num') {{
-            return (parseFloat(av) - parseFloat(bv)) * sortState.dir;
-          }}
-          return av.localeCompare(bv) * sortState.dir;
-        }});
-        sorted.forEach(function(row) {{ tbody.appendChild(row); }});
-      }});
-    }});
-  }}
-
-  // --- Copy-path buttons on each script card ---
-  document.querySelectorAll('.copy-btn').forEach(function(btn) {{
-    btn.addEventListener('click', function() {{
-      var path = btn.getAttribute('data-path');
-      var reset = function() {{ btn.classList.remove('copied'); btn.title = 'Copy path'; }};
-      var onCopied = function() {{
-        btn.classList.add('copied');
-        btn.title = 'Copied!';
-        setTimeout(reset, 1200);
-      }};
-      if (navigator.clipboard && navigator.clipboard.writeText) {{
-        navigator.clipboard.writeText(path).then(onCopied, function() {{}});
-      }} else {{
-        var tmp = document.createElement('textarea');
-        tmp.value = path;
-        tmp.style.position = 'fixed';
-        tmp.style.opacity = '0';
-        document.body.appendChild(tmp);
-        tmp.select();
-        try {{ document.execCommand('copy'); onCopied(); }} catch (e) {{}}
-        document.body.removeChild(tmp);
-      }}
-    }});
-  }});
-
-  // --- Scrollspy: highlight the current section in the TOC while scrolling ---
-  var tocLinks = Array.prototype.slice.call(document.querySelectorAll('.toc a[href^="#"]'));
-  var targets = tocLinks
-    .map(function(a) {{
-      var id = a.getAttribute('href').slice(1);
-      var el = document.getElementById(id);
-      return el ? {{ link: a, el: el }} : null;
-    }})
-    .filter(Boolean);
-
-  function onScroll() {{
-    var pos = window.scrollY + 110;
-    var current = null;
-    targets.forEach(function(t) {{
-      if (t.el.offsetTop <= pos) current = t;
-    }});
-    tocLinks.forEach(function(a) {{ a.classList.remove('active'); }});
-    if (current) current.link.classList.add('active');
-  }}
-  window.addEventListener('scroll', onScroll, {{ passive: true }});
-  onScroll();
-}})();
-</script>
-</body>
-</html>
-"""
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -1115,6 +652,13 @@ def main() -> int:
 
     root = os.path.abspath(args.root)
     out_path = args.out or os.path.join(root, "docs", "index.html")
+
+    template_path = os.path.join(root, "docs", TEMPLATE_NAME)
+    if not os.path.isfile(template_path):
+        print(f"[!] Template not found: {template_path}", file=sys.stderr)
+        return 1
+    with open(template_path, "r", encoding="utf-8") as f:
+        template = f.read()
 
     script_paths = find_scripts(root)
     docs: list[ScriptDoc] = []
@@ -1145,7 +689,7 @@ def main() -> int:
 
     os.makedirs(os.path.dirname(out_path), exist_ok=True)
     with open(out_path, "w", encoding="utf-8") as f:
-        f.write(build_html(docs, root))
+        f.write(build_html(docs, root, template))
 
     print(f"[+] Wrote {out_path} ({len(docs)} scripts documented)")
 
