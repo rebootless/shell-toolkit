@@ -10,8 +10,8 @@ fi
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-INSTALL_DIR="$(cd "$SCRIPT_DIR/../standalone/install/apt/gui" && pwd)"
-GROUP_DIR="$(cd "$SCRIPT_DIR/../standalone/group-management" && pwd)"
+INSTALL_DIR="$(cd "$SCRIPT_DIR/../install" && pwd)"
+GROUP_DIR="$(cd "$SCRIPT_DIR/../group-management" && pwd)"
 
 run_scripts() {
     local dir="$1"
