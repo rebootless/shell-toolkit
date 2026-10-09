@@ -39,7 +39,7 @@ To regenerate the documentation locally:
 
 - Debian- or Ubuntu-based Linux system with Bash 5.0+
 - Root/`sudo` access for system-level scripts
-- Internet connection
+- Some scripts require internet connection
 - `python3` (standard library only) to run `generate-docs.py`
 - Some scripts require additional software such as `pipx`, `flatpak`, or `npm` (see the documentation for details)
 
