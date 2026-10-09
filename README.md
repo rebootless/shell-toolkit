@@ -1,16 +1,11 @@
 # Shell-Toolkit
 
-**A collection of standalone Bash utilities and reusable workflows for Debian- and Ubuntu-based systems.** Focused on system administration and automation.
+**A collection of Bash scripts for Debian- and Ubuntu-based systems.** Focused on system administration and automation.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Bash](https://img.shields.io/badge/Bash-5.0%2B-4EAA25?logo=gnubash&logoColor=white)](https://www.gnu.org/software/bash/)
 [![Debian](https://img.shields.io/badge/Debian-Supported-A81D33?logo=debian&logoColor=white)](https://www.debian.org)
 [![Ubuntu](https://img.shields.io/badge/Ubuntu-Supported-E95420?logo=ubuntu&logoColor=white)](https://ubuntu.com)
-
-Scripts are organized into two categories:
-
-- **standalone/** — self-contained scripts that perform a single task.
-- **workflows/** — scripts that orchestrate multiple standalone utilities to accomplish a larger task.
 
 ## Quick Start
 
@@ -26,9 +21,8 @@ All shell scripts are tracked with the executable bit. If your local checkout lo
 find . -type f -name "*.sh" -exec chmod +x {} \;
 ```
 
-Then either run an individual script from `standalone/` or execute a workflow from `workflows/`.
-
-A dry run in a disposable VM or non-production environment is always a good idea before using scripts on production systems.
+> [!TIP]
+> A dry run in a disposable VM or non-production environment is always a good idea before using scripts on production systems.
 
 ## Documentation
 
@@ -45,28 +39,9 @@ To regenerate the documentation locally:
 
 - Debian- or Ubuntu-based Linux system with Bash 5.0+
 - Root/`sudo` access for system-level scripts
-- Internet connection for package and image downloads
+- Internet connection
 - `python3` (standard library only) to run `generate-docs.py`
 - Some scripts require additional software such as `pipx`, `flatpak`, or `npm` (see the documentation for details)
-
-## Related Projects
-
-- [ansible-playbook](https://github.com/rebootless/ansible-playbook) — Ansible playbook for provisioning and configuring complete servers.
-
-## Contributing
-
-Issues and Pull Requests are welcome.
-
-Please follow the rules:
-
-- English comments and documentation
-- Metadata block (`# ---DOC-START--- ... # ---DOC-END---`) for every new script
-
-Before submitting a Pull Request, ensure that documentation generation succeeds:
-
-```bash
-./generate-docs.py --strict
-```
 
 ## License
 

@@ -3,11 +3,12 @@
 # ---DOC-START---
 # summary: Pull updates for all Git repositories in a directory.
 # description: |
-#   Updates every Git repository located directly inside the target directory.
+#   Updates every Git repository located directly inside the selected `repositories/` / `gists/` subdirectories.
 #
-#   - Usage: `./git-pull-all.sh <github-username-or-url> [--path <dir>]`
+#   - Usage: `./git-pull-all.sh <github-username-or-url> (--repositories | --gists | --all) [--path <dir>]`
 #   - Accepts either a bare username or a full `github.com/<user>` URL
-#   - Defaults to the `./<username>` directory produced by `git-clone-all.sh`
+#   - Requires one of `--repositories`, `--gists` or `--all` (`--repositories --gists` equals `--all`)
+#   - Defaults to the `./<username>` root (with `repositories/` and `gists/`) produced by `git-clone-all.sh`
 #   - Pulls the latest changes for each existing Git repository
 #   - Skips directories that are not Git repositories
 #   - Skips repositories with uncommitted changes
@@ -22,25 +23,43 @@ export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
 usage() {
     cat <<EOF
-Usage: $0 <github-username-or-url> [--path <dir>]
+Usage: $0 <github-username-or-url> (--repositories | --gists | --all) [--path <dir>]
 
 Arguments:
   <github-username-or-url>  Bare GitHub username or a github.com/<user> URL
 
 Options:
-  --path <dir>              Directory containing Git repositories (default: ./<username>)
+  --repositories            Process <dir>/repositories/
+  --gists                   Process <dir>/gists/
+  --all                     Process both (same as --repositories --gists)
+  --path <dir>              Root directory (default: ./<username>)
   -h, --help                Show this help message and exit
 EOF
 }
 
 INPUT=""
 DEST=""
+WANT_REPOS=0
+WANT_GISTS=0
 
 while [[ $# -gt 0 ]]; do
     case "$1" in
         -h|--help)
             usage
             exit 0
+            ;;
+        --repositories)
+            WANT_REPOS=1
+            shift
+            ;;
+        --gists)
+            WANT_GISTS=1
+            shift
+            ;;
+        --all)
+            WANT_REPOS=1
+            WANT_GISTS=1
+            shift
             ;;
         --path)
             if [[ $# -lt 2 ]]; then
@@ -67,6 +86,12 @@ if [[ -z "$INPUT" ]]; then
     exit 1
 fi
 
+if [[ "$WANT_REPOS" -eq 0 && "$WANT_GISTS" -eq 0 ]]; then
+    echo "Error: one of --repositories, --gists or --all is required" >&2
+    usage >&2
+    exit 1
+fi
+
 # Extract username from URL or use as-is
 USER=$(echo "$INPUT" | sed -E 's#https?://github\.com/##; s#/$##')
 
@@ -81,9 +106,20 @@ fi
 
 cd "$DEST"
 
-mapfile -t REPOS < <(
-    find . -mindepth 1 -maxdepth 1 -type d -print | sort
-)
+SECTIONS=()
+if [[ "$WANT_REPOS" -eq 1 ]]; then SECTIONS+=(repositories); fi
+if [[ "$WANT_GISTS" -eq 1 ]]; then SECTIONS+=(gists); fi
+
+REPOS=()
+for section in "${SECTIONS[@]}"; do
+    if [[ ! -d "$section" ]]; then
+        echo "Skipping missing directory: $section" >&2
+        continue
+    fi
+    while IFS= read -r dir; do
+        REPOS+=("$dir")
+    done < <(find "$section" -mindepth 1 -maxdepth 1 -type d -print | sort)
+done
 
 TOTAL=${#REPOS[@]}
 
