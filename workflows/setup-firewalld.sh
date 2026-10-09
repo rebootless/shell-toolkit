@@ -9,7 +9,7 @@
 # sudo: true
 # interactive: false
 # idempotent: true
-# dependencies: standalone/install/apt/cli/install-firewalld-cli.sh, standalone/firewall/enable-firewalld.sh
+# dependencies: firewalld/install-firewalld-cli.sh, firewalld/enable-firewalld.sh
 # ---DOC-END---
 
 set -euo pipefail
@@ -22,8 +22,8 @@ fi
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-INSTALL_DIR="$(cd "$SCRIPT_DIR/../standalone/install/apt/cli" && pwd)"
-FIREWALL_DIR="$(cd "$SCRIPT_DIR/../standalone/firewall" && pwd)"
+INSTALL_DIR="$(cd "$SCRIPT_DIR/../firewalld" && pwd)"
+FIREWALL_DIR="$(cd "$SCRIPT_DIR/../firewalld" && pwd)"
 
 run_scripts() {
     local dir="$1"

@@ -9,7 +9,7 @@
 # sudo: true
 # interactive: true
 # idempotent: true
-# dependencies: standalone/install/apt/cli/install-qemu-kvm.sh, standalone/group-management/grant-libvirt.sh, standalone/group-management/grant-kvm.sh
+# dependencies: install/install-qemu-kvm.sh, group-management/grant-libvirt.sh, group-management/grant-kvm.sh
 # ---DOC-END---
 
 set -euo pipefail
@@ -22,8 +22,8 @@ fi
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-INSTALL_DIR="$(cd "$SCRIPT_DIR/../standalone/install/apt/cli" && pwd)"
-GROUP_DIR="$(cd "$SCRIPT_DIR/../standalone/group-management" && pwd)"
+INSTALL_DIR="$(cd "$SCRIPT_DIR/../install" && pwd)"
+GROUP_DIR="$(cd "$SCRIPT_DIR/../group-management" && pwd)"
 
 run_scripts() {
     local dir="$1"

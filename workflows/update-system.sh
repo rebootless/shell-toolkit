@@ -9,13 +9,15 @@
 # sudo: false
 # interactive: false
 # idempotent: true
-# dependencies: standalone/update/update-apt.sh, standalone/update/update-flatpak.sh, standalone/update/update-pipx.sh
+# dependencies: update/update-apt.sh, flatpak/update-flatpak.sh, pipx/update-pipx.sh
 # ---DOC-END---
 
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-UPDATE_DIR="$(cd "$SCRIPT_DIR/../standalone/update" && pwd)"
+UPDATE_DIR="$(cd "$SCRIPT_DIR/../update" && pwd)"
+FLATPAK_DIR="$(cd "$SCRIPT_DIR/../flatpak" && pwd)"
+PIPX_DIR="$(cd "$SCRIPT_DIR/../pipx" && pwd)"
 
 run_script() {
     local script="$1"
@@ -32,7 +34,7 @@ run_script() {
 echo "Running update scripts..."
 
 run_script "$UPDATE_DIR/update-apt.sh"
-run_script "$UPDATE_DIR/update-flatpak.sh"
-run_script "$UPDATE_DIR/update-pipx.sh"
+run_script "$FLATPAK_DIR/update-flatpak.sh"
+run_script "$PIPX_DIR/update-pipx.sh"
 
 echo "Done."

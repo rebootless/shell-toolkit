@@ -9,7 +9,7 @@
 # sudo: true
 # interactive: false
 # idempotent: true
-# dependencies: standalone/firewall/disable-firewalld.sh, standalone/firewall/remove-firewalld.sh
+# dependencies: firewalld/disable-firewalld.sh, firewalld/remove-firewalld.sh
 # ---DOC-END---
 
 set -euo pipefail
@@ -22,7 +22,7 @@ fi
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-FIREWALL_DIR="$(cd "$SCRIPT_DIR/../standalone/firewall" && pwd)"
+FIREWALL_DIR="$(cd "$SCRIPT_DIR/../firewalld" && pwd)"
 
 run_scripts() {
     local dir="$1"

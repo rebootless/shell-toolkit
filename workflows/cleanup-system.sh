@@ -3,7 +3,7 @@
 # ---DOC-START---
 # summary: Run one or more cleanup tasks.
 # description: |
-#   Executes cleanup scripts from the `standalone/cleanup` directory.
+#   Executes cleanup scripts from the `cleanup/` directory.
 #
 #   - Multiple cleanup tasks may be specified at once.
 #   - `--all` runs every available cleanup script.
@@ -16,7 +16,7 @@
 # sudo: false
 # interactive: false
 # idempotent: true
-# dependencies: standalone/cleanup/cleanup-apt.sh, standalone/cleanup/cleanup-browser-brave.sh, standalone/cleanup/cleanup-browser-chrome.sh, standalone/cleanup/cleanup-browser-chromium.sh, standalone/cleanup/cleanup-browser-edge.sh, standalone/cleanup/cleanup-browser-firefox.sh, standalone/cleanup/cleanup-browser-opera.sh, standalone/cleanup/cleanup-browser-vivaldi.sh, standalone/cleanup/cleanup-docker.sh, standalone/cleanup/cleanup-flatpak.sh, standalone/cleanup/cleanup-kernels.sh, standalone/cleanup/cleanup-logs.sh, standalone/cleanup/cleanup-temp.sh, standalone/cleanup/cleanup-thumbnails.sh
+# dependencies: cleanup/cleanup-apt.sh, cleanup/cleanup-browser-brave.sh, cleanup/cleanup-browser-chrome.sh, cleanup/cleanup-browser-chromium.sh, cleanup/cleanup-browser-edge.sh, cleanup/cleanup-browser-firefox.sh, cleanup/cleanup-browser-opera.sh, cleanup/cleanup-browser-vivaldi.sh, cleanup/cleanup-docker.sh, cleanup/cleanup-flatpak.sh, cleanup/cleanup-kernels.sh, cleanup/cleanup-logs.sh, cleanup/cleanup-temp.sh, cleanup/cleanup-thumbnails.sh
 # ---DOC-END---
 
 set -euo pipefail
@@ -57,7 +57,7 @@ fi
 ORIGINAL_ARGS=("$@")
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-CLEANUP_DIR="$(cd "$SCRIPT_DIR/../standalone/cleanup" && pwd)"
+CLEANUP_DIR="$(cd "$SCRIPT_DIR/../cleanup" && pwd)"
 
 TASKS=()
 NEED_ROOT=false

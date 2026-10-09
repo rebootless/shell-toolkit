@@ -18,7 +18,7 @@
 # sudo: false
 # interactive: true
 # idempotent: true
-# dependencies: standalone/install/apt/cli/install-git.sh, standalone/git/bootstrap-git.sh
+# dependencies: git/install-git.sh, git/bootstrap-git.sh
 # ---DOC-END---
 
 set -euo pipefail
@@ -26,8 +26,8 @@ export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-INSTALL_DIR="$(cd "$SCRIPT_DIR/../standalone/install/apt/cli" && pwd)"
-GIT_DIR="$(cd "$SCRIPT_DIR/../standalone/git" && pwd)"
+INSTALL_DIR="$(cd "$SCRIPT_DIR/../git" && pwd)"
+GIT_DIR="$(cd "$SCRIPT_DIR/../git" && pwd)"
 
 usage() {
     cat <<EOF
