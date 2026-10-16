@@ -36,9 +36,10 @@ while IFS= read -r -d '' file; do
     tmp="$TMPDIR_WORK/${#files[@]}"
 
     awk '
-        /echo "==>/ {
+        /^[[:space:]]*echo "==>/ {
             if (previous !~ /^[[:space:]]*echo ""[[:space:]]*$/) {
-                print "echo \"\""
+                match($0, /^[[:space:]]*/)
+                print substr($0, 1, RLENGTH) "echo \"\""
             }
         }
         {
@@ -48,7 +49,6 @@ while IFS= read -r -d '' file; do
     ' "$file" > "$tmp"
 
     if ! cmp -s "$file" "$tmp"; then
-        chmod --reference="$file" "$tmp"
         files+=("$file")
         temps+=("$tmp")
     fi
@@ -63,7 +63,9 @@ printf '\nThe following files will be modified:\n'
 printf '  %s\n' "${files[@]}"
 printf '\n'
 
-read -r -p 'Apply changes? [y/N] ' answer
+if ! IFS= read -r -p 'Apply changes? [y/N] ' answer; then
+    answer=''
+fi
 
 case "$answer" in
     y|Y)
