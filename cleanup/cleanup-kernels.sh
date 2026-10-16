@@ -29,6 +29,7 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 CURRENT_KERNEL=$(uname -r)
+echo ""
 echo "==> Old kernels cleanup"
 echo "Current kernel: $CURRENT_KERNEL"
 

@@ -8,6 +8,7 @@ if [[ $EUID -ne 0 ]]; then
     exit 1
 fi
 
+echo ""
 echo "==> Installing ProtonVPN"
 
 BASE_URL="https://repo.protonvpn.com/debian/dists/stable/main/binary-all"

@@ -37,6 +37,7 @@ if ! command -v sudo >/dev/null 2>&1; then
     exit 1
 fi
 
+echo ""
 echo "==> Installing dependencies"
 
 sudo apt-get update -q

@@ -9,6 +9,7 @@ if [[ $EUID -eq 0 ]]; then
     exit 1
 fi
 
+echo ""
 echo "==> Installing Markdown LSP"
 
 MARK_START="# >>> markdown-language-server >>>"

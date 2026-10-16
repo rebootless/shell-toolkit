@@ -7,6 +7,7 @@ export DEBIAN_FRONTEND=noninteractive
 REAL_USER="${SUDO_USER:-$USER}"
 REAL_HOME="$(eval echo "~$REAL_USER")"
 
+echo ""
 echo "==> Installing Flatpak"
 
 echo "Installing Flatpak..."

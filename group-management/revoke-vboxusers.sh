@@ -21,6 +21,7 @@ fi
 
 USERNAME="$USER_NAME"
 
+echo ""
 echo "==> Revoke vboxusers access"
 
 if ! getent group vboxusers >/dev/null 2>&1; then

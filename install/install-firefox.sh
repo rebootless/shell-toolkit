@@ -9,6 +9,7 @@ if [[ $EUID -ne 0 ]]; then
     exit 1
 fi
 
+echo ""
 echo "==> Installing Firefox"
 
 if command -v firefox >/dev/null 2>&1; then

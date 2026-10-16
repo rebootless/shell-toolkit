@@ -10,6 +10,7 @@ if [[ $EUID -ne 0 ]]; then
     exit 1
 fi
 
+echo ""
 echo "==> Purging VirtualBox"
 
 if command -v VBoxManage >/dev/null 2>&1; then

@@ -2,6 +2,7 @@
 
 set -euo pipefail
 
+echo ""
 echo "==> Installing Python LSP"
 
 MARK_START="# >>> python-language-server >>>"

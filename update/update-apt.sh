@@ -7,10 +7,12 @@ if [[ $EUID -ne 0 ]]; then
     exec sudo "$0" "$@"
 fi
 
+echo ""
 echo "==> Updating package index"
 apt-get update
 echo "Package index refreshed."
 
+echo ""
 echo "==> Upgrading installed packages"
 apt-get upgrade -y
 echo "Packages upgraded."

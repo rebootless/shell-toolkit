@@ -33,6 +33,7 @@ if ! command -v flatpak >/dev/null 2>&1; then
     exit 0
 fi
 
+echo ""
 echo "==> Flatpak cleanup"
 
 if [[ "$DRY_RUN" == true ]]; then

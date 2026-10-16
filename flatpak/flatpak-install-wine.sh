@@ -11,6 +11,7 @@ BASHRC="$HOME/.bashrc"
 MARK_START="# >>> wine-flatpak >>>"
 MARK_END="# <<< wine-flatpak <<<"
 
+echo ""
 echo "==> Installing Wine via Flatpak"
 
 if ! command -v flatpak >/dev/null 2>&1; then

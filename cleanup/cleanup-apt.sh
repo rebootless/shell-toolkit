@@ -28,6 +28,7 @@ if [[ $EUID -ne 0 ]]; then
     exit 1
 fi
 
+echo ""
 echo "==> APT cleanup"
 
 if [[ "$DRY_RUN" == true ]]; then

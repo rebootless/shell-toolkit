@@ -30,6 +30,7 @@ fi
 
 LOG_AGE_DAYS=7
 
+echo ""
 echo "==> Temp files cleanup"
 
 if [[ "$DRY_RUN" == true ]]; then

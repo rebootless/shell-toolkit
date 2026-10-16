@@ -28,6 +28,7 @@ apt-get update
 echo "Installing dependencies..."
 apt-get install -y curl unzip fontconfig
 
+echo ""
 echo "==> Installing Nerd Fonts"
 
 mkdir -p "$FONT_DIR"

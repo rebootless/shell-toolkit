@@ -97,6 +97,7 @@ if [[ ! -d "$DIR" ]]; then
     exit 1
 fi
 
+echo ""
 echo "==> Scanning for .webm files"
 
 if [[ "$RECURSIVE" == true ]]; then
@@ -118,6 +119,7 @@ CONVERTED=0
 SKIPPED=0
 FAILED=0
 
+echo ""
 echo "==> Converting"
 
 for SRC in "${FILES[@]}"; do

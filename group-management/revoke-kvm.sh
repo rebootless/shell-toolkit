@@ -21,6 +21,7 @@ fi
 
 USERNAME="$USER_NAME"
 
+echo ""
 echo "==> Revoke KVM access"
 
 if ! getent group kvm >/dev/null 2>&1; then

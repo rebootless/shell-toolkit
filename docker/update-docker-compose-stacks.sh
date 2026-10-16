@@ -12,9 +12,11 @@ UPDATED=()
 UNCHANGED=()
 SKIPPED=()
 
+echo ""
 echo "==> Current Containers"
 docker ps --format 'table {{.Names}}\t{{.Image}}\t{{.Status}}'
 
+echo ""
 echo "==> Discovering Compose stacks"
 
 mapfile -t STACKS < <(
@@ -29,6 +31,7 @@ if [[ ${#STACKS[@]} -eq 0 ]]; then
     exit 0
 fi
 
+echo ""
 echo "==> Updating Stacks"
 
 for dir in "${STACKS[@]}"; do
