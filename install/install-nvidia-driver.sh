@@ -166,6 +166,7 @@ fi
 
 # --detect resolves to a concrete package and then behaves like --package.
 if [[ "$MODE" == "detect" ]]; then
+    echo ""
     echo "==> Detecting GPU driver"
     if ! TARGET="$(detect_driver_package)"; then
         echo "Auto-detection failed. Re-run with --package <name> or --run <file> instead."
@@ -199,6 +200,7 @@ if [[ "$MODE" == "run" ]]; then
     fi
 fi
 
+echo ""
 echo "==> Detecting environment"
 
 echo "Checking for a graphical session..."
@@ -296,12 +298,14 @@ update-initramfs -u
 echo "initramfs refreshed."
 
 if [[ "$MODE" == "package" ]]; then
+    echo ""
     echo "==> Installing via apt"
     apt-get update
     echo "Installing $TARGET ..."
     apt-get install -y "$TARGET"
     echo "Package $TARGET installed."
 else
+    echo ""
     echo "==> Installing via .run file"
     chmod +x "$TARGET"
     echo "Running $TARGET (silent, dkms, no X check, no UI)..."

@@ -8,6 +8,7 @@ if [[ $EUID -ne 0 ]]; then
     exit 1
 fi
 
+echo ""
 echo "==> Updating GRUB configuration..."
 
 update-grub

@@ -19,6 +19,7 @@ if ! command -v tar >/dev/null 2>&1; then
     exit 1
 fi
 
+echo ""
 echo "==> Installing ranger_devicons"
 
 CONFIG_DIR="$HOME/.config/ranger"

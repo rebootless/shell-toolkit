@@ -9,6 +9,7 @@ if [[ $EUID -ne 0 ]]; then
     exit 1
 fi
 
+echo ""
 echo "==> VeraCrypt GUI Setup"
 
 echo "Updating package lists..."

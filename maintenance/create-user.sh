@@ -20,6 +20,7 @@ fi
 USERNAME="$1"
 PASSWORD="${2:-}"
 
+echo ""
 echo "==> Create local user"
 
 if [[ -z "$USERNAME" ]]; then

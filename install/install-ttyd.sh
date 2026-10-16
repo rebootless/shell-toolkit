@@ -20,6 +20,7 @@ if [[ "$(uname -m)" != "$ARCH" ]]; then
     exit 1
 fi
 
+echo ""
 echo "==> Installing ttyd ${VERSION}"
 
 if [[ -x "$INSTALL_PATH" ]]; then

@@ -21,6 +21,7 @@ fi
 
 USERNAME="$USER_NAME"
 
+echo ""
 echo "==> Grant sudo access"
 
 if ! dpkg -s sudo >/dev/null 2>&1; then

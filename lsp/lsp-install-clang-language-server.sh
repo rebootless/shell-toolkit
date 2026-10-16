@@ -8,6 +8,7 @@ if [[ $EUID -ne 0 ]]; then
     exec sudo "$0" "$@"
 fi
 
+echo ""
 echo "==> Installing Clangd"
 
 if command -v clangd >/dev/null 2>&1; then

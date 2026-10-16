@@ -8,6 +8,7 @@ if ! command -v flatpak >/dev/null 2>&1; then
     exit 0
 fi
 
+echo ""
 echo "==> Updating Flatpak applications"
 flatpak update -y
 echo "Flatpak applications and runtimes updated."

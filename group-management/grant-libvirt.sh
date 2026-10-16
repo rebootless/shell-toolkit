@@ -21,6 +21,7 @@ fi
 
 USERNAME="$USER_NAME"
 
+echo ""
 echo "==> Grant libvirt access"
 
 if ! getent group libvirt >/dev/null 2>&1; then

@@ -56,6 +56,7 @@ for name in "$@"; do
     packages+=("${items[@]}")
 done
 
+echo ""
 echo "==> Installing: $*"
 
 echo "Updating package lists..."

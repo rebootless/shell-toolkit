@@ -96,6 +96,7 @@ for name in "$@"; do
         read -ra items <<< "$ports"
     fi
 
+    echo ""
     echo "==> ${action^^} ${name^^}"
     for item in "${items[@]}"; do
         if firewall-cmd --permanent "--query-$flag=$item" >/dev/null 2>&1; then

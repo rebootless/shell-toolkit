@@ -8,6 +8,7 @@ if ! command -v pipx >/dev/null 2>&1; then
     exit 0
 fi
 
+echo ""
 echo "==> Updating pipx packages"
 pipx upgrade-all
 printf '\n'

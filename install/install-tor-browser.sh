@@ -4,6 +4,7 @@ set -euo pipefail
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 export DEBIAN_FRONTEND=noninteractive
 
+echo ""
 echo "==> Installing Tor Browser"
 
 TMP="/tmp/torbrowser"

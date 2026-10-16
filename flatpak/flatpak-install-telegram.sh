@@ -4,6 +4,7 @@ set -euo pipefail
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 export DEBIAN_FRONTEND=noninteractive
 
+echo ""
 echo "==> Installing Telegram via Flatpak"
 
 if ! command -v flatpak >/dev/null 2>&1; then

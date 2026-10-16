@@ -9,6 +9,7 @@ if [[ $EUID -ne 0 ]]; then
     exit 1
 fi
 
+echo ""
 echo "==> Installing Docker Engine and Docker Compose plugin (official repo)"
 
 if command -v docker &>/dev/null && apt-cache policy docker-ce 2>/dev/null | grep -q "Installed: [^(]"; then
