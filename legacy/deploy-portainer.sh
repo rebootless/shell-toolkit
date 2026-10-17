@@ -187,7 +187,7 @@ echo "  Portainer data: $DEPLOY_DIR/data"
 echo "  Docker socket:  /var/run/docker.sock (mounted read-write)"
 
 echo ""
-echo "Note: --admin-password-file applies only on first run."
+echo "NOTE: --admin-password-file applies only on first run."
 echo "  To change the password on a live instance use the Portainer UI."
 
 echo ""

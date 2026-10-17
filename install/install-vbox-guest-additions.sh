@@ -95,7 +95,7 @@ fi
 
 echo "VirtualBox Guest Additions installation completed successfully."
 if (( INSTALL_EXIT != 0 )); then
-    echo "Note: the installer returned a non-zero exit code, but the kernel modules are loaded."
+    echo "NOTE: the installer returned a non-zero exit code, but the kernel modules are loaded."
 fi
 
 echo ""
