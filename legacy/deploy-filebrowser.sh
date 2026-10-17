@@ -225,7 +225,7 @@ echo "  Served files:   $DEPLOY_DIR/srv"
 echo "  Database:       $DEPLOY_DIR/database/filebrowser.db"
 
 echo ""
-echo "Note: the admin password is applied only once, at first bootstrap."
+echo "NOTE: the admin password is applied only once, at first bootstrap."
 echo "  To change it on a live instance use the File Browser UI, or:"
 echo "    docker run --rm -v \"$DEPLOY_DIR/database:/database\" filebrowser/filebrowser:v2.63.23 users update \"$FB_USER\" --password '<new-password>' -d /database/filebrowser.db"
 
