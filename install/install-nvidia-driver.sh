@@ -35,8 +35,9 @@ if [[ -r /etc/os-release ]]; then
     DISTRO_ID="${ID:-unknown}"
 fi
 
-# Detect recommended driver package via ubuntu-drivers (Ubuntu) or nvidia-detect (Debian).
-# Prints the package name on stdout, exits non-zero if nothing could be detected.
+# Detect recommended driver package:
+# ubuntu-drivers (Ubuntu)
+# nvidia-detect (Debian)
 detect_driver_package() {
     echo "Looking for a GPU detection tool..." >&2
 
@@ -244,8 +245,7 @@ else
     echo "No active display manager detected (already in text mode?)"
 fi
 
-# DKMS + kernel headers are required for both the .run --dkms path and most
-# apt nvidia-driver-XXX packages (which build the module via dkms as well).
+# DKMS + kernel headers
 echo "Checking for dkms and kernel headers..."
 MISSING_DEPS=()
 command -v dkms &>/dev/null || MISSING_DEPS+=("dkms")
@@ -259,16 +259,14 @@ else
     echo "dkms and matching kernel headers already present."
 fi
 
-# Secure Boot check — an unsigned/self-signed dkms module can install cleanly
-# but still fail to load at boot under Secure Boot (nvidia-smi: "No devices were found").
+# Secure Boot check
 if command -v mokutil &>/dev/null && mokutil --sb-state 2>/dev/null | grep -qi "enabled"; then
     echo -e "${YELLOW}Secure Boot is enabled.${NC}"
     echo -e "${YELLOW}The NVIDIA kernel module must be signed (e.g. via dkms/mokutil MOK enrollment)${NC}"
     echo -e "${YELLOW}or it will fail to load after reboot even though installation succeeds.${NC}"
 fi
 
-# Confirm nothing is holding the GPU. /dev/nvidia* may not exist yet on a
-# fresh install, so check the DRI nodes too, which are always present.
+# Confirm nothing is holding the GPU
 if command -v fuser &>/dev/null; then
     if fuser -v /dev/nvidia* /dev/dri/* 2>/dev/null; then
         echo -e "${RED}Some process is still holding an NVIDIA/DRI device.${NC}"
@@ -309,9 +307,6 @@ else
     echo "==> Installing via .run file"
     chmod +x "$TARGET"
     echo "Running $TARGET (silent, dkms, no X check, no UI)..."
-    # --no-x-check: we already confirmed X is down manually above
-    # --dkms: rebuild the module automatically on kernel updates
-    # --ui=none: guarantees the installer never tries an ncurses/GUI prompt
     "$TARGET" --silent --dkms --no-x-check --ui=none
     echo ".run installer finished"
 fi
