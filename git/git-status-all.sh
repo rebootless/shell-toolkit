@@ -1,0 +1,140 @@
+#!/bin/bash
+
+set -euo pipefail
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
+usage() {
+    cat <<EOF
+Usage: $0 <github-username-or-url> (--repositories | --gists | --all) [--path <dir>]
+
+Arguments:
+  <github-username-or-url>  Bare GitHub username or a github.com/<user> URL
+
+Options:
+  --repositories            Process <dir>/repositories/
+  --gists                   Process <dir>/gists/
+  --all                     Process both (same as --repositories --gists)
+  --path <dir>              Root directory (default: ./<username>)
+  -h, --help                Show this help message and exit
+EOF
+}
+
+INPUT=""
+DEST=""
+WANT_REPOS=0
+WANT_GISTS=0
+
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        -h|--help)
+            usage
+            exit 0
+            ;;
+        --repositories)
+            WANT_REPOS=1
+            shift
+            ;;
+        --gists)
+            WANT_GISTS=1
+            shift
+            ;;
+        --all)
+            WANT_REPOS=1
+            WANT_GISTS=1
+            shift
+            ;;
+        --path)
+            if [[ $# -lt 2 ]]; then
+                echo "Error: --path requires an argument" >&2
+                exit 1
+            fi
+            DEST="$2"
+            shift 2
+            ;;
+        *)
+            if [[ -n "$INPUT" ]]; then
+                echo "Error: unexpected argument: $1" >&2
+                usage
+                exit 1
+            fi
+            INPUT="$1"
+            shift
+            ;;
+    esac
+done
+
+if [[ -z "$INPUT" ]]; then
+    usage
+    exit 1
+fi
+
+if [[ "$WANT_REPOS" -eq 0 && "$WANT_GISTS" -eq 0 ]]; then
+    echo "Error: one of --repositories, --gists or --all is required" >&2
+    usage >&2
+    exit 1
+fi
+
+# Extract username from URL or use as-is
+USER=$(echo "$INPUT" | sed -E 's#https?://github\.com/##; s#/$##')
+
+if [[ -z "$DEST" ]]; then
+    DEST="./$USER"
+fi
+
+if [[ ! -d "$DEST" ]]; then
+    echo "Error: directory does not exist: $DEST" >&2
+    exit 1
+fi
+
+cd "$DEST"
+
+SECTIONS=()
+if [[ "$WANT_REPOS" -eq 1 ]]; then SECTIONS+=(repositories); fi
+if [[ "$WANT_GISTS" -eq 1 ]]; then SECTIONS+=(gists); fi
+
+REPOS=()
+for section in "${SECTIONS[@]}"; do
+    if [[ ! -d "$section" ]]; then
+        echo "Skipping missing directory: $section" >&2
+        continue
+    fi
+    while IFS= read -r dir; do
+        REPOS+=("$dir")
+    done < <(find "$section" -mindepth 1 -maxdepth 1 -type d -print | sort)
+done
+
+TOTAL=${#REPOS[@]}
+
+if [[ "$TOTAL" -eq 0 ]]; then
+    echo "No directories found in: $(pwd)"
+    exit 0
+fi
+
+echo "$TOTAL directories found in: $(pwd)"
+
+counter=0
+dirty_count=0
+
+for repo in "${REPOS[@]}"; do
+    name="${repo#./}"
+    counter=$((counter + 1))
+
+    if ! git -C "$repo" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+        echo "[$counter/$TOTAL] Skipping non-Git directory: $name"
+        continue
+    fi
+
+    status=$(git -C "$repo" status --porcelain 2>/dev/null || true)
+
+    if [[ -z "$status" ]]; then
+        echo "[$counter/$TOTAL] Clean: $name"
+        continue
+    fi
+
+    dirty_count=$((dirty_count + 1))
+    echo "[$counter/$TOTAL] Dirty: $name"
+    git -C "$repo" status --short
+    echo
+done
+
+echo "Done. $dirty_count dirty repositories out of $TOTAL in: $(pwd)"
